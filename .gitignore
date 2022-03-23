@@ -1,0 +1,5 @@
+# According to the comments in pypa/pipenv#598, including a Pipfile.lock file is 
+# recommended, but in this case which collaborators who have different OS specifications.
+# The platform-specific dependencies or having no cross-platform support, pipenv
+# will install dependencies that will not work or have missing other dependencies.
+Pipfile.lock
