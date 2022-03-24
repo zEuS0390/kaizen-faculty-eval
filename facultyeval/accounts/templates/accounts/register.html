@@ -1,0 +1,16 @@
+{% extends 'accounts\base.html' %}
+{% block title %}User Registration{% endblock %}
+{% block content %}
+<h4 style="text-align: center;">User Registration</h4>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.first_name }}
+    {{ form.last_name }}
+    {{ form.email }}
+    {{ form.username }}
+    {{ form.password1 }}
+    {{ form.password2 }}
+    <a class="btn btn-light" href="{% url 'accounts:login' %}">Cancel</a>
+    <input class="btn btn-success" type="submit" value="Submit">
+</form>
+{% endblock %}

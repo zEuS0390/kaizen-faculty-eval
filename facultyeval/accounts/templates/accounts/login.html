@@ -1,0 +1,13 @@
+{% extends 'accounts\base.html' %}
+{% block title %}User Authentication{% endblock %}
+{% block content %}
+<h4 style="text-align: center;">User Authentication</h4>
+<form method="POST">
+    {% csrf_token %}
+    <input class="form-control" id="username" name="username" placeholder="Username"><br>
+    <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+    <a class="btn btn-warning" href="{% url 'accounts:register' %}">Register</a>
+    <input class="btn btn-success" type="submit" value="Submit"><br>
+    <a href="#">Forgot your password?</a>
+</form>
+{% endblock %}
