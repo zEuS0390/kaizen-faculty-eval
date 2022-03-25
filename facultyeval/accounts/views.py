@@ -13,13 +13,17 @@ class Login(View):
     def get(self, request):
         return render(request, template_name="accounts/login.html")
 
+    @method_decorator(unauthenticated_user)
     def post(self, request):
         username = request.POST.get('username')
         password = request.POST.get('password')
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect("administrator:dashboard")
+            if user.is_superuser:
+                return redirect("administrator:dashboard")
+            else:
+                return HttpResponse("<a href='/logout/'>Viewer's Page</a>")
         return HttpResponse("<h1>Access Denied!</h1>")
 
 class Register(View):
@@ -29,6 +33,7 @@ class Register(View):
         form = UserForm()
         return render(request, template_name="accounts/register.html", context={"form":form})
 
+    @method_decorator(unauthenticated_user)
     def post(self, request):
         form = UserForm(request.POST)
         if form.is_valid():
@@ -47,5 +52,6 @@ class Landing(View):
     def get(self, request):
         return render(request, template_name="accounts/landing.html", context={})
 
+    @method_decorator(unauthenticated_user)
     def post(self, request):
         return redirect("/")
