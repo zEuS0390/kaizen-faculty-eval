@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Kaizen Faculty Evaluation</title>
+        <title>{% block title %}{% endblock %}</title>
         <link rel="stylesheet" href="{% static 'css\bootstrap.min.css' %}">
         <script src="{% static 'js\bootstrap.min.js' %}"></script>
     </head>
@@ -11,7 +11,7 @@
             <div class="container">
         
                 <!-- Navbar Brand Name -->
-                <a class="navbar-brand" href="#">Kaizen Faculty Evaluation</a>
+                <a class="navbar-brand" href="{% url 'administrator:dashboard' %}">Kaizen Faculty Evaluation</a>
                 
                 <!-- Navbar Toggler -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navHomePage" aria-controls="navHomePage" aria-expanded="true" aria-label="Home Page Toggle Navigation">
@@ -22,37 +22,26 @@
                 <div class="collapse navbar-collapse" id="navHomePage">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Calendar</a>
+                            <a class="nav-link active" aria-current="page" href="{% url 'administrator:dashboard' %}">Dashboard</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Evaluation
+                                Faculty Evaluation
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li>
-                                    <a class="dropdown-item dropdown" href="#">First year</a>
+                                    <a class="dropdown-item dropdown" href="{% url 'administrator:hr' %}">HR</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="#">Second year</a>
+                                    <a class="dropdown-item" href="{% url 'administrator:aiv' %}">AIV</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="#">Third year</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="#">Fourth year</a>
+                                    <a class="dropdown-item" href="{% url 'administrator:canvas' %}">Canvas</a>
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Contact</a>
-                        </li>
                     </ul>
+                    <a class="btn btn-danger" href="{% url 'accounts:logout' %}">Logout</a>
                 </div>
             </div>
         </nav>

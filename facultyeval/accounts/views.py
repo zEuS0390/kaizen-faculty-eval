@@ -4,14 +4,14 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.contrib.auth import authenticate, login, logout
 from .forms import UserForm
-from .decorators import check_user_auth
+from .decorators import unauthenticated_user
 
 # Create your views here.
 class Login(View):
 
-    @method_decorator(check_user_auth)
+    @method_decorator(unauthenticated_user)
     def get(self, request):
-        return render(request, template_name="accounts\\login.html")
+        return render(request, template_name="accounts/login.html")
 
     def post(self, request):
         username = request.POST.get('username')
@@ -24,9 +24,10 @@ class Login(View):
 
 class Register(View):
 
+    @method_decorator(unauthenticated_user)
     def get(self, request):
         form = UserForm()
-        return render(request, template_name="accounts\\register.html", context={"form":form})
+        return render(request, template_name="accounts/register.html", context={"form":form})
 
     def post(self, request):
         form = UserForm(request.POST)
@@ -39,3 +40,12 @@ class Register(View):
 def logoutUser(request):
     logout(request)
     return redirect("/")
+
+class Landing(View):
+
+    @method_decorator(unauthenticated_user)
+    def get(self, request):
+        return render(request, template_name="accounts/landing.html", context={})
+
+    def post(self, request):
+        return redirect("/")
