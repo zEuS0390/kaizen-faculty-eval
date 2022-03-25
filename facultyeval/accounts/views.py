@@ -38,7 +38,7 @@ class Register(View):
         form = UserForm(request.POST)
         if form.is_valid():
             user = form.save()
-            return redirect("/accounts/login/")
+            return redirect("accounts:login")
         return HttpResponse("<h1>Error!</h1>")
 
 @login_required(login_url="/accounts/login/")
