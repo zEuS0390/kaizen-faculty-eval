@@ -1,2 +1,2 @@
-pipenv install
+python -m pipenv install
 pause

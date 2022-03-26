@@ -1,2 +1,2 @@
-pipenv shell
+python -m pipenv shell
 pause
