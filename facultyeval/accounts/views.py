@@ -8,6 +8,10 @@ from .decorators import unauthenticated_user
 
 # Create your views here.
 class Login(View):
+    """
+    The log in view will be the main entry point of the application. It would 
+    require user credentials to verify if they are registered within the database.
+    """
 
     @method_decorator(unauthenticated_user)
     def get(self, request):
@@ -27,6 +31,10 @@ class Login(View):
         return HttpResponse("<h1>Access Denied!</h1>")
 
 class Register(View):
+    """
+    The register view will essentially create a user and it will require
+    basic information to be verified in the authentication.
+    """
 
     @method_decorator(unauthenticated_user)
     def get(self, request):
@@ -43,6 +51,9 @@ class Register(View):
 
 @login_required(login_url="/accounts/login/")
 def logoutUser(request):
+    """
+    This view will log out the authenticated user.
+    """
     logout(request)
     return redirect("/")
 
