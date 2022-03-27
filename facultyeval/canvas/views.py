@@ -1,34 +1,29 @@
+from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.views import View
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from administrator.decorators import admin_only
+from .decorators import admin_only
 
 # Create your views here.
-class Home(View):
-    @method_decorator(login_required(login_url="accounts:login"))
-    @method_decorator(admin_only)
-    def get(self, request):
-        return render(request, template_name="administrator/index.html", context={})
-
-class HR(View):
+class Index(View):
 
     @method_decorator(login_required(login_url="accounts:login"))
     @method_decorator(admin_only)
     def get(self, request):
-        return render(request, template_name="administrator/hr.html", context={})
+        return render(request, template_name="canvas/new.html")
 
     @method_decorator(login_required(login_url="accounts:login"))
     @method_decorator(admin_only)
     def post(self, request):
-        return 
+        return redirect("/")
 
-class AIV(View):
+class Canvas(View):
 
     @method_decorator(login_required(login_url="accounts:login"))
     @method_decorator(admin_only)
     def get(self, request):
-        return render(request, template_name="administrator/aiv.html", context={})
+        return render(request, template_name="administrator/canvas.html", context={})
 
     @method_decorator(login_required(login_url="accounts:login"))
     @method_decorator(admin_only)
