@@ -1,0 +1,91 @@
+{% extends 'administrator/base.html' %}
+{% block title %}Add New Evaluation{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="dropdown">
+                <button class="btn btn-warning dropdown-toggle" type="button"
+                id="dropdownMenuButton1" data-toggle="dropdown">
+                    Dropdown button
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col">
+            <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button"
+                id="dropdownMenuButton1" data-toggle="dropdown">
+                    Dropdown button 2
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col">
+            <form method="POST">
+                {% csrf_token %}
+                <input id="username" name="username" placeholder="Place your username">
+                <input type="password" id="password" name="password" placeholder="Place your password">
+                <input type="submit" value="Log In Here">
+            </form>
+        </div>
+    </div>
+<div class="container">
+    <table class="table sm-5">
+        <thead class="thead-dark">
+            <tr class="table-primary">
+                <th scope="col"></th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Vladimir</td>
+                <td>Putin</td>
+                <td>
+                    <div class="container">
+                        <a class="btn btn-primary" href="#">Open</a>
+                        <a class="btn btn-success" href="#">Update</a>
+                        <a class="btn btn-danger" href="#">Delete</a>
+                    </div>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td>Kim Jong</td>
+                <td>Un</td>
+                <td>
+                    <div class="container">
+                        <a class="btn btn-primary" href="#">Open</a>
+                        <a class="btn btn-success" href="#">Update</a>
+                        <a class="btn btn-danger" href="#">Delete</a>
+                    </div>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td>Xi</td>
+                <td>Jinping</td>
+                <td>
+                    <div class="container">
+                        <a class="btn btn-primary" href="#">Open</a>
+                        <a class="btn btn-success" href="#">Update</a>
+                        <a class="btn btn-danger" href="#">Delete</a>
+                    </div>
+                </td>
+              </tr>
+        </tbody>
+    </table>
+</div>
+{% endblock %}
