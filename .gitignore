@@ -1,3 +1,9 @@
+# In the .venv folder, there is a .gitignore that ignores all of its content.
+# Pipenv automatically honors the WORKON_HOME environment variable, but you can
+# also stick it to project folder by either setting the PIPENV_VENV_IN_PROJECT
+# to 1 in the environment variable or manually creating a .venv folder alongside 
+# the Pipfile and running the command 'pipenv shell'.
+
 # According to the comments in pypa/pipenv#598, including a Pipfile.lock file is 
 # recommended, but in this case which collaborators who have different OS specifications.
 # The platform-specific dependencies or having no cross-platform support, pipenv
