@@ -7,6 +7,6 @@
     <input class="form-control" id="username" name="username" placeholder="Username"><br>
     <input type="password" class="form-control" id="password" name="password" placeholder="Password">
     <input class="btn btn-success" type="submit" value="Log In"><br>
-    <a href="#">Forgot your password?</a>
+    <a href="{% url 'accounts:password_reset' %}">Forgot your password?</a>
 </form>
 {% endblock %}
