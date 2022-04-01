@@ -1,6 +1,16 @@
 {% extends 'administrator/base.html' %}
 {% block title %}Add New Evaluation{% endblock %}
 {% block content %}
+<div class="container mb-4 mt-4">
+    <div class="row align-items-center">
+        <div class="col d-flex justify-content-center">
+            <div class="border text-center">
+                <img class="rounded-circle" src="/media/{{user.member.image}}" alt="profile_picture">
+                <h5>{{user.member}}</h5>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="container">
     <div class="row">
         <div class="col">
