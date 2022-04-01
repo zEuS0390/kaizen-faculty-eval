@@ -27,7 +27,7 @@ class Login(View):
             if user.is_superuser:
                 return redirect("administrator:dashboard")
             else:
-                return HttpResponse("<a href='/logout/'>Viewer's Page</a>")
+                return redirect("member:profile")
         return HttpResponse("<h1>Access Denied!</h1>")
 
 class Register(View):
