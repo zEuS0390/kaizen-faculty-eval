@@ -5,6 +5,7 @@
 <form method="POST">
     {% csrf_token %}
     {{ form.first_name }}
+    {{ form.middle_name }}
     {{ form.last_name }}
     {{ form.email }}
     {{ form.username }}

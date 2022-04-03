@@ -5,6 +5,7 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth import authenticate, login, logout
 from .forms import UserForm
 from .decorators import unauthenticated_user
+from .models import Member
 
 # Create your views here.
 class Login(View):
@@ -46,7 +47,11 @@ class Register(View):
         form = UserForm(request.POST)
         if form.is_valid():
             user = form.save()
+            middle_name = form.cleaned_data.get('middle_name')
+            member = Member(user=user, middle_name=middle_name)
+            member.save()
             return redirect("accounts:login")
+        print(form.errors)
         return HttpResponse("<h1>Error!</h1>")
 
 @login_required(login_url="/accounts/login/")
