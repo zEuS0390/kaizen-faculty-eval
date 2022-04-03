@@ -11,4 +11,4 @@ class Member(models.Model):
     middle_name = models.CharField(max_length=200)
     image = models.ImageField(upload_to="profile_img")
     def __str__(self):
-        return f"{self.user.last_name}, {self.user.first_name}, {self.user.middle_name}"
+        return f"{self.user.last_name}, {self.user.first_name}, {self.middle_name}"
