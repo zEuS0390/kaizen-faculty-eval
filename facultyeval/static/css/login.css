@@ -1,0 +1,7 @@
+/* This is for the input form box in login */
+.input-box {
+    width: 400px;
+    padding: 30px 30px 30px 30px;
+    background-color: rgb(183, 253, 121); 
+    border-radius: 20px 20px 20px 20px;
+}

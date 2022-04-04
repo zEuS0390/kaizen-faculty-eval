@@ -1,5 +1,6 @@
 from django.shortcuts import redirect, render, HttpResponse
 from django.views import View
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.contrib.auth import authenticate, login, logout
@@ -29,7 +30,8 @@ class Login(View):
                 return redirect("administrator:dashboard")
             else:
                 return redirect("member:profile")
-        return HttpResponse("<h1>Access Denied!</h1>")
+        messages.error(request, "Incorrect username or password.")
+        return redirect("accounts:login")
 
 class Register(View):
     """
@@ -51,7 +53,6 @@ class Register(View):
             member = Member(user=user, middle_name=middle_name)
             member.save()
             return redirect("accounts:login")
-        print(form.errors)
         return HttpResponse("<h1>Error!</h1>")
 
 @login_required(login_url="/accounts/login/")
@@ -61,13 +62,3 @@ def logoutUser(request):
     """
     logout(request)
     return redirect("/")
-
-class Landing(View):
-
-    @method_decorator(unauthenticated_user)
-    def get(self, request):
-        return render(request, template_name="accounts/landing.html", context={})
-
-    @method_decorator(unauthenticated_user)
-    def post(self, request):
-        return redirect("/")
