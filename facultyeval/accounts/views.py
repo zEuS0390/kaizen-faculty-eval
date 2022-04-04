@@ -53,7 +53,7 @@ class Register(View):
             member = Member(user=user, middle_name=middle_name)
             member.save()
             return redirect("accounts:login")
-        return HttpResponse("<h1>Error!</h1>")
+        return render(request, template_name="accounts/register.html", context={"form": form})
 
 @login_required(login_url="/accounts/login/")
 def logoutUser(request):
