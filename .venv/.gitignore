@@ -1,2 +1,7 @@
+# Created by virtualenv automatically.
+# Pipenv automatically honors the WORKON_HOME environment variable, but you can
+# also stick it to project folder by either setting the PIPENV_VENV_IN_PROJECT
+# to 1 in the environment variable or manually creating a .venv folder alongside 
+# the Pipfile and running the command 'pipenv shell'.
 *
 !.gitignore

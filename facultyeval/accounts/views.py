@@ -1,10 +1,12 @@
 from django.shortcuts import redirect, render, HttpResponse
 from django.views import View
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.contrib.auth import authenticate, login, logout
 from .forms import UserForm
 from .decorators import unauthenticated_user
+from .models import Member
 
 # Create your views here.
 class Login(View):
@@ -27,8 +29,9 @@ class Login(View):
             if user.is_superuser:
                 return redirect("administrator:dashboard")
             else:
-                return HttpResponse("<a href='/logout/'>Viewer's Page</a>")
-        return HttpResponse("<h1>Access Denied!</h1>")
+                return redirect("member:profile")
+        messages.error(request, "Incorrect username or password.")
+        return redirect("accounts:login")
 
 class Register(View):
     """
@@ -46,8 +49,11 @@ class Register(View):
         form = UserForm(request.POST)
         if form.is_valid():
             user = form.save()
+            middle_name = form.cleaned_data.get('middle_name')
+            member = Member(user=user, middle_name=middle_name)
+            member.save()
             return redirect("accounts:login")
-        return HttpResponse("<h1>Error!</h1>")
+        return render(request, template_name="accounts/register.html", context={"form": form})
 
 @login_required(login_url="/accounts/login/")
 def logoutUser(request):
@@ -56,13 +62,3 @@ def logoutUser(request):
     """
     logout(request)
     return redirect("/")
-
-class Landing(View):
-
-    @method_decorator(unauthenticated_user)
-    def get(self, request):
-        return render(request, template_name="accounts/landing.html", context={})
-
-    @method_decorator(unauthenticated_user)
-    def post(self, request):
-        return redirect("/")

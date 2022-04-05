@@ -1,16 +1,46 @@
 {% extends 'accounts/base.html' %}
+{% load static %}
 {% block title %}User Registration{% endblock %}
 {% block content %}
-<h4 style="text-align: center;">User Registration</h4>
-<form method="POST">
-    {% csrf_token %}
-    {{ form.first_name }}
-    {{ form.last_name }}
-    {{ form.email }}
-    {{ form.username }}
-    {{ form.password1 }}
-    {{ form.password2 }}
-    <a class="btn btn-light" href="{% url 'accounts:login' %}">Cancel</a>
-    <input class="btn btn-success" type="submit" value="Submit">
-</form>
+<div class="container">
+    <div class="row align-items-center" style="height: 100vh;">
+        <div class="col d-flex justify-content-center">
+            <div>
+                <div class="mb-4 d-flex justify-content-center">
+                    <img class="mt-4" src="{% static 'img/cpe_logo.png' %}" width="64" height="64">
+                    <img class="mt-4 ms-4" src="{% static 'img/tip_logo.png' %}" width="64" height="64">
+                </div>
+                <!-- Log In Form -->
+                <div class="input-box mb-4">
+                    <h4 class="text-center rounded-circle">User Registration</h4>
+                    <form method="POST">
+                        {% csrf_token %}
+                        <label class="form-label mt-2" for="first_name">First Name</label>
+                        {{ form.first_name }}
+                        <label class="form-label mt-2" for="middle_name">Middle Name</label>
+                        {{ form.middle_name }}
+                        <label class="form-label mt-2" for="last_name">Last Name</label>
+                        {{ form.last_name }}
+                        <label class="form-label mt-2" for="email">Email Address</label>
+                        {{ form.email }}
+                        <label class="form-label mt-2" for="username">Username</label>
+                        {{ form.username }}
+                        <label class="form-label mt-2" for="password1">Password</label>
+                        {{ form.password1 }}
+                        <label class="form-label mt-2" for="password2">Confirm Password</label>
+                        {{ form.password2 }}
+                        <div class="d-grid mt-4 gap-2">
+                            {% for key, message in form.errors.items %}
+                                <div class="alert alert-danger">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                            <input class="btn btn-success" type="submit" value="Register">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
