@@ -11,7 +11,7 @@ class Index(View):
     @method_decorator(login_required(login_url="accounts:login"))
     @method_decorator(admin_only)
     def get(self, request):
-        return render(request, template_name="canvas/new.html")
+        return render(request, template_name="canvas/index.html")
 
     @method_decorator(login_required(login_url="accounts:login"))
     @method_decorator(admin_only)
