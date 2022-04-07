@@ -20,7 +20,7 @@
                         <hr>
                         <ul class="nav nav-pills flex-column mb-auto">
                             <li class="nav-item">
-                                <a href="{% url 'administrator:dashboard' %}" class="nav-link active text-white">
+                                <a href="{% url 'administrator:dashboard' %}" class="nav-link {% block nav_item_dashboard %}{% endblock %} text-white">
                                 Dashboard
                                 </a>
                             </li>
@@ -35,17 +35,17 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{% url 'administrator:hr' %}" class="nav-link text-white">
+                                <a href="{% url 'administrator:hr' %}" class="nav-link {% block nav_item_hr %}{% endblock %} text-white">
                                   HR
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{% url 'administrator:aiv' %}" class="nav-link text-white">
+                                <a href="{% url 'administrator:aiv' %}" class="nav-link {% block nav_item_aiv %}{% endblock %} text-white">
                                   AIV
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{% url 'canvas:index' %}" class="nav-link text-white">
+                                <a href="{% url 'canvas:index' %}" class="nav-link {% block nav_item_canvas %}{% endblock %} text-white">
                                   LMS (Canvas)
                                 </a>
                             </li>
