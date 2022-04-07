@@ -4,7 +4,8 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.contrib.auth import authenticate, login, logout
-from .forms import UserForm
+from django.contrib.auth.views import PasswordResetView
+from .forms import UserForm, PassResetForm
 from .decorators import unauthenticated_user
 from .models import Member
 
@@ -54,6 +55,9 @@ class Register(View):
             member.save()
             return redirect("accounts:login")
         return render(request, template_name="accounts/register.html", context={"form": form})
+
+class PassResetView(PasswordResetView):
+    form_class = PassResetForm
 
 @login_required(login_url="/accounts/login/")
 def logoutUser(request):
