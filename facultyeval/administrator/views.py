@@ -35,3 +35,8 @@ class AIV(View):
     @method_decorator(admin_only)
     def post(self, request):
         return redirect("/")
+
+@login_required(login_url="accounts:login")
+@admin_only
+def About(request):
+    return render(request, template_name="administrator/about.html", context={})
