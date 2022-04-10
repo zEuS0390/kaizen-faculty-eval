@@ -18,14 +18,3 @@ class Index(View):
     def post(self, request):
         return redirect("/")
 
-class Canvas(View):
-
-    @method_decorator(login_required(login_url="accounts:login"))
-    @method_decorator(admin_only)
-    def get(self, request):
-        return render(request, template_name="administrator/canvas.html", context={})
-
-    @method_decorator(login_required(login_url="accounts:login"))
-    @method_decorator(admin_only)
-    def post(self, request):
-        return redirect("/")
