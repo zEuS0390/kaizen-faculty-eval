@@ -5,11 +5,12 @@ from django.utils.decorators import method_decorator
 from administrator.decorators import admin_only
 
 # Create your views here.
-class Home(View):
+class Dashboard(View):
+    
     @method_decorator(login_required(login_url="accounts:login"))
     @method_decorator(admin_only)
     def get(self, request):
-        return render(request, template_name="administrator/index.html", context={})
+        return render(request, template_name="administrator/dashboard.html", context={})
 
 class HR(View):
 
@@ -34,3 +35,8 @@ class AIV(View):
     @method_decorator(admin_only)
     def post(self, request):
         return redirect("/")
+
+@login_required(login_url="accounts:login")
+@admin_only
+def About(request):
+    return render(request, template_name="administrator/about.html", context={})

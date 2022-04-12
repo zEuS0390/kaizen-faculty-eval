@@ -6,24 +6,101 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% block title %}{% endblock %}</title>
         <!-- Bootstrap -->
-        <!-- <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"> -->
-
-        <!-- JS Scripts -->
-        <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
-        <!-- <script src="{% static 'js/bootstrap.min.js' %}"></script>
-        <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
-        <script src="{% static 'css/sidebar.css' %}"></script> -->
-
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="{% static 'css/bootstrap/bootstrap.min.css' %}">
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> -->
     </head>
     <body>
-        <a class="btn btn-primary" href="{% url 'administrator:dashboard' %}">Dashboard</a>
-        <a class="btn btn-success" href="{% url 'administrator:hr' %}">HR</a>
-        <a class="btn btn-danger" href="{% url 'administrator:aiv' %}">AIV</a>
-        <a class="btn btn-warning" href="{% url 'canvas:index' %}">LMS (Canvas)</a>
-        <a class="btn btn-info" href="{% url 'accounts:logout' %}">Log Out</a>
-        {% block content %}
-        {% endblock %}
+        <div class="container-fluid" style="position: absolute; padding-left: 0rem;">
+            <div class="row">
+                <!-- Sidebar Navigation -->
+                <div class="col-auto" style="padding-right: 0rem;">
+                    <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px; height: 100vh; position:fixed;">
+                        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                          <span class="fs-4">Faculty Evaluation</span>
+                        </a>
+                        <hr>
+                        <ul class="nav nav-pills flex-column mb-auto">
+                            <li class="nav-item">
+                                <a href="{% url 'administrator:dashboard' %}" class="nav-link {% block nav_item_dashboard %}{% endblock %} text-white">
+                                Dashboard
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <button id="course_collapse" href="#" class="nav-link btn btn-toggle align-items-center text-white" data-bs-toggle="collapse" data-bs-target="#courses-collapse" aria-expanded="false">
+                                  Courses
+                                </button>
+                                <div class="collapse" id="courses-collapse">
+                                  <ul class="btn-toggle-nav list-unstyled small">
+                                    <li><a href="#" class="nav-link rounded text-white">Create Course</a></li>
+                                    <li><a href="#" class="nav-link rounded text-white">List of Courses</a></li>
+                                  </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <button href="#" class="nav-link btn btn-toggle align-items-center text-white" data-bs-toggle="collapse" data-bs-target="#members-collapse" aria-expanded="false">
+                                  Members
+                                </button>
+                                <div class="collapse" id="members-collapse">
+                                  <ul class="btn-toggle-nav list-unstyled small">
+                                    <li><a href="#" class="nav-link rounded text-white">Create Member</a></li>
+                                    <li><a href="#" class="nav-link rounded text-white">List of Members</a></li>
+                                  </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'administrator:hr' %}" class="nav-link {% block nav_item_hr %}{% endblock %} text-white">
+                                  HR
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'administrator:aiv' %}" class="nav-link {% block nav_item_aiv %}{% endblock %} text-white">
+                                  AIV
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'canvas:index' %}" class="nav-link {% block nav_item_canvas %}{% endblock %} text-white">
+                                  LMS (Canvas)
+                                </a>
+                            </li>
+                        </ul>
+                        <hr>
+                        <div class="dropdown">
+                            <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                              <img src="/media/{{user.member.image}}" alt="" width="32" height="32" class="rounded-circle me-2">
+                              <strong>{{user.username}}</strong>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+                              <li><a class="dropdown-item" href="#">Profile</a></li>
+                              <li><a class="dropdown-item" href="{% url 'administrator:about' %}">About</a></li>
+                              <li><hr class="dropdown-divider"></li>
+                              <li><a class="dropdown-item" href="{% url 'accounts:logout' %}">Sign out</a></li>
+                            </ul>
+                          </div>
+                    </div>
+                </div>
+                <!-- Content -->
+                <div class="col" style="margin-left: 280px;">
+                    {% block content %}
+                    {% endblock %}
+                </div>
+            </div>
+            <!-- Footer -->
+            <div class="row">
+              <div class="col pl-2 pr-2" style="margin-left: 280px; padding-right: 0rem;">
+                <footer class="page-footer" style="z-index: 0; background-color: black; bottom: 0;">
+                  <div class="footer-copyright py-2 text-center text-white" style="font-size: 14px;">
+                    © 2022 | Developed by:<br>
+                    <span style="font-size: 10px;">JAMES JOSHUA BALLES | ZEUS JAMES BALTAZAR | JHOLET MAE BOTONA | CYNNA MAE CREBELLO | CHRISTIAN DALE DELA CRUZ | IAN GABRIEL MARQUEZ | RON RASL PARMAN | FRANCIS GENER PENULIAR</span>
+                  </div>
+                </footer>
+              </div>
+            </div>
+        </div>
+        <!-- JS Scripts -->
+        <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+        <!-- <script src="{% static 'js/bootstrap/bootstrap.min.js' %}"></script> -->
+        <script src="{% static 'js/bootstrap/bootstrap.bundle.min.js' %}"></script>
+        <!-- <script src="{% static 'css/sidebar.css' %}"></script> -->
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> -->
     </body>
 </html>
