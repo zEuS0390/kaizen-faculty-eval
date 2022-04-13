@@ -1,0 +1,15 @@
+{% extends 'member/base.html' %}
+{% block content %}
+<div class="container">
+    <div class="row align-items-center">
+        <div class="col d-flex justify-content-center">
+            <div class="text-center">
+                <a href="{% url 'member:profile' %}">
+                    <img class="rounded-circle" src="/media/{{user.member.image}}" alt="profile-image" width="128" height="128">
+                </a>
+                <h5>{{user.member}}</h5>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

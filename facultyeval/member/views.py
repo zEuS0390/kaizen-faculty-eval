@@ -1,20 +1,18 @@
-from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.views import View
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from .decorators import admin_only
+from .decorators import member_only
 
 # Create your views here.
-class Index(View):
+class Profile(View):
 
     @method_decorator(login_required(login_url="accounts:login"))
-    @method_decorator(admin_only)
+    @method_decorator(member_only)
     def get(self, request):
-        return render(request, template_name="canvas/index.html")
+        return render(request, template_name="member/profile.html", context={})
 
     @method_decorator(login_required(login_url="accounts:login"))
-    @method_decorator(admin_only)
+    @method_decorator(member_only)
     def post(self, request):
-        return redirect("/")
-
+        return redirect("/member/")
