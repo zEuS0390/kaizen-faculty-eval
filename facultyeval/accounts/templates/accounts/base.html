@@ -10,8 +10,12 @@
         <link rel="stylesheet" href="{% static 'css/login.css' %}">
     </head>
     <body>
-        {% block content %}
-        {% endblock %}
+        <div class="container-fluid">
+            {% block content %}
+            {% endblock %}
+            <!-- Footer -->
+            {% include 'accounts/footer.html' %}
+        </div>
         <!-- Bootstrap JS -->
         <script src="{% static 'js/bootstrap/bootstrap.min.js' %}"></script>
     </body>
