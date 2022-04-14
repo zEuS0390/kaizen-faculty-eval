@@ -1,0 +1,31 @@
+{% extends 'administrator/base.html' %}
+{% block title %}Faculty Evaluation in Canvas{% endblock %}
+{% block nav_item_canvas %}active{% endblock %}
+{% block content %}
+<div style="min-height: 100vh;">
+    <div class="row">
+        <div class="colr">
+            {% if messages %}
+                {% for message in messages %}
+                    {% if message.tags == 'error' %}
+                        <div class="alert alert-danger">
+                    {% else %}
+                        <div class="alert alert-{{message.tags}}">
+                    {% endif %}
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <form class="form-group" method="POST">
+                {% csrf_token %}
+                {{form}}
+                <input class="btn-primary" type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
