@@ -1,16 +1,11 @@
 {% extends 'administrator/base.html' %}
+{% load static %}
 {% block title %}Faculty Evaluation in Canvas{% endblock %}
 {% block nav_item_canvas %}active{% endblock %}
 {% block content %}
-<div style="min-height: 100vh;">
+<div style="padding: 50px;min-height: 100vh;">
     <div class="row">
-        <div class="fs-5">
-            <a href="#">LMS (Canvas)</a>
-            >
-            <a href="#">List of Items</a>
-        </div>
-    </div>
-    <div class="row">
+        <!-- Export buttons (Not implemented yet) -->
         <div class="col d-flex justify-content-start">
             <a href="#" class="btn btn-warning">
                 PDF
@@ -19,22 +14,40 @@
                 CSV
             </a>
         </div>
+        <!-- Create new performance evaluation -->
         <div class="col d-flex justify-content-end">
             <a href="{% url 'canvas:eval_entry' %}" class="btn btn-primary">
                 New
             </a>
         </div>
     </div>
+    <!-- Display messages from the server -->
+    <div class="row">
+        <div class="col">
+            {% if messages %}
+                {% for message in messages %}
+                    {% if message.tags == 'error' %}
+                        <div class="alert alert-danger">
+                    {% else %}
+                        <div class="alert alert-{{message.tags}}">
+                    {% endif %}
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+    <!-- Display performance evaluation of each faculty member -->
     <div class="row">
         <div class="col">
             <h4 class="text-center">1ST SEMESTER - MODULAR GROUP 1 - S.Y. 2021-2022</h4>
-            <table class="table table-hover">
+            <table class="table table-hover" id="myTable">
                 <thead class="table-primary">
                     <th class="text-center" scope="col">ID</th>
                     <th class="text-center" scope="col">Faculty Member</th>
-                    <th class="text-center" scope="col">P1</th>
-                    <th class="text-center" scope="col">P2</th>
-                    <th class="text-center" scope="col">F</th>
+                    <th class="text-center" scope="col">PART1</th>
+                    <th class="text-center" scope="col">PART2</th>
+                    <th class="text-center" scope="col">FINAL</th>
                     <th class="text-center" scope="col">REMARKS</th>
                     <th class="text-center">ACTIONS</th>
                 </thead>
@@ -42,14 +55,21 @@
                     {% for rating in ratings %}
                         <tr scope="row">
                             <td class="text-center" scope="col" style="width: 5%;">{{rating.id}}</td>
-                            <td class="text-center" scope="col" style="width: 30%;">{{rating.member}}</td>
+                            <td class="text-center" scope="col" style="width: 40%;">
+                                <img src="/media/{{rating.member.image}}" class="rounded-circle" alt="" width="32" height="32">
+                                {{rating.member}}
+                            </td>
                             <td class="text-center" scope="col" style="width: 5%;">{{rating.part1}}</td>
                             <td class="text-center" scope="col" style="width: 5%;">{{rating.part2}}</td>
                             <td class="text-center" scope="col" style="width: 5%;">{{rating.final}}</td>
                             <td class="text-center" scope="col" style="width: 30%;">{{rating.remarks}}</td>
-                            <td class="text-center" scope="col" style="width: 20%;">
-                                <a href="#" class="btn btn-success">Edit</a>
-                                <a href="{% url 'canvas:delete_eval' ID=rating.id %}" class="btn btn-danger">Delete</a>
+                            <td class="text-center" scope="col" style="width: 15%;">
+                                <a href="{% url 'canvas:edit_eval' ID=rating.id %}" class="btn" style="background-color: lightgreen;">
+                                    <img id="user-icon" src="{% static 'img/bootstrap/pencil-square.svg' %}">
+                                </a>
+                                <a href="{% url 'canvas:delete_eval' ID=rating.id %}" class="btn btn-danger">
+                                    <img id="user-icon" src="{% static 'img/bootstrap/trash3-fill.svg' %}">
+                                </a>
                             </td>
                         </tr>
                     {% endfor %}

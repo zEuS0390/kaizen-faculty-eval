@@ -2,9 +2,10 @@
 {% block title %}Faculty Evaluation in Canvas{% endblock %}
 {% block nav_item_canvas %}active{% endblock %}
 {% block content %}
-<div style="min-height: 100vh;">
+<div style="padding: 50px; min-height: 100vh;">
+    <!-- Display messages from the server -->
     <div class="row">
-        <div class="colr">
+        <div class="col">
             {% if messages %}
                 {% for message in messages %}
                     {% if message.tags == 'error' %}
@@ -18,12 +19,15 @@
             {% endif %}
         </div>
     </div>
+    <!-- Performance Evaluation Form -->
     <div class="row">
         <div class="col">
             <form class="form-group" method="POST">
                 {% csrf_token %}
                 {{form}}
-                <input class="btn-primary" type="submit" value="Submit">
+                <div class="d-grid pt-2">
+                    <input class="btn btn-primary" type="submit" value="Submit">
+                </div>
             </form>
         </div>
     </div>
