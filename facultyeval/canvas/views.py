@@ -18,7 +18,7 @@ class Index(View):
     @method_decorator(login_required(login_url="accounts:login"))
     @method_decorator(admin_only)
     def get(self, request):
-        school_year = SchoolYear.objects.get(school_year="2021-2022")
+        school_year = SchoolYear.objects.filter(school_year="2021-2022").first()
         ratings = MGRating.objects.filter(school_year=school_year, group_title="MG1", semester="1st Sem")
         return render(request, template_name="canvas/index.html", context={"ratings": ratings})
 
