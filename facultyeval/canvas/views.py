@@ -3,6 +3,7 @@ from django.views import View
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+from django.core.mail import EmailMessage
 from .decorators import admin_only
 from .forms import EvaluationForm
 from administrator.models import SchoolYear
@@ -50,13 +51,15 @@ class CreateEval(View):
             group_title = form.cleaned_data.get("group_title")
             semester = form.cleaned_data.get("semester")
             if MGRating.objects.filter(member=member, 
-                                       school_year=school_year, 
-                                       group_title=group_title, 
-                                       semester=semester).exists():
+                                        school_year=school_year, 
+                                        group_title=group_title, 
+                                        semester=semester).exists():
                 messages.error(request, "Evaluation form entry already exist!")
                 return redirect("canvas:eval_entry")
             mgrating.save()
             messages.success(request, "Evaluation successfully created!")
+            msg = EmailMessage('New Evaluation', 'You have a new evaluation in {school_year} - {group_title} - {semester}. You may now view it in the Faculty Evaluation'.format(school_year=school_year, group_title=group_title, semester=semester), to=[member.user.email])
+            msg.send()
             return redirect("canvas:index")
         return redirect("/")
 
