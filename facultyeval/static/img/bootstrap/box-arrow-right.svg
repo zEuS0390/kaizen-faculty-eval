@@ -30,41 +30,41 @@
       <feColorMatrix
          result="fbSourceGraphicAlpha"
          in="fbSourceGraphic"
-         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         values="0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0"
          id="feColorMatrix333" />
       <feColorMatrix
          id="feColorMatrix335"
-         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0.21 0.72 0.07 1 0 "
+         values="1 0 0 0 1 0 1 0 0 1 0 0 1 0 1 0.21 0.72 0.07 1 0 "
          result="fbSourceGraphic"
          in="fbSourceGraphic" />
       <feColorMatrix
          result="fbSourceGraphicAlpha"
          in="fbSourceGraphic"
-         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         values="0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0"
          id="feColorMatrix355" />
       <feColorMatrix
          id="feColorMatrix357"
-         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0.21 0.72 0.07 1 0 "
+         values="1 0 0 0 1 0 1 0 0 1 0 0 1 0 1 0.21 0.72 0.07 1 0 "
          result="fbSourceGraphic"
          in="fbSourceGraphic" />
       <feColorMatrix
          result="fbSourceGraphicAlpha"
          in="fbSourceGraphic"
-         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         values="0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0"
          id="feColorMatrix14" />
       <feColorMatrix
          id="feColorMatrix16"
-         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0.21 0.72 0.07 1 0 "
+         values="1 0 0 0 1 0 1 0 0 1 0 0 1 0 1 0.21 0.72 0.07 1 0 "
          result="fbSourceGraphic"
          in="fbSourceGraphic" />
       <feColorMatrix
          result="fbSourceGraphicAlpha"
          in="fbSourceGraphic"
-         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         values="0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0"
          id="feColorMatrix17" />
       <feColorMatrix
          id="feColorMatrix19"
-         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0.21 0.72 0.07 1 0 "
+         values="1 0 0 0 1 0 1 0 0 1 0 0 1 0 1 0.21 0.72 0.07 1 0 "
          result="color2"
          in="fbSourceGraphic" />
     </filter>
@@ -74,9 +74,9 @@
      pagecolor="#505050"
      bordercolor="#eeeeee"
      borderopacity="1"
-     inkscape:pageshadow="0"
-     inkscape:pageopacity="0"
-     inkscape:pagecheckerboard="0"
+     inkscape:pageshadow="1"
+     inkscape:pageopacity="1"
+     inkscape:pagecheckerboard="1"
      showgrid="false"
      inkscape:zoom="50.5"
      inkscape:cx="7.990099"
