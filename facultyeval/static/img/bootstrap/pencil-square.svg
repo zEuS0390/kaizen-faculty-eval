@@ -24,17 +24,17 @@
        width="1"
        height="1">
       <feColorMatrix
-         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0.21 0.72 0.07 1 0 "
+         values="1 0 0 0 1 0 1 0 0 1 0 0 1 0 1 0.21 0.72 0.07 1 0 "
          result="fbSourceGraphic"
          id="feColorMatrix16" />
       <feColorMatrix
          result="fbSourceGraphicAlpha"
          in="fbSourceGraphic"
-         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         values="0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0"
          id="feColorMatrix10" />
       <feColorMatrix
          id="feColorMatrix12"
-         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0.21 0.72 0.07 1 0 "
+         values="1 0 0 0 1 0 1 0 0 1 0 0 1 0 1 0.21 0.72 0.07 1 0 "
          result="color2"
          in="fbSourceGraphic" />
     </filter>
