@@ -3,14 +3,14 @@
 
 ### Team Members
 These are all the team members of the Faculty Evaluation Project.
-1. James Joshua Balles
-2. Zeus James Baltazar
-3. Jholet Mae Botona
-4. Cynna Mae Crebello 
-5. Christian Dale Dela Cruz
-6. Ian Gabriel Marquez
-7. Ron Rasl Parman 
-8. Francis Gener Penuliar
+1. James Joshua Balles [Data Science]
+2. Zeus James Baltazar [Intelligent Systems]
+3. Jholet Mae Botona [System Administration]
+4. Cynna Mae Crebello [System Administration]
+5. Christian Dale Dela Cruz [System Administration]
+6. Ian Gabriel Marquez [System Administration]
+7. Ron Rasl Parman [System Administration]
+8. Francis Gener Penuliar [System Administration]
 
 ### Tools/Dependencies
 The following are the requirements needed in creating the Faculty Evaluation Project.
