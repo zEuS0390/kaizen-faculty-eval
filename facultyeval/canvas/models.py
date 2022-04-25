@@ -4,8 +4,8 @@ from administrator.models import SchoolYear
 
 # Create your models here.
 class MGRating(models.Model):
-    FIRST_SEM = '1st Sem'
-    SECOND_SEM = '2nd Sem'
+    FIRST_SEM = '1st-Sem'
+    SECOND_SEM = '2nd-Sem'
     SEMESTER_CHOICES = [
         (FIRST_SEM, 'First Semester'),
         (SECOND_SEM, 'Second Semester')
