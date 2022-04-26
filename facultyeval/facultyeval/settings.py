@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'administrator',
     'accounts',
     'canvas',
+    'hr',
     'member'
 ]
 
