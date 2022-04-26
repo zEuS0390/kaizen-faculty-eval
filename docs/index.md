@@ -1,6 +1,6 @@
 [![shields](https://img.shields.io/badge/Kaizen-Faculty%20Evaluation-brightgreen)](https://github.com/zEuS-0390/kaizen-faculty-eval) [![shields](https://img.shields.io/badge/TIP-Quezon%20City-yellow)](https://www.tip.edu.ph/)
 
-## Welcome to Kaizen Faculty Evaluation
+## Kaizen Faculty Evaluation Documentation
 
 ### Team Members
 These are all the team members of the Faculty Evaluation Project.
