@@ -1,37 +1,47 @@
-## Welcome to GitHub Pages
+## Welcome to Kaizen Faculty Evaluation
 
-You can use the [editor on GitHub](https://github.com/zEuS-0390/kaizen-faculty-eval/edit/main/docs/index.md) to maintain and preview the content for your website in Markdown files.
+### Team Members
+These are all the team members of the Faculty Evaluation Project.
+1. James Joshua Balles [Data Science]
+2. Zeus James Baltazar [Intelligent Systems]
+3. Jholet Mae Botona [System Administration]
+4. Cynna Mae Crebello [System Administration]
+5. Christian Dale Dela Cruz [System Administration]
+6. Ian Gabriel Marquez [System Administration]
+7. Ron Rasl Parman [System Administration]
+8. Francis Gener Penuliar [System Administration]
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+### Tools/Dependencies
+The following are the requirements needed in creating the Faculty Evaluation Project.
+* **Git** (Local Version Control)
+* **GitHub** (Remote Version Control) 
+* **Python**  (Programming Language) 
+* **Pipenv** (Packaging Tool with Virtual Environment) 
+* **Django** (Python Web Framework) 
+* **MySQL** (Server-based Database)
+* **XAMPP** (MySQL Server)
+* **HTML/CSS/JS** (Web Page Fundamentals)
+* **Bootstrap** (CSS Framework)
 
-### Markdown
+## Development
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+### Create a virtual environment
+In this project, we are using pipenv packaging tool to manage dependencies and virtual environemnt. To activate the virtual environment, run the following command or execute
+the batch file **'shell.bat'**. Make sure the directory of your terminal is in the project folder. 
+```python
+python -m pipenv shell
 ```
 
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
+### Install package dependencies
+No need to worry about manual installation of package dependencies because there is a provided pipfile. All you need to do is to run the following command or execute the
+batch file **'install.bat'**.
+```python
+python -m pipenv install
+```
 
-### Jekyll Themes
+### Run the main entry point of the program
+You will always use this particular command in the development because it is the main entry point of the program. There is also a provided batch file **'runserver.bat'** to run the web application. 
+```python
+python manage.py runserver
+```
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/zEuS-0390/kaizen-faculty-eval/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
