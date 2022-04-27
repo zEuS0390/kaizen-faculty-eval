@@ -32,7 +32,7 @@ class Login(View):
             if user.is_superuser:
                 return redirect("administrator:dashboard")
             else:
-                return redirect("member:profile")
+                return redirect("member:home")
         messages.error(request, "Incorrect username or password.")
         return redirect("accounts:login")
 

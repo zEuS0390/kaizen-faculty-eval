@@ -20,21 +20,27 @@
                         <hr>
                         <ul class="nav nav-pills flex-column mb-auto">
                             <li class="nav-item">
-                                <a href="#" class="nav-link {% block nav_item_hr %}{% endblock %} text-white">
+                                <a href="{% url 'member:home' %}" class="nav-link {% block nav_item_home %}{% endblock %} text-white">
+                                  <img src = "{% static 'img/bootstrap/house-fill.svg'%}" />
+                                  Home
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'member:hr' %}" class="nav-link {% block nav_item_hr %}{% endblock %} text-white">
                                   <img src = "{% static 'img/bootstrap/journals.svg'%}" />
                                   HR
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link {% block nav_item_aiv %}{% endblock %} text-white">
+                                <a href="{% url 'member:aiv' %}" class="nav-link {% block nav_item_aiv %}{% endblock %} text-white">
                                   <img src = "{% static 'img/bootstrap/clipboard-data-fill.svg'%}" />
                                   AIV
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link {% block nav_item_canvas %}{% endblock %} text-white">
+                                <a href="{% url 'member:lms' %}" class="nav-link {% block nav_item_lms %}{% endblock %} text-white">
                                   <img src = "{% static 'img/bootstrap/mortarboard-fill.svg'%}" /> 
-                                  LMS (Canvas)
+                                  LMS
                                 </a>
                             </li>
                         </ul>
@@ -45,7 +51,7 @@
                               <strong>{{user.username}}</strong>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-                              <li><a class="dropdown-item" href="#"> <img src = "{% static 'img/bootstrap/person-circle.svg'%}" /> Profile</a></li>
+                              <li><a class="dropdown-item" href="{% url 'member:profile' %}"> <img src = "{% static 'img/bootstrap/person-circle.svg'%}" /> Profile</a></li>
                               <li><hr class="dropdown-divider"></li>
                               <li><a class="dropdown-item" href="{% url 'accounts:logout' %}"><img src = "{% static 'img/bootstrap/box-arrow-right.svg'%}" /> Sign out</a></li>
                             </ul>
