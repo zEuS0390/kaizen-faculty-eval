@@ -43,7 +43,7 @@
                                 <div class="collapse" id="members-collapse">
                                   <ul class="btn-toggle-nav list-unstyled small">
                                     <li><a href="#" class="nav-link rounded text-white">Create Member</a></li>
-                                    <li><a href="#" class="nav-link rounded text-white">List of Members</a></li>
+                                    <li><a href="{% url 'administrator:list_of_members' %}" class="nav-link rounded {% block nav_item_listofmembers %}{% endblock %} text-white">List of Members</a></li>
                                   </ul>
                                 </div>
                             </li>
