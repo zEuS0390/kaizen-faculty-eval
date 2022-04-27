@@ -1,0 +1,78 @@
+{% extends 'administrator/base.html' %}
+{% block title %}Developers{% endblock %}
+{% load static %}
+{% block content %}
+<div class="d-flex justify-content-center" style="min-height: 100vh;">
+  <div class="d-flex align-items-center">
+<div class="container">
+    <div class="row gutters">
+    <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+    <div class="card h-100">
+      <div class="card-body">
+        <div class="account-settings">
+          <div class="user-profile">
+            <h3 class="user-name">Profile </h3>
+            <div class="user-avatar">
+              <img src="https://picsum.photos/200/300" >
+            </div>
+            <h5 class="user-name">Jholet Mae Botona </h5>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+    <div class="card h-100">
+      <div class="card-body">
+        <div class="row gutters">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <h6 class="mb-2 text-primary">Personal Details</h6>
+          </div>
+          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+            <div class="form-group">
+              <label for="fullName">Full Name</label>
+              <p>Jholet Mae Billona Botona</p>
+            </div>
+          </div>
+          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+            <div class="form-group">
+              <label for="eMail">Email</label>
+              <p>qjmbbotona@tip.edu.ph</p>
+            </div>
+          </div>
+          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+            <div class="form-group">
+              <label for="phone">Contact</label>
+              <p>09063187624</p>
+            </div>
+          </div>
+        </div>
+        <div class="row gutters">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="text-right">
+              <button type="button" id="submit" name="submit" class="btn btn-primary">Edit</button>
+            </div>
+            <div class="row gutters">
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <h6 class="mb-2 text-primary">Biography</h6>
+                <p>22/TIP QC/4th Year/Computer Engineering</p>
+              </div>
+              <div class="row gutters">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                  <div class="text-right">
+                    <button type="button" id="submit" name="submit" class="btn btn-primary">Edit</button>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}

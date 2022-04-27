@@ -7,5 +7,6 @@ urlpatterns = [
     path('hr/', HR.as_view(), name="hr"),
     path('aiv/', AIV.as_view(), name="aiv"),
     path('about/', About, name="about"),
-    path('list_of_members/', ListOfMembers, name="list_of_members")
+    path('list_of_members/', ListOfMembers, name="list_of_members"),
+    path('profile/', Profile, name="profile")
 ]

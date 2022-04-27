@@ -47,3 +47,8 @@ def About(request):
 def ListOfMembers(request):
     members = Member.objects.all()
     return render(request, template_name="administrator/listofmembers.html", context={"members": members})
+
+@login_required(login_url="accounts:login")
+@admin_only
+def Profile(request):
+    return render(request, template_name="administrator/profile.html", context={})
