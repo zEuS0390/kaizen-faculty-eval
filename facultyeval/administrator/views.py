@@ -3,6 +3,7 @@ from django.views import View
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from administrator.decorators import admin_only
+from canvas.models import Member
 
 # Create your views here.
 class Dashboard(View):
@@ -40,3 +41,9 @@ class AIV(View):
 @admin_only
 def About(request):
     return render(request, template_name="administrator/about.html", context={})
+
+@login_required(login_url="accounts:login")
+@admin_only
+def ListOfMembers(request):
+    members = Member.objects.all()
+    return render(request, template_name="administrator/listofmembers.html", context={"members": members})
