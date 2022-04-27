@@ -28,25 +28,24 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <button id="course_collapse" href="#" class="nav-link btn btn-toggle align-items-center text-white" data-bs-toggle="collapse" data-bs-target="#courses-collapse" aria-expanded="false">
-                                  Courses
-                                </button>
-                                <div class="collapse" id="courses-collapse">
-                                  <ul class="btn-toggle-nav list-unstyled small">
-                                    <li><a href="#" class="nav-link rounded text-white">Create Course</a></li>
-                                    <li><a href="#" class="nav-link rounded text-white">List of Courses</a></li>
-                                  </ul>
-                                </div>
-                            </li>
-                            <li class="nav-item">
                                 <button href="#" class="nav-link btn btn-toggle align-items-center text-white" data-bs-toggle="collapse" data-bs-target="#members-collapse" aria-expanded="false">
                                   <img src = "{% static 'img/bootstrap/people-fill.svg'%}" /> 
                                   Members
                                 </button>
                                 <div class="collapse" id="members-collapse">
                                   <ul class="btn-toggle-nav list-unstyled small">
-                                    <li><a href="#" class="nav-link rounded text-white">Create Member</a></li>
-                                    <li><a href="{% url 'administrator:list_of_members' %}" class="nav-link rounded {% block nav_item_listofmembers %}{% endblock %} text-white">List of Members</a></li>
+                                    <li>
+                                      <a href="#" class="nav-link rounded text-white">
+                                        <img src = "{% static 'img/bootstrap/pencil-square.svg'%}"/> 
+                                        Create Member
+                                      </a>
+                                    </li>
+                                    <li>
+                                      <a href="{% url 'administrator:list_of_members' %}" class="nav-link rounded {% block nav_item_listofmembers %}{% endblock %} text-white">
+                                        <img src = "{% static 'img/bootstrap/person-lines-fill.svg'%}"/> 
+                                        List of Members
+                                      </a>
+                                    </li>
                                   </ul>
                                 </div>
                             </li>

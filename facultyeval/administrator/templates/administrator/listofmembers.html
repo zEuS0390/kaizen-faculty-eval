@@ -16,7 +16,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col d-flex justify-content-center">
+        <div class="col">
             <table class="table table-hover" id="myTable">
                 <thead class="table-success">
                     <th class="text-center" scope="col">ID</th>
@@ -26,12 +26,12 @@
                 <tbody>
                     {% for member in members %}
                         <tr scope="row">
-                            <td class="text-center" scope="col" style="width: 5%;">{{member.id}}</td>
-                            <td class="text-center" scope="col" style="width: 40%;">
+                            <td class="text-center" scope="col">{{member.id}}</td>
+                            <td class="text-center" scope="col">
                                 <img src="/media/{{member.image}}" class="rounded-circle" alt="" width="32" height="32">
                                 {{member}}
                             </td>
-                            <td class="text-center" scope="col" style="width: 15%;">
+                            <td class="text-center" scope="col">
                                 <a href="#" class="btn" style="background-color: lightblue;">
                                     <img id="user-icon" src="{% static 'img/bootstrap/folder2-open.svg' %}">
                                 </a>
