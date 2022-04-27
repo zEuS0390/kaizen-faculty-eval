@@ -5,17 +5,16 @@
 <div class="d-flex justify-content-center" style="min-height: 100vh;">
   <div class="d-flex align-items-center">
 <div class="container">
+  <h3 class="user-name">My Profile</h3> 
     <div class="row gutters">
     <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
     <div class="card h-100">
       <div class="card-body">
         <div class="account-settings">
           <div class="user-profile">
-            <h3 class="user-name">Profile </h3> 
             <div class="user-avatar">
-              <img src="https://picsum.photos/200/300" >
+              <img src="/media/{{ user.member.image }}"/>
             </div>
-            <h5 class="user-name">Jholet Mae Botona </h5>
           </div>
         </div>
       </div>
@@ -31,25 +30,25 @@
           <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
             <div class="form-group">
               <label for="First Name">First Name</label>
-              <p>Jholet Mae </p>
+              <p>{{ user.first_name }}</p>
             </div>
           </div>
           <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
             <div class="form-group">
               <label for="Middle Name">Middle Name</label>
-              <p>Billona </p>
+              <p>{{ user.member.middle_name }}</p>
             </div>
           </div>
           <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
             <div class="form-group">
               <label for="Last Name">Last Name</label>
-              <p>Botona </p>
+              <p>{{ user.last_name }}</p>
             </div>
           </div>
           <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
             <div class="form-group">
               <label for="eMail">Email</label>
-              <p>qjmbbotona@tip.edu.ph</p>
+              <p>{{ user.email }}</p>
             </div>
           </div>
         </div>
@@ -60,6 +59,4 @@
     </div>
   </div>
 </div>
-
-
 {% endblock %}
