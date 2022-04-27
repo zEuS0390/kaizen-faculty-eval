@@ -3,44 +3,34 @@
    width="16"
    height="16"
    fill="currentColor"
-   class="bi bi-lock-fill"
+   class="bi bi-person-workspace"
    viewBox="0 0 16 16"
    version="1.1"
-   id="svg4"
-   sodipodi:docname="lock-fill.svg"
+   id="svg6"
+   sodipodi:docname="person-workspace.svg"
    inkscape:version="1.1.2 (b8e25be833, 2022-02-05)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
   <defs
-     id="defs8">
+     id="defs10">
     <filter
        style="color-interpolation-filters:sRGB;"
        inkscape:label="Invert"
-       id="filter12"
+       id="filter18"
        x="0"
        y="0"
        width="1"
        height="1">
       <feColorMatrix
          values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0.21 0.72 0.07 1 0 "
-         result="fbSourceGraphic"
-         id="feColorMatrix10" />
-      <feColorMatrix
-         result="fbSourceGraphicAlpha"
-         in="fbSourceGraphic"
-         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
-         id="feColorMatrix8" />
-      <feColorMatrix
-         id="feColorMatrix11"
-         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0.21 0.72 0.07 1 0 "
          result="color2"
-         in="fbSourceGraphic" />
+         id="feColorMatrix16" />
     </filter>
   </defs>
   <sodipodi:namedview
-     id="namedview6"
+     id="namedview8"
      pagecolor="#505050"
      bordercolor="#eeeeee"
      borderopacity="1"
@@ -49,16 +39,22 @@
      inkscape:pagecheckerboard="0"
      showgrid="false"
      inkscape:zoom="51.9375"
-     inkscape:cx="8.0192539"
+     inkscape:cx="8"
      inkscape:cy="8.009627"
      inkscape:window-width="1920"
      inkscape:window-height="1017"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="svg4" />
-  <path
-     d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"
-     id="path2"
-     style="filter:url(#filter12)" />
+     inkscape:current-layer="svg6" />
+  <g
+     id="g14"
+     style="filter:url(#filter18)">
+    <path
+       d="M4 16s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H4Zm4-5.95a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"
+       id="path2" />
+    <path
+       d="M2 1a2 2 0 0 0-2 2v9.5A1.5 1.5 0 0 0 1.5 14h.653a5.373 5.373 0 0 1 1.066-2H1V3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v9h-2.219c.554.654.89 1.373 1.066 2h.653a1.5 1.5 0 0 0 1.5-1.5V3a2 2 0 0 0-2-2H2Z"
+       id="path4" />
+  </g>
 </svg>
