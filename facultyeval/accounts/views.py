@@ -1,3 +1,4 @@
+from email.message import EmailMessage
 from django.shortcuts import redirect, render, HttpResponse
 from django.views import View
 from django.contrib import messages
@@ -8,6 +9,7 @@ from django.contrib.auth.views import PasswordResetView
 from .forms import UserForm, PassResetForm
 from .decorators import unauthenticated_user
 from .models import Member
+from django.core.mail import mail_admins
 
 # Create your views here.
 class Login(View):
@@ -30,7 +32,7 @@ class Login(View):
             if user.is_superuser:
                 return redirect("administrator:dashboard")
             else:
-                return redirect("member:profile")
+                return redirect("member:home")
         messages.error(request, "Incorrect username or password.")
         return redirect("accounts:login")
 
@@ -53,6 +55,7 @@ class Register(View):
             middle_name = form.cleaned_data.get('middle_name')
             member = Member(user=user, middle_name=middle_name)
             member.save()
+            mail_admins("New Registrant","A new member has successfully registered.")           
             return redirect("accounts:login")
         return render(request, template_name="accounts/register.html", context={"form": form})
 

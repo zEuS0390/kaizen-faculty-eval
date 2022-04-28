@@ -5,14 +5,27 @@ from django.utils.decorators import method_decorator
 from .decorators import member_only
 
 # Create your views here.
-class Profile(View):
+@login_required(login_url="accounts:login")
+@member_only
+def Home(request):
+    return render(request, template_name="member/home.html", context={})
 
-    @method_decorator(login_required(login_url="accounts:login"))
-    @method_decorator(member_only)
-    def get(self, request):
-        return render(request, template_name="member/profile.html", context={})
+@login_required(login_url="accounts:login")
+@member_only
+def Profile(request):
+    return render(request, template_name="member/profile.html", context={})
 
-    @method_decorator(login_required(login_url="accounts:login"))
-    @method_decorator(member_only)
-    def post(self, request):
-        return redirect("/member/")
+@login_required(login_url="accounts:login")
+@member_only
+def HR(request):
+    return render(request, template_name="member/hr.html", context={})
+
+@login_required(login_url="accounts:login")
+@member_only
+def AIV(request):
+    return render(request, template_name="member/aiv.html", context={})
+
+@login_required(login_url="accounts:login")
+@member_only
+def LMS(request):
+    return render(request, template_name="member/lms.html", context={})

@@ -1,5 +1,6 @@
 [![shields](https://img.shields.io/badge/Kaizen-Faculty%20Evaluation-brightgreen)](https://github.com/zEuS-0390/kaizen-faculty-eval) [![shields](https://img.shields.io/badge/TIP-Quezon%20City-yellow)](https://www.tip.edu.ph/)
-# Kaizen Faculty Evaluation
+
+## Kaizen Faculty Evaluation Documentation
 
 ### Team Members
 These are all the team members of the Faculty Evaluation Project.
@@ -24,6 +25,8 @@ The following are the requirements needed in creating the Faculty Evaluation Pro
 * **HTML/CSS/JS** (Web Page Fundamentals)
 * **Bootstrap** (CSS Framework)
 
+## Development
+
 ### Create a virtual environment
 In this project, we are using pipenv packaging tool to manage dependencies and virtual environemnt. To activate the virtual environment, run the following command or execute
 the batch file **'shell.bat'**. Make sure the directory of your terminal is in the project folder. 
@@ -43,3 +46,4 @@ You will always use this particular command in the development because it is the
 ```python
 python manage.py runserver
 ```
+
