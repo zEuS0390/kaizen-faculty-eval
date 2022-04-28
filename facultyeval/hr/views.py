@@ -4,6 +4,11 @@ from django.shortcuts import render, redirect
 from .decorators import admin_only
 from django.views import View
 from accounts.models import Member
+from django.contrib import messages
+from .forms import *
+from .models import *
+from django.core.mail import EmailMessage
+from django.forms import inlineformset_factory
 
 # Create your views here.
 class Index(View):
@@ -23,8 +28,11 @@ class CreateEval(View):
 
     @method_decorator(login_required(login_url="accounts:login"))
     @method_decorator(admin_only)
-    def get(self, request):
-        return render(request, template_name="hr/evaluation_form_entry.html")
+    def get(self, request, ID):
+        context = {
+            "form": HRCriterionScoresForm()
+        }
+        return render(request, template_name="hr/evaluation_form_entry.html", context=context)
 
     @method_decorator(login_required(login_url="accounts:login"))
     @method_decorator(admin_only)

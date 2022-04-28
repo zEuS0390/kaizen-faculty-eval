@@ -14,12 +14,6 @@
                 CSV
             </a>
         </div>
-        <!-- Create new performance evaluation -->
-        <div class="col d-flex justify-content-end">
-            <a href="{% url 'hr:eval_entry' %}" class="btn btn-primary">
-                New
-            </a>
-        </div>
     </div>
     <!-- Display messages from the server -->
     <div class="row">
@@ -55,7 +49,7 @@
                                 {{member}}
                             </td>
                             <td class="text-center" scope="col" style="width: 15%;">
-                                <a href="#" class="btn" style="background-color: lightgreen;">
+                                <a href="{% url 'hr:eval_entry' ID=member.id %}" class="btn" style="background-color: lightgreen;">
                                     <img id="user-icon" src="{% static 'img/bootstrap/pencil-square.svg' %}">
                                 </a>
                                 <a href="#" class="btn btn-danger">
