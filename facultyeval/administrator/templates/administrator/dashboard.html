@@ -4,7 +4,6 @@
 {% block content %}
 <div class="row align-items-center" style="min-height: 100vh; background-color:azure;">
     <div class="col d-flex justify-content-center">
-        <!-- <h6>I'm in the dashboard</h6> -->
         <div class="container">
             <div class="row my-5">
                 <h4 class="text-left">Welcome {{user.username}}!</h4>
@@ -16,7 +15,7 @@
                         <div class="card-body">
                             <h5 class="card-title">HR Evaluation</h5>
                             <p class="card-text">Navigate to HR panel to evaluate a faculty.</p>
-                            <a href="{% url 'administrator:hr' %}" class="btn btn-primary">Go to HR</a>
+                            <a href="{% url 'hr:index' %}" class="btn btn-primary">Go to HR</a>
                         </div>
                     </div>
                 </div>
