@@ -2,9 +2,72 @@
 {% block title %}Dashboard{% endblock %}
 {% block nav_item_dashboard %}active{% endblock %}
 {% block content %}
-<div class="row align-items-center" style="height: 100vh; background-color:azure;">
+<div class="row align-items-center" style="min-height: 100vh; background-color:azure;">
     <div class="col d-flex justify-content-center">
-        <h6>I'm in the dashboard</h6>
+        <div class="container">
+            <div class="row my-5">
+                <h4 class="text-left">Welcome {{user.username}}!</h4>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <div class="card" style="width: 18rem;">
+                        <img src="https://picsum.photos/200/100" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">HR Evaluation</h5>
+                            <p class="card-text">Navigate to HR panel to evaluate a faculty.</p>
+                            <a href="{% url 'hr:index' %}" class="btn btn-primary">Go to HR</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="card" style="width: 18rem;">
+                        <img src="https://picsum.photos/200/100" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">AIV Evaluation</h5>
+                            <p class="card-text">Navigate to AIV panel to evaluate a faculty.</p>
+                            <a href="{% url 'administrator:aiv' %}" class="btn btn-primary">Go to AIV</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="card" style="width: 18rem;">
+                        <img src="https://picsum.photos/200/100" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">LMS Evaluation</h5>
+                            <p class="card-text">Navigate to LMS panel to evaluate a faculty.</p>
+                            <a href="{% url 'canvas:index' SEM='1st-Sem' MG='MG1' SY='2021-2022' %}" class="btn btn-primary">Go to LMS</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Start of data table -->
+
+            <div class="row my-5">
+                <hr>
+                <h5 class="text-left">Activity logs</h5>
+                <table class="table table-hover" id="myTable">
+                    <thead class="table-primary">
+                        <th class="text-center" scope="col">ID</th>
+                        <th class="text-center" scope="col">Status</th>
+                        <th class="text-center" scope="col">User</th>
+                        <th class="text-center" scope="col">Evaluation</th>
+                        <th class="text-center" scope="col">Date/Time</th>
+                    </thead>
+                    <tbody>
+                        {% for log in logs %}
+                            <tr scope="row">
+                                <td class="text-center" scope="col" style="width: 10%;">{{log.id}}</td>
+                                <td class="text-center" scope="col" style="width: 20%;">{{log.activity_log}}</td>
+                                <td class="text-center" scope="col" style="width: 25%;">{{log.member}}</td>
+                                <td class="text-center" scope="col" style="width: 20%;">{{log.eval_log}}</td>
+                                <td class="text-center" scope="col" style="width: 25%;">{{log.date_log}}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}

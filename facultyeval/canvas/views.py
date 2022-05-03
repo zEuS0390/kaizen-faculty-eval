@@ -6,7 +6,7 @@ from django.utils.decorators import method_decorator
 from django.core.mail import EmailMessage
 from .decorators import admin_only
 from .forms import EvaluationForm
-from administrator.models import SchoolYear
+from administrator.models import SchoolYear, ActivityLogs
 from .models import MGRating
 
 # Create your views here.
@@ -59,6 +59,8 @@ class CreateEval(View):
                 messages.error(request, "Evaluation form entry already exist!")
                 return redirect("canvas:eval_entry")
             mgrating.save()
+            logs = ActivityLogs(member=member, activity_log=ActivityLogs.ADDED, eval_log=ActivityLogs.LMS)
+            logs.save()
             messages.success(request, "Evaluation successfully created!")
             msg = EmailMessage('New Evaluation', 'You have a new evaluation in {school_year} - {group_title} - {semester}. You may now view it in the Faculty Evaluation'.format(school_year=school_year, group_title=group_title, semester=semester), to=[member.user.email])
             msg.send()
@@ -89,6 +91,8 @@ class EditEval(View):
                 "final": selected_mgrating.final,
                 "remarks": selected_mgrating.remarks
             })
+            logs = ActivityLogs(member=selected_mgrating.member, activity_log=ActivityLogs.UPDATE, eval_log=ActivityLogs.LMS)
+            logs.save()
             return render(request, template_name="canvas/evaluation_form.html", context={"form":form})
         messages.error(request, f"ID {ID} does not exist!")
         SEM = result.first().semester
@@ -122,6 +126,8 @@ def DeleteEval(request, ID):
     SY = result.first().school_year
     # Check if the performance evaluation already exist
     if result.exists():
+        logs = ActivityLogs(member=result.first().member, activity_log=ActivityLogs.DELETED, eval_log=ActivityLogs.LMS)
+        logs.save()
         result.delete()
         messages.success(request, f"ID {ID} has been successfully removed")
         return redirect("canvas:index", SEM, MG, SY)
