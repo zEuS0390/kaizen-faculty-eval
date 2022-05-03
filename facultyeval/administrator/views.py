@@ -3,6 +3,7 @@ from django.views import View
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from administrator.decorators import admin_only
+from administrator.models import ActivityLogs
 
 # Create your views here.
 class Dashboard(View):
@@ -10,7 +11,8 @@ class Dashboard(View):
     @method_decorator(login_required(login_url="accounts:login"))
     @method_decorator(admin_only)
     def get(self, request):
-        return render(request, template_name="administrator/dashboard.html", context={})
+        logs = ActivityLogs.objects.all()
+        return render(request, template_name="administrator/dashboard.html", context={"logs": logs})
 
 class HR(View):
 
