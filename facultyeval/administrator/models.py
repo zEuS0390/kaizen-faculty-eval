@@ -1,4 +1,3 @@
-from tkinter.tix import AUTO
 from django.db import models
 from accounts.models import Member
 
