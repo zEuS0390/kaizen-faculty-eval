@@ -4,7 +4,6 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.core.mail import EmailMessage
-
 from .decorators import admin_only
 from .forms import EvaluationForm
 from administrator.models import SchoolYear, ActivityLogs
