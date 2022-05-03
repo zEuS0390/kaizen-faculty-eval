@@ -3,5 +3,9 @@ from .views import *
 
 app_name = "member"
 urlpatterns = [
-    path("", Profile.as_view(), name="profile")
+    path("", Home, name="home"),
+    path("profile/", Profile, name="profile"),
+    path("hr/", HR, name="hr"),
+    path("aiv/", AIV, name="aiv"),
+    path("lms/", LMS, name="lms")
 ]

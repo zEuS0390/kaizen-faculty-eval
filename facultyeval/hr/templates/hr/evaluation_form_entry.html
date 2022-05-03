@@ -1,0 +1,15 @@
+{% extends 'administrator/base.html' %}
+{% load static %}
+{% block title %}Evaluation Form Criteria{% endblock %}
+{% block nav_item_hr %}active{% endblock %}
+{% block content %}
+<div class="container" style="padding: 40px; min-height: 100vh;">
+    <div class="row">
+        <div class="col d-flex justify-content-center">
+            <table>
+                {{form.as_table}}
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
