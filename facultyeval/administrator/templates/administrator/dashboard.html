@@ -15,7 +15,7 @@
                         <div class="card-body">
                             <h5 class="card-title">HR Evaluation</h5>
                             <p class="card-text">Navigate to HR panel to evaluate a faculty.</p>
-                            <a href="{% url 'hr:index' %}" class="btn btn-primary">Go to HR</a>
+                            <a href="{% url 'hr:index' SEM='1st-Sem' SY='2021-2022' %}" class="btn btn-primary">Go to HR</a>
                         </div>
                     </div>
                 </div>
@@ -70,4 +70,11 @@
         </div>
     </div>
 </div>
+{% endblock %}
+{% block javascript %}
+<script>
+	$(document).ready(function(){
+		$('#myTable').DataTable();
+	});
+</script>
 {% endblock %}
