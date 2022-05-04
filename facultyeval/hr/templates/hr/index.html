@@ -5,13 +5,23 @@
 {% block content %}
 <div style="padding: 50px;min-height: 100vh;">
     <div class="row" style="margin-bottom: 20px;">
+        <div class="col">
+            <h3 class="text-center">HR EVALUATION FORM</h3>
+        </div>
+    </div>
+    <div class="row" style="margin-bottom: 25px;">
         <!-- Export buttons (Not implemented yet) -->
-        <div class="col d-flex justify-content-start">
+        <div class="col">
             <a href="#" class="btn btn-warning" style="margin-right: 10px;">
                 PDF
             </a>
             <a href="#" class="btn btn-success">
                 CSV
+            </a>
+        </div>
+        <div class="col d-flex justify-content-end">
+            <a href="{% url 'hr:list_of_criteria' %}" class="btn btn-primary">
+                List of Criteria
             </a>
         </div>
     </div>
@@ -34,22 +44,30 @@
     <!-- Display performance evaluation of each faculty member -->
     <div class="row">
         <div class="col">
-            <table class="table table-hover" id="myTable">
+            <table class="table table-hover border" id="myTable">
                 <thead class="table-primary">
                     <th class="text-center" scope="col">ID</th>
-                    <th class="text-center" scope="col">Faculty Member</th>
+                    <th class="text-center" scope="col">FACULTY MEMBER</th>
+                    <th class="text-center" scope="col">STATUS</th>
                     <th class="text-center">ACTIONS</th>
                 </thead>
                 <tbody>
-                    {% for member in members %}
+                    {% for item in hr_data %}
                         <tr scope="row">
-                            <td class="text-center" scope="col" style="width: 5%;">{{member.id}}</td>
+                            <td class="text-center" scope="col" style="width: 5%;">{{item.0.id}}</td>
                             <td class="text-center" scope="col" style="width: 40%;">
-                                <img src="/media/{{member.image}}" class="rounded-circle" alt="" width="32" height="32">
-                                {{member}}
+                                <img src="/media/{{item.0.image}}" class="rounded-circle" alt="" width="32" height="32">
+                                {{item.0}}
+                            </td>
+                            <td class="text-center" scope="col" style="width: 15%">
+                                {% if item.1 == True %}
+                                <img class="" src="{% static 'img/bootstrap/check-circle-fill.svg' %}" alt="check-circle"/>
+                                {% else %}
+                                <img src="{% static 'img/bootstrap/x-circle-fill.svg' %}" alt="x-circle"/>
+                                {% endif %}
                             </td>
                             <td class="text-center" scope="col" style="width: 15%;">
-                                <a href="{% url 'hr:eval_entry' ID=member.id %}" class="btn" style="background-color: lightgreen;">
+                                <a href="{% url 'hr:hr_eval_scores' SEM=SEM SY=SY ID=item.0.id %}" class="btn" style="background-color: lightgreen;">
                                     <img id="user-icon" src="{% static 'img/bootstrap/pencil-square.svg' %}">
                                 </a>
                                 <a href="#" class="btn btn-danger">
