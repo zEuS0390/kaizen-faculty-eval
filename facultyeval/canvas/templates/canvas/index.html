@@ -4,6 +4,11 @@
 {% block nav_item_canvas %}active{% endblock %}
 {% block content %}
 <div style="padding: 50px;min-height: 100vh;">
+    <div class="row" style="margin-bottom: 10px;">
+        <div class="col">
+            <h3 class="text-center">LMS/CANVAS EVALUATION</h3>
+        </div>
+    </div>
     <div class="row">
         <!-- Export buttons (Not implemented yet) -->
         <div class="col d-flex justify-content-start">
@@ -38,10 +43,9 @@
         </div>
     </div>
     <!-- Display performance evaluation of each faculty member -->
-    <div class="row">
+    <div class="row" style="margin-top: 25px;">
         <div class="col">
-            <h4 class="text-center">1ST SEMESTER - MODULAR GROUP 1 - S.Y. 2021-2022</h4>
-            <table class="table table-hover" id="myTable">
+            <table class="table table-hover border" id="myTable">
                 <thead class="table-primary">
                     <th class="text-center" scope="col">ID</th>
                     <th class="text-center" scope="col">Faculty Member</th>
@@ -78,4 +82,11 @@
         </div>
     </div>
 </div>
+{% endblock %}
+{% block javascript %}
+<script>
+	$(document).ready(function(){
+		$('#myTable').DataTable();
+	});
+</script>
 {% endblock %}
