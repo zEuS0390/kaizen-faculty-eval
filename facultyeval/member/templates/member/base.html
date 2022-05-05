@@ -7,6 +7,7 @@
         <title>{% block title %}{% endblock %}</title>
         <!-- Bootstrap -->
         <link rel="stylesheet" href="{% static 'css/bootstrap/bootstrap.min.css' %}">
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.css"/>
     </head>
     <body>
         <div class="container-fluid" style="position: absolute; padding-left: 0rem;">
@@ -21,7 +22,7 @@
                         <ul class="nav nav-pills flex-column mb-auto">
                             <li class="nav-item">
                                 <a href="{% url 'member:home' %}" class="nav-link {% block nav_item_home %}{% endblock %} text-white">
-                                  <img src = "{% static 'img/bootstrap/house-fill.svg'%}" />
+                                  <img src = "{% static 'img/bootstrap/house-fill.svg'%}" style = "filter:invert(100%)" />
                                   Home
                                 </a>
                             </li>
@@ -70,5 +71,7 @@
         <!-- JS Scripts -->
         <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
         <script src="{% static 'js/bootstrap/bootstrap.bundle.min.js' %}"></script>
+        {% block javascript %}
+        {% endblock %}
     </body>
 </html>
