@@ -4,7 +4,74 @@
 {% block content %}
 <div class="row" style="min-height: 100vh; background-color:azure;">
     <div class="col d-flex justify-content-center">
-        <h6>I'm in the home page</h6>
+        <div class="container">
+            <div class="row my-5">
+                <h4 class="text-left">Welcome {{user.username}}!</h4>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <div class="card" style="width: 18rem;">
+                        <img src="https://picsum.photos/200/100" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">HR Evaluation</h5>
+                            <p class="card-text">Navigate to HR panel to view HR evaluation.</p>
+                            <a href="{% url 'member:hr' %}" class="btn btn-primary">Go to HR</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="card" style="width: 18rem;">
+                        <img src="https://picsum.photos/200/100" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">AIV Evaluation</h5>
+                            <p class="card-text">Navigate to AIV panel to view AIV evaluation.</p>
+                            <a href="{% url 'member:aiv' %}" class="btn btn-primary">Go to AIV</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="card" style="width: 18rem;">
+                        <img src="https://picsum.photos/200/100" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">LMS Evaluation</h5>
+                            <p class="card-text">Navigate to LMS panel to view LMS evaluation.</p>
+                            <a href="{% url 'member:lms' %}" class="btn btn-primary">Go to LMS</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-5">
+            <!-- Start of data table -->
+            <div class="col d-flex justify-content-center">
+                <div class="row">
+                    <h5 class="text-left">Evaluation logs</h5>
+                    <table class="table table-hover" id="myTable">
+                        <thead class="table-primary">
+                            <th class="text-center" scope="col">Evaluation</th>
+                            <th class="text-center" scope="col">Status</th>
+                            <th class="text-center" scope="col">Date/Time</th>
+                        </thead>
+                        <tbody>
+                            {% for log in logs %}
+                                <tr scope="row">
+                                    <td class="text-center" scope="col" style="width: 20%;">{{log.eval_log}}</td>
+                                    <td class="text-center" scope="col" style="width: 20%;">{{log.activity_log}}</td>
+                                    <td class="text-center" scope="col" style="width: 20%;">{{log.date_log}}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+{% endblock %}
+{% block javascript %}
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.js"></script>
+<script>
+	$(document).ready(function(){
+		$('#myTable').DataTable();
+	});
+</script>
 {% endblock %}
