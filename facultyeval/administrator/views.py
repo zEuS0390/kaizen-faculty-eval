@@ -50,3 +50,12 @@ def DeleteMember(request, ID):
     if member.exists():
         member.first().user.delete()
     return redirect("administrator:list_of_members")
+
+@login_required(login_url="accounts:login")
+@admin_only
+def ViewMemberProfile(request, ID):
+    member = Member.objects.filter(id=ID)
+    if member.exists():
+        cntx_user = member.first().user
+        return render(request, template_name="administrator/viewmemberprofile.html", context={"cntx_user": cntx_user})
+    return redirect("/")

@@ -35,11 +35,8 @@
                                 {{member}}
                             </td>
                             <td class="text-center" scope="col">
-                                <a href="#" class="btn" style="background-color: lightblue;">
+                                <a href="{% url 'administrator:view_profile_member' ID=member.id %}" class="btn" style="background-color: lightblue;">
                                     <img id="user-icon" src="{% static 'img/bootstrap/folder2-open.svg' %}">
-                                </a>
-                                <a href="#" class="btn" style="background-color: lightgreen;">
-                                    <img id="user-icon" src="{% static 'img/bootstrap/pencil-square.svg' %}">
                                 </a>
                                 <a href="#" class="btn btn-danger">
                                     <img id="user-icon" src="{% static 'img/bootstrap/trash3-fill.svg' %}">

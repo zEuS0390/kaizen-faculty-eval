@@ -8,5 +8,6 @@ urlpatterns = [
     path('about/', About, name="about"),
     path('list_of_members/', ListOfMembers, name="list_of_members"),
     path('profile/', Profile, name="profile"),
-    path('delete-member/<int:ID>/', DeleteMember, name="delete_member")
+    path('delete-member/<int:ID>/', DeleteMember, name="delete_member"),
+    path("view-profile-member/<int:ID>/", ViewMemberProfile, name="view_profile_member")
 ]
