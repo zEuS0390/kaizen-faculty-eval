@@ -1,0 +1,6 @@
+django
+django-import-export
+crispy-bootstrap5
+python-decouple
+mysqlclient
+Pillow
