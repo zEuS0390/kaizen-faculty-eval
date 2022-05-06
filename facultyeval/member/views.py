@@ -3,12 +3,16 @@ from django.views import View
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from .decorators import member_only
+from administrator.models import ActivityLogs
+from accounts.models import Member
 
 # Create your views here.
 @login_required(login_url="accounts:login")
 @member_only
 def Home(request):
-    return render(request, template_name="member/home.html", context={})
+    member = Member.objects.filter(user=request.user).first()
+    logs = ActivityLogs.objects.filter(member=member)
+    return render(request, template_name="member/home.html", context={"logs":logs})
 
 @login_required(login_url="accounts:login")
 @member_only

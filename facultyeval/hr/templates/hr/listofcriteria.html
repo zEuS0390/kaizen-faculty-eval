@@ -1,0 +1,22 @@
+{% extends 'administrator/base.html' %}
+{% load static %}
+{% block title %}List of Criteria{% endblock %}
+{% block nav_item_hr %}active{% endblock %}
+{% block content %}
+<div style="min-height: 100vh;">
+    <div class="row" style="margin-top: 50px; margin-bottom: 25px;">
+        <div class="col">
+            <h3 class="text-center">LIST OF CRITERIA</h3>
+        </div>
+    </div>
+    <div class="row" style="margin-left: 50px; margin-right: 50px;">
+        <div class="col">
+            <ul class="list-group text-center">
+                {% for criterion in criteria %}
+                    <li class="list-group-item">{{ criterion.title }}</li>
+                {% endfor %}
+              </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

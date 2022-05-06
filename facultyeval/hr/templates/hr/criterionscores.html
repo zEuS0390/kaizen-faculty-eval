@@ -1,0 +1,60 @@
+{% extends 'administrator/base.html' %}
+{% load static %}
+{% block title %}Criterion Score Entry{% endblock %}
+{% block nav_item_hr %}active{% endblock %}
+{% block content %}
+<div style="min-height: 100vh; margin-bottom: 50px">
+    <!-- Title -->
+    <div class="row" style="padding-top: 50px; margin-bottom: 25px;">
+        <div class="col">
+            <h4 class="text-center">HR Criteria Scores</h4>
+        </div>
+    </div>
+    <!-- Display messages from the server -->
+    <div class="row">
+        <div class="col">
+            {% if messages %}
+                {% for message in messages %}
+                    {% if message.tags == 'error' %}
+                        <div class="alert alert-danger">
+                    {% else %}
+                        <div class="alert alert-{{message.tags}}">
+                    {% endif %}
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+    <div class="row" style="margin-left: 50px; margin-right: 50px;">
+        <div class="col">
+            <form method="POST">
+                {% csrf_token %}
+                <div style="margin-bottom: 20px;">
+                    <label for="hrcriterion">Criterion Title</label>
+                    {{form.hrcriterion}}
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <label for="program_chair_score">Program Chair Score</label>
+                    {{form.program_chair_score}}
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <label for="student_score">Student Score</label>
+                    {{form.student_score}}
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <label for="average_score">Average Score</label>
+                    {{form.average_score}}
+                </div>
+                <div style="margin-bottom: 40px;">
+                    <label for="remarks">Remarks</label>
+                    {{form.remarks}}
+                </div>
+                <div class="d-grid">
+                    <input class="btn btn-success" type="submit" value="Submit">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

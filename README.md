@@ -1,5 +1,6 @@
 [![shields](https://img.shields.io/badge/Kaizen-Faculty%20Evaluation-brightgreen)](https://github.com/zEuS-0390/kaizen-faculty-eval) [![shields](https://img.shields.io/badge/TIP-Quezon%20City-yellow)](https://www.tip.edu.ph/)
 # Kaizen Faculty Evaluation
+It is a web application that manages evaluation of faculty members in computer engineering department at Technological Institute of the Philippines - Quezon City. The head of the department, Engr. Cecille Venal is the client of this project and the adviser is Engr. Jonathan V. Taylar. It was conducted for the faculty members to see their performance based on three sources, which are Human Resources (HR), Academic Improvement Visitation (AIV), and Learning Management System (LMS/Canvas).
 
 ### Team Members
 These are all the team members of the Faculty Evaluation Project.
@@ -23,6 +24,8 @@ The following are the requirements needed in creating the Faculty Evaluation Pro
 * **XAMPP** (MySQL Server)
 * **HTML/CSS/JS** (Web Page Fundamentals)
 * **Bootstrap** (CSS Framework)
+
+## Development
 
 ### Create a virtual environment
 In this project, we are using pipenv packaging tool to manage dependencies and virtual environemnt. To activate the virtual environment, run the following command or execute
