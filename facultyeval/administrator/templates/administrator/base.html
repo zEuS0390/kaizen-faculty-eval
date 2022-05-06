@@ -59,7 +59,7 @@
                               <strong>{{user.username}}</strong>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-                              <li><a class="dropdown-item" href="#"> <img src = "{% static 'img/bootstrap/person-circle.svg'%}" /> Profile</a></li>
+                              <li><a class="dropdown-item" href="{% url 'administrator:profile' %}"> <img src = "{% static 'img/bootstrap/person-circle.svg'%}" /> Profile</a></li>
                               <li><a class="dropdown-item" href="{% url 'administrator:about' %}"> <img src = "{% static 'img/bootstrap/person-workspace.svg'%}" /> About</a></li>
                               <li><hr class="dropdown-divider"></li>
                               <li><a class="dropdown-item" href="{% url 'accounts:logout' %}"><img src = "{% static 'img/bootstrap/box-arrow-right.svg'%}" /> Sign out</a></li>

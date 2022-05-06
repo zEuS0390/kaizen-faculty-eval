@@ -1,0 +1,62 @@
+{% extends 'administrator/base.html' %}
+{% block title %}My Profile{% endblock %}
+{% load static %}
+{% block content %}
+<div class="d-flex justify-content-center" style="min-height: 100vh;">
+  <div class="d-flex align-items-center">
+<div class="container">
+  <h3 class="user-name">My Profile</h3> 
+    <div class="row gutters">
+    <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+    <div class="card h-100">
+      <div class="card-body">
+        <div class="account-settings">
+          <div class="user-profile">
+            <div class="user-avatar">
+              <img src="/media/{{ user.member.image }}"/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+    <div class="card h-100">
+      <div class="card-body">
+        <div class="row gutters">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <h6 class="mb-2 text-primary">Personal Details</h6>
+          </div>
+          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+            <div class="form-group">
+              <label for="First Name">First Name</label>
+              <p>{{ user.first_name }}</p>
+            </div>
+          </div>
+          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+            <div class="form-group">
+              <label for="Middle Name">Middle Name</label>
+              <p>{{ user.member.middle_name }}</p>
+            </div>
+          </div>
+          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+            <div class="form-group">
+              <label for="Last Name">Last Name</label>
+              <p>{{ user.last_name }}</p>
+            </div>
+          </div>
+          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+            <div class="form-group">
+              <label for="eMail">Email</label>
+              <p>{{ user.email }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

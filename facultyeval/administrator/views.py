@@ -40,6 +40,11 @@ def ListOfMembers(request):
 
 @login_required(login_url="accounts:login")
 @admin_only
+def Profile(request):
+    return render(request, template_name="administrator/profile.html", context={})
+
+@login_required(login_url="accounts:login")
+@admin_only
 def DeleteMember(request, ID):
     member = Member.objects.filter(id=ID)
     if member.exists():
