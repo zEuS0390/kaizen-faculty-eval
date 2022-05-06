@@ -37,3 +37,11 @@ def About(request):
 def ListOfMembers(request):
     members = Member.objects.all()
     return render(request, template_name="administrator/listofmembers.html", context={"members": members})
+
+@login_required(login_url="accounts:login")
+@admin_only
+def DeleteMember(request, ID):
+    member = Member.objects.filter(id=ID)
+    if member.exists():
+        member.first().user.delete()
+    return redirect("administrator:list_of_members")
