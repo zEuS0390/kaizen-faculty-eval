@@ -3,7 +3,7 @@ from django.views import View
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from administrator.decorators import admin_only
-from administrator.models import ActivityLogs
+from administrator.models import ActivityLogs, SchoolYear
 from canvas.models import Member
 
 # Create your views here.
@@ -65,7 +65,8 @@ class SchoolYearView(View):
     @method_decorator(login_required(login_url="accounts:login"))
     @method_decorator(admin_only)
     def get(self, request):
-        return render(request, template_name="administrator/schoolyear.html", context={})
+        school_years = SchoolYear.objects.all()
+        return render(request, template_name="administrator/schoolyear.html", context={"data": school_years})
 
     @method_decorator(login_required(login_url="accounts:login"))
     @method_decorator(admin_only)
