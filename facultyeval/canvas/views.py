@@ -9,6 +9,9 @@ from .forms import EvaluationForm
 from administrator.models import SchoolYear, ActivityLogs
 from .models import MGRating
 
+from django.http import HttpResponse
+import csv
+
 # Create your views here.
 class Index(View):
     """
@@ -20,10 +23,9 @@ class Index(View):
     @method_decorator(admin_only)
     def get(self, request, SEM, MG, SY):
         
-        print(SEM, MG, SY)
         school_year = SchoolYear.objects.filter(school_year=SY).first()
         ratings = MGRating.objects.filter(school_year=school_year, group_title=MG, semester=SEM)
-        return render(request, template_name="canvas/index.html", context={"ratings": ratings})
+        return render(request, template_name="canvas/index.html", context={"ratings": ratings, "SEM": SEM, "MG": MG, "SY":SY})
 
     @method_decorator(login_required(login_url="accounts:login"))
     @method_decorator(admin_only)
@@ -134,3 +136,20 @@ def DeleteEval(request, ID):
     messages.error(request, f"ID {ID} does not exist!")
     return redirect("canvas:index", SEM, MG, SY)
     
+
+
+@login_required(login_url="accounts:login")
+@admin_only
+def export_lms_csv(request,SEM, MG, SY):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="lms_{}_{}_{}.csv"'.format(SEM, MG, SY)
+
+    writer = csv.writer(response)
+    writer.writerow(["ID", "Faculty Member", "Part 1", "Part 2", "Final", "Remarks"])
+    school_year = SchoolYear.objects.filter(school_year=SY).first()
+    ratings = MGRating.objects.filter(school_year=school_year, group_title=MG, semester=SEM)
+    for rating in ratings:
+        data = [rating.id, rating.member, rating.part1, rating.part2, rating.final, rating.remarks]
+        writer.writerow(data)
+
+    return response

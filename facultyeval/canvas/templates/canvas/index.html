@@ -15,7 +15,7 @@
             <a href="#" class="btn btn-warning">
                 PDF
             </a>
-            <a href="#" class="btn btn-success">
+            <a href="{% url 'canvas:export_lms_csv' SEM=SEM MG=MG SY=SY %}" class="btn btn-success">
                 CSV
             </a>
         </div>
