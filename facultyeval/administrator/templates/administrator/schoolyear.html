@@ -1,0 +1,72 @@
+{% extends 'administrator/base.html' %}
+{% block title %}School Year{% endblock %}
+{% load static %}
+{% block content %}
+<div class="container" style="padding: 40px; min-height: 100vh;">
+    <!-- Title -->
+    <div class="row">
+        <div class="col">
+            <h4 class="text-center">School Year</h4>
+        </div>
+    </div>
+    <!-- Display messages from the server -->
+    <div class="row">
+        <div class="col">
+            {% if messages %}
+                {% for message in messages %}
+                    {% if message.tags == 'error' %}
+                        <div class="alert alert-danger">
+                    {% else %}
+                        <div class="alert alert-{{message.tags}}">
+                    {% endif %}
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+    <!-- Display performance evaluation of each faculty member -->
+    <div class="row">
+        <div class="col">
+            <table class="table table-hover border" id="myTable">
+                <thead class="table-primary">
+                    <th class="text-center" scope="col">ID</th>
+                    <th class="text-center" scope="col">FACULTY MEMBER</th>
+                    <th class="text-center" scope="col">STATUS</th>
+                    {% if item.1 == True %}
+                        <th class="text-center">ACTIONS</th>
+                    {% endif %}
+                </thead>
+                <tbody>
+                    {% for item in hr_data %}
+                        <tr scope="row">
+                            <td class="text-center" scope="col" style="width: 5%;">{{item.0.id}}</td>
+                            <td class="text-center" scope="col" style="width: 40%;">
+                                <img src="/media/{{item.0.image}}" class="rounded-circle" alt="" width="32" height="32">
+                                {{item.0}}
+                            </td>
+                            <td class="text-center" scope="col" style="width: 15%">
+                                {% if item.1 == True %}
+                                <img class="" src="{% static 'img/bootstrap/check-circle-fill.svg' %}" alt="check-circle"/>
+                                {% else %}
+                                <img src="{% static 'img/bootstrap/x-circle-fill.svg' %}" alt="x-circle"/>
+                                {% endif %}
+                            </td>
+                            {% if item.1 == True %}
+                            <td class="text-center" scope="col" style="width: 15%;">
+                                <a href="{% url 'hr:update_hr_eval_scores' SEM=SEM SY=SY ID=item.0.id %}" class="btn" style="background-color: lightgreen;">
+                                    <img id="user-icon" src="{% static 'img/bootstrap/pencil-square.svg' %}">
+                                </a>
+                                <a href="#" class="btn btn-danger">
+                                    <img id="user-icon" src="{% static 'img/bootstrap/trash3-fill.svg' %}">
+                                </a>
+                            </td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

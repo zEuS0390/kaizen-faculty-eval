@@ -59,3 +59,15 @@ def ViewMemberProfile(request, ID):
         cntx_user = member.first().user
         return render(request, template_name="administrator/viewmemberprofile.html", context={"cntx_user": cntx_user})
     return redirect("/")
+
+class SchoolYearView(View):
+
+    @method_decorator(login_required(login_url="accounts:login"))
+    @method_decorator(admin_only)
+    def get(self, request):
+        return render(request, template_name="administrator/schoolyear.html", context={})
+
+    @method_decorator(login_required(login_url="accounts:login"))
+    @method_decorator(admin_only)
+    def post(self, request):
+        return

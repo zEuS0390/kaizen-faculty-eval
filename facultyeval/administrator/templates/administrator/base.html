@@ -34,6 +34,12 @@
                               </a>
                             </li>
                             <li class="nav-item">
+                              <a href="{% url 'administrator:school_year' %}" class="nav-link {% block nav_item_school_year %}{% endblock %} text-white">
+                                <img style="filter:invert(100%);" src="{% static 'img/bootstrap/clock-fill.svg'%}" /> 
+                                School Year
+                              </a>
+                            </li>
+                            <li class="nav-item">
                                 <a href="{% url 'hr:index' SEM='1st-Sem' SY='2021-2022' %}" class="nav-link {% block nav_item_hr %}{% endblock %} text-white">
                                   <img src = "{% static 'img/bootstrap/journals.svg'%}" />
                                   HR
