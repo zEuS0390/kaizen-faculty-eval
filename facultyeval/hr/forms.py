@@ -13,14 +13,9 @@ class HRRatingForm(forms.ModelForm):
             self.fields[field].required = True
             self.fields[field].widget.attrs.update({"name": field, "class": "form-control"})
 
-class HRCriterionScoresForm(forms.ModelForm):
+class HRCriterionScoresForm(forms.Form):
 
-    class Meta:
-        model = HRCriterionScores
-        fields = "__all__"
-
-    def __init__(self, *args, **kwargs):
-        super(HRCriterionScoresForm, self).__init__(*args, **kwargs)
-        for field in self.fields:
-            self.fields[field].required = True
-            self.fields[field].widget.attrs.update({"name": field, "class": "form-control"})
+    program_chair_score = forms.FloatField(widget=forms.NumberInput(attrs={'class': "form-control"}))
+    student_score = forms.FloatField(widget=forms.NumberInput(attrs={'class': "form-control"}))
+    average_score = forms.FloatField(widget=forms.NumberInput(attrs={'class': "form-control"}))
+    remarks = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'class': "form-control"}))

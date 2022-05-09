@@ -1,6 +1,6 @@
 {% extends 'administrator/base.html' %}
 {% load static %}
-{% block title %}Evaluation Form Criteria{% endblock %}
+{% block title %}HR Evaluation Crieria Form{% endblock %}
 {% block nav_item_hr %}active{% endblock %}
 {% block content %}
 <div style="padding: 50px; min-height: 100vh;">
@@ -8,13 +8,6 @@
     <div class="row">
         <div class="col">
             <h4 class="text-center">HR Criteria Scores</h4>
-        </div>
-    </div>
-    <div class="row" style="margin-bottom: 20px;">
-        <div class="col d-flex justify-content-end">
-            <a href="{% url 'hr:criterion_scores' SEM=SEM SY=SY ID=member_id %}" class="btn btn-primary">
-                Add
-            </a>
         </div>
     </div>
     <!-- Display messages from the server -->
@@ -48,16 +41,27 @@
                     {% for item in hrcriterionscores %}
                         <tr scope="row">
                             <td class="text-center" scope="col" style="width: 25%">{{ item.hrcriterion.title }}</td>
-                            <td class="text-center" scope="col" style="width: 15%">{{ item.program_chair_score }}</td>
-                            <td class="text-center" scope="col" style="width: 15%">{{ item.student_score }}</td>
-                            <td class="text-center" scope="col" style="width: 15%">{{ item.average_score }}</td>
-                            <td class="text-center" scope="col" style="width: 10%">{{ item.remarks }}</td>
+                                <td class="text-center" scope="col" style="width: 15%">
+                                    {% if item.program_chair_score is not None %}
+                                        {{ item.program_chair_score }}
+                                    {% endif %}
+                                </td>
+                            <td class="text-center" scope="col" style="width: 15%">
+                                {% if item.student_score is not None %}
+                                    {{ item.student_score }}
+                                {% endif %}
+                            </td>
+                            <td class="text-center" scope="col" style="width: 15%">
+                                {% if item.average_score is not None %}
+                                    {{ item.average_score }}
+                                {% endif %} 
+                            </td>
+                            <td class="text-center" scope="col" style="width: 10%">
+                                {{ item.remarks }}
+                            </td>
                             <td class="text-center" scope="col" style="width: 30%">
-                                <a href="#" class="btn" style="background-color: lightgreen;">
+                                <a href="{% url 'hr:criterion_scores' SY=SY SEM=SEM ID=member_id CRITERIONID=item.hrcriterion.id %}" class="btn" style="background-color: lightgreen;">
                                     <img id="user-icon" src="{% static 'img/bootstrap/pencil-square.svg' %}">
-                                </a>
-                                <a href="#" class="btn btn-danger">
-                                    <img id="user-icon" src="{% static 'img/bootstrap/trash3-fill.svg' %}">
                                 </a>
                             </td>
                         </tr>

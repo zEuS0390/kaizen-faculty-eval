@@ -24,9 +24,9 @@ class HRCriterion(models.Model):
 class HRCriterionScores(models.Model):
     hrrating = models.ForeignKey(HRRating, on_delete=models.CASCADE)
     hrcriterion = models.ForeignKey(HRCriterion, on_delete=models.CASCADE)
-    program_chair_score = models.FloatField()
-    student_score = models.FloatField()
-    average_score = models.FloatField()
+    program_chair_score = models.FloatField(blank=True, null=True)
+    student_score = models.FloatField(blank=True, null=True)
+    average_score = models.FloatField(blank=True , null=True)
     remarks = models.CharField(max_length=200)
     def __str__(self):
         return f"{self.hrrating} - {self.hrcriterion} - {self.program_chair_score} - {self.student_score} - {self.average_score} - {self.remarks}"
