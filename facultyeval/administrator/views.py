@@ -7,6 +7,8 @@ from administrator.models import ActivityLogs, SchoolYear
 from canvas.models import Member
 from django.contrib import messages
 from .forms import *
+from django.http import HttpResponse
+import csv
 
 # Create your views here.
 class Dashboard(View):
@@ -112,3 +114,15 @@ def DeleteSchoolYear(request, ID):
     else:
         messages.error(request, "Error encountered deleting the school year")
     return redirect("administrator:school_year")
+
+@login_required(login_url="accounts:login")
+@admin_only
+def export_members_csv(request):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="registered_faculty_members.csv"'
+    writer = csv.writer(response)
+    writer.writerow(["List of Registered Faculty Members"])
+    members = Member.objects.all()
+    for member in members:
+        writer.writerow([member])
+    return response
