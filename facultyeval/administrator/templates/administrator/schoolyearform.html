@@ -1,0 +1,39 @@
+{% extends 'administrator/base.html' %}
+{% block title %}New School Year{% endblock %}
+{% block nav_item_school_year %}active{% endblock %}
+{% load static %}
+{% block content %}
+<div style="padding: 40px; min-height: 100vh;">
+    <!-- Title -->
+    <div class="row">
+        <div class="col">
+            <h4 class="text-center">NEW SCHOOL YEAR</h4>
+        </div>
+    </div>
+    <!-- Display messages from the server -->
+    <div class="row">
+        <div class="col">
+            {% if messages %}
+                {% for message in messages %}
+                    {% if message.tags == 'error' %}
+                        <div class="alert alert-danger">
+                    {% else %}
+                        <div class="alert alert-{{message.tags}}">
+                    {% endif %}
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <form class="form-group" method="POST">
+                {% csrf_token %}
+                {{ form }}
+                <input class="btn btn-primary" type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
