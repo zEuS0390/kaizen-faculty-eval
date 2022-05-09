@@ -8,7 +8,9 @@ from django.contrib import messages
 from .forms import *
 from .models import *
 from django.core.mail import EmailMessage
-
+from administrator.models import ActivityLogs
+from django.http import HttpResponse
+import csv
 
 # Create your views here.
 class Index(View):
@@ -128,6 +130,10 @@ class HRRatingEntry(View):
                 criterion_scores = HRCriterionScores(hrrating=hrrating, hrcriterion=criterion)
                 criterion_scores.save()
             messages.success(request, "HR evaluation entry successfully created!")
+            #ActivityLogs
+            logs = ActivityLogs(member=member, activity_log=ActivityLogs.ADDED, eval_log=ActivityLogs.HR)
+            logs.save()
+            #End of ActivityLogs
             return redirect("hr:index", SEM=semester, SY=school_year)
         return redirect("hr:hr_rating_entry", SEM=SEM, SY=SY)
 
@@ -138,9 +144,30 @@ def DeleteHRRating(request, SEM, SY, ID):
     school_year = SchoolYear.objects.filter(school_year=SY).first()
     hrrating = HRRating.objects.filter(member=member, school_year=school_year, semester=SEM)
     if hrrating.exists():
+        #ActivityLogs
+        logs = ActivityLogs(member=member, activity_log=ActivityLogs.DELETED, eval_log=ActivityLogs.HR)
+        logs.save()
+        #End of ActivityLogs
         hrrating.delete()
         messages.success(request, "HR evaluation entry was successfully deleted!")
         return redirect("hr:index", SEM=SEM, SY=SY)
     else:
         messages.error(request, f"ID {ID} does not exist!")
     return redirect("hr:index", SEM=SEM, SY=SY)
+
+
+@login_required(login_url="accounts:login")
+@admin_only
+def export_hr_csv(request,SEM, SY, ID):
+    member = Member.objects.filter(id=ID).first()
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="hr_{}_{}_{}.csv"'.format(SEM, SY, member)
+    writer = csv.writer(response)
+    writer.writerow(["Faculty Member",member])
+    writer.writerow(["Criterion", "Program Chair", "Student", "Average", "Remarks"])
+    school_year = SchoolYear.objects.filter(school_year=SY).first()
+    hrrating = HRRating.objects.filter(member=member, school_year=school_year, semester=SEM).first()
+    hrcriterionscores = HRCriterionScores.objects.filter(hrrating=hrrating)
+    for item in hrcriterionscores:
+        writer.writerow([item.hrcriterion,item.program_chair_score,item.student_score,item.average_score,item.remarks])
+    return response 

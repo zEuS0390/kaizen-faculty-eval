@@ -10,6 +10,16 @@
             <h4 class="text-center">HR Criteria Scores</h4>
         </div>
     </div>
+    <div class="row" style="margin-bottom: 25px;">
+        <div class="col">
+            <a href="#" class="btn btn-warning" style="margin-right: 5px;">
+                PDF
+            </a>
+            <a href="{% url 'hr:export_hr_csv' SEM=SEM SY=SY ID=member_id %}" class="btn btn-success">
+                CSV
+            </a>
+        </div>
+    </div>
     <!-- Display messages from the server -->
     <div class="row">
         <div class="col">

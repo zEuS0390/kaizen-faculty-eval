@@ -3,6 +3,7 @@ from .views import *
 
 app_name = "hr"
 urlpatterns = [
+    path("<slug:SEM>/<slug:SY>/update-hr-eval-scores/<int:ID>/export", export_hr_csv, name='export_hr_csv'),
     path("list-of-criteria/", ListofCriteria, name="list_of_criteria"),
     path("<slug:SEM>/<slug:SY>/", Index.as_view(), name="index"),
     path("<slug:SEM>/<slug:SY>/delete-hr-rating/<int:ID>", DeleteHRRating, name="delete_hr_rating"),
