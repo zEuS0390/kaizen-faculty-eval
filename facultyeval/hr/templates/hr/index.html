@@ -20,9 +20,10 @@
             </a>
         </div>
         <div class="col d-flex justify-content-end">
-            <a href="{% url 'hr:list_of_criteria' %}" class="btn btn-primary">
+            <a href="{% url 'hr:list_of_criteria' %}" class="btn btn-secondary" style="margin-right: 10px;">
                 List of Criteria
             </a>
+            <a href="{% url 'hr:hr_rating_entry' SEM=SEM SY=SY %}" class="btn btn-primary">New</a>
         </div>
     </div>
     <!-- Display messages from the server -->
@@ -66,14 +67,18 @@
                                 <img src="{% static 'img/bootstrap/x-circle-fill.svg' %}" alt="x-circle"/>
                                 {% endif %}
                             </td>
+                            {% if item.1 == True %}
                             <td class="text-center" scope="col" style="width: 15%;">
-                                <a href="{% url 'hr:hr_eval_scores' SEM=SEM SY=SY ID=item.0.id %}" class="btn" style="background-color: lightgreen;">
+                                <a href="{% url 'hr:update_hr_eval_scores' SEM=SEM SY=SY ID=item.0.id %}" class="btn" style="background-color: lightgreen;">
                                     <img id="user-icon" src="{% static 'img/bootstrap/pencil-square.svg' %}">
                                 </a>
-                                <a href="#" class="btn btn-danger">
+                                <a href="{% url 'hr:delete_hr_rating' SEM=SEM SY=SY ID=item.0.id%}" class="btn btn-danger">
                                     <img id="user-icon" src="{% static 'img/bootstrap/trash3-fill.svg' %}">
                                 </a>
                             </td>
+                            {% else %}
+                            <td class="text-center"></td>
+                            {% endif %}
                         </tr>
                     {% endfor %}
                 </tbody>
