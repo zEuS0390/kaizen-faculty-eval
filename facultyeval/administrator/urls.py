@@ -3,6 +3,7 @@ from .views import *
 
 app_name = "administrator"
 urlpatterns = [
+    path("list_of_members/export", export_members_csv, name='export_members_csv'),
     path('', Dashboard.as_view(), name="dashboard"),
     path('aiv/', AIV.as_view(), name="aiv"),
     path('about/', About, name="about"),
