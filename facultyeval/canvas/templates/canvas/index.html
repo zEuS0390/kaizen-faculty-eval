@@ -11,8 +11,8 @@
     </div>
     <div class="row">
         <!-- Export buttons (Not implemented yet) -->
-        <div class="col d-flex justify-content-start">
-            <a href="#" class="btn btn-warning">
+        <div class="col">
+            <a href="#" class="btn btn-warning" style="margin-right: 10px;">
                 PDF
             </a>
             <a href="{% url 'canvas:export_lms_csv' SEM=SEM MG=MG SY=SY %}" class="btn btn-success">
@@ -27,23 +27,21 @@
         </div>
     </div>
     <!-- Display messages from the server -->
-    <div class="row">
+    <div class="row" style="margin-top: 12px;">
         <div class="col">
             {% if messages %}
                 {% for message in messages %}
-                    {% if message.tags == 'error' %}
-                        <div class="alert alert-danger">
-                    {% else %}
-                        <div class="alert alert-{{message.tags}}">
-                    {% endif %}
-                        {{ message }}
+                    <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{message.tags}}{% endif %} alert-dismissible fade show" role="alert">
+                        {% if message.tags == 'error' %}<strong>Error Encountered!</strong><br>{% endif %}
+                        {{message}}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 {% endfor %}
             {% endif %}
         </div>
     </div>
     <!-- Display performance evaluation of each faculty member -->
-    <div class="row" style="margin-top: 25px;">
+    <div class="row">
         <div class="col">
             <table class="table table-hover border" id="myTable">
                 <thead class="table-primary">

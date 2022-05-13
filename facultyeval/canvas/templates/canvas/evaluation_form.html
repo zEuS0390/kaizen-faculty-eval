@@ -8,12 +8,10 @@
         <div class="col">
             {% if messages %}
                 {% for message in messages %}
-                    {% if message.tags == 'error' %}
-                        <div class="alert alert-danger">
-                    {% else %}
-                        <div class="alert alert-{{message.tags}}">
-                    {% endif %}
-                        {{ message }}
+                    <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{message.tags}}{% endif %} alert-dismissible fade show" role="alert">
+                        {% if message.tags == 'error' %}<strong>Error Encountered!</strong><br>{% endif %}
+                        {{message}}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 {% endfor %}
             {% endif %}

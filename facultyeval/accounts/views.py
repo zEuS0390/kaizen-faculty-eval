@@ -57,6 +57,9 @@ class Register(View):
             member.save()
             mail_admins("New Registrant","A new member has successfully registered.")           
             return redirect("accounts:login")
+        errors = [' '.join(error for error in errorlist) for errorlist in form.errors.values()]
+        for error in errors:
+            messages.error(request, f"{error}")
         return render(request, template_name="accounts/register.html", context={"form": form})
 
 class PassResetView(PasswordResetView):
