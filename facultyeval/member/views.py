@@ -33,3 +33,8 @@ def AIV(request):
 @member_only
 def LMS(request):
     return render(request, template_name="member/lms.html", context={})
+
+@login_required(login_url="accounts:login")
+@member_only
+def About(request):
+    return render(request, template_name="member/about.html", context={})

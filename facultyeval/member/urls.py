@@ -7,5 +7,6 @@ urlpatterns = [
     path("profile/", Profile, name="profile"),
     path("hr/", HR, name="hr"),
     path("aiv/", AIV, name="aiv"),
-    path("lms/", LMS, name="lms")
+    path("lms/", LMS, name="lms"),
+    path("about/", About, name="about")
 ]
