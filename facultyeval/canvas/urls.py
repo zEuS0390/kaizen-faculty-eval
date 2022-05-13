@@ -3,6 +3,7 @@ from .views import *
 
 app_name = "canvas"
 urlpatterns = [
+    path("<slug:SEM>/<str:MG>/<slug:SY>/export_pdf", GeneratePdf.as_view(), name='export_lms_pdf'),
     path("<slug:SEM>/<str:MG>/<slug:SY>/export", export_lms_csv, name='export_lms_csv'),
     path("<slug:SEM>/<str:MG>/<slug:SY>/", Index.as_view(), name="index"),
     path("evaluation-form-entry/", CreateEval.as_view(), name="eval_entry"),

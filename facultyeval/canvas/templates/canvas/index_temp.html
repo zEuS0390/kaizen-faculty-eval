@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LMS/CANVAS EVALUATION</title>
+    <style>
+        h1 {
+          text-align: center;
+        }
+        th {
+          text-align: center;
+          background-color: limegreen;
+        }
+        table {
+          text-align: center;  
+          border-left:1px solid black;
+          border-top:1px solid black;
+          border-right:1px solid black;
+          border-bottom:1px solid black;
+        }
+      </style>
+</head>
+<body>
+      <h1>LMS/CANVAS EVALUATION</h1>
+      <h3>School Year: {{ SY }}<br>Semester: {{ SEM }}<br>Modular Group: {{ MG }}</h3>
+      <table>
+        <thead>
+            <th>ID</th>
+            <th>Faculty Member</th>
+            <th>PART1</th>
+            <th>PART2</th>
+            <th>FINAL</th>
+            <th>REMARKS</th>
+        </thead>
+        <tbody>
+            {% for rating in ratings %}
+                <tr>
+                    <td>{{rating.id}}</td>
+                    <td>{{rating.member}}</td>
+                    <td>{{rating.part1}}</td>
+                    <td>{{rating.part2}}</td>
+                    <td>{{rating.final}}</td>
+                    <td>{{rating.remarks}}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

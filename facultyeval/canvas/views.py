@@ -8,9 +8,13 @@ from .decorators import admin_only
 from .forms import EvaluationForm
 from administrator.models import SchoolYear, ActivityLogs
 from .models import MGRating
-
 from django.http import HttpResponse
 import csv
+from io import BytesIO
+from django.template.loader import get_template
+from xhtml2pdf import pisa
+from django.views.generic import View
+from django.template.loader import render_to_string
 
 # Create your views here.
 class Index(View):
@@ -151,5 +155,30 @@ def export_lms_csv(request,SEM, MG, SY):
     for rating in ratings:
         data = [rating.id, rating.member, rating.part1, rating.part2, rating.final, rating.remarks]
         writer.writerow(data)
-
     return response
+
+def html_to_pdf(template_src, context_dict={}):
+     template = get_template(template_src)
+     html  = template.render(context_dict)
+     result = BytesIO()
+     pdf = pisa.pisaDocument(BytesIO(html.encode("ISO-8859-1")), result)
+     if not pdf.err:
+         return HttpResponse(result.getvalue(), content_type='application/pdf')
+     return None
+
+class GeneratePdf(View):
+    @method_decorator(login_required(login_url="accounts:login"))
+    @method_decorator(admin_only)
+    def get(self, request, SEM, MG, SY):
+
+        school_year = SchoolYear.objects.filter(school_year=SY).first()
+        ratings = MGRating.objects.filter(school_year=school_year, group_title=MG, semester=SEM)
+
+        open('canvas/templates/canvas/temp.html', "w").write(render_to_string('canvas/index_temp.html', 
+        {"ratings": ratings, "SY": SY, "SEM": SEM, "MG": MG}))
+         
+        # getting the template
+        pdf = html_to_pdf('canvas/temp.html')
+         
+        # rendering the template
+        return HttpResponse(pdf, content_type='application/pdf')

@@ -12,7 +12,7 @@
     <div class="row">
         <!-- Export buttons (Not implemented yet) -->
         <div class="col">
-            <a href="#" class="btn btn-warning" style="margin-right: 10px;">
+            <a href="{% url 'canvas:export_lms_pdf' SEM=SEM MG=MG SY=SY %}" class="btn btn-warning" style="margin-right: 10px;">
                 PDF
             </a>
             <a href="{% url 'canvas:export_lms_csv' SEM=SEM MG=MG SY=SY %}" class="btn btn-success">

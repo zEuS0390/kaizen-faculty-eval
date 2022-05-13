@@ -4,3 +4,4 @@ crispy-bootstrap5
 python-decouple
 mysqlclient
 Pillow
+xhtml2pdf

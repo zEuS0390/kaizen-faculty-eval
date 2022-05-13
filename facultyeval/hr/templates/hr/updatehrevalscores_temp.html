@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HR Criteria Scores</title>
+    <style>
+        h1 {
+          text-align: center;
+        }
+        th {
+          text-align: center;
+          background-color: limegreen;
+        }
+        table {
+          text-align: center;
+          border-left:1px solid black;
+          border-top:1px solid black;
+          border-right:1px solid black;
+          border-bottom:1px solid black;
+        }
+      </style>
+</head>
+<body>
+    
+      <h1>HR Criteria Scores</h1>
+      <h2>Name: {{ member }}</h2>
+      <h3>Semester: {{ SEM }}<br>School Year: {{ SY }}</h3>
+      <table>
+        <thead>
+            <th>Criterion</th>
+            <th>Program Chair</th>
+            <th>Student</th>
+            <th>Average</th>
+            <th>Remarks</th>
+        </thead>
+        <tbody>
+            {% for item in hrcriterionscores %}
+                <tr>
+                    <td>{{ item.hrcriterion.title }}</td>
+                        <td>
+                            {% if item.program_chair_score is not None %}
+                                {{ item.program_chair_score }}
+                            {% endif %}
+                        </td>
+                    <td>
+                        {% if item.student_score is not None %}
+                            {{ item.student_score }}
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if item.average_score is not None %}
+                            {{ item.average_score }}
+                        {% endif %} 
+                    </td>
+                    <td>
+                        {{ item.remarks }}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

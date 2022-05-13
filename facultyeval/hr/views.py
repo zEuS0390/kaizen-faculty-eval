@@ -11,6 +11,11 @@ from django.core.mail import EmailMessage
 from administrator.models import ActivityLogs
 from django.http import HttpResponse
 import csv
+from io import BytesIO
+from django.template.loader import get_template
+from xhtml2pdf import pisa
+from django.views.generic import View
+from django.template.loader import render_to_string
 
 # Create your views here.
 class Index(View):
@@ -171,3 +176,31 @@ def export_hr_csv(request,SEM, SY, ID):
     for item in hrcriterionscores:
         writer.writerow([item.hrcriterion,item.program_chair_score,item.student_score,item.average_score,item.remarks])
     return response 
+
+def html_to_pdf(template_src, context_dict={}):
+     template = get_template(template_src)
+     html  = template.render(context_dict)
+     result = BytesIO()
+     pdf = pisa.pisaDocument(BytesIO(html.encode("ISO-8859-1")), result)
+     if not pdf.err:
+         return HttpResponse(result.getvalue(), content_type='application/pdf')
+     return None
+
+class GeneratePdf(View):
+    @method_decorator(login_required(login_url="accounts:login"))
+    @method_decorator(admin_only)
+    def get(self, request, SEM, SY, ID):
+
+        member = Member.objects.filter(id=ID).first()
+        school_year = SchoolYear.objects.filter(school_year=SY).first()
+        hrrating = HRRating.objects.filter(member=member, school_year=school_year, semester=SEM).first()
+        hrcriterionscores = HRCriterionScores.objects.filter(hrrating=hrrating).all()
+
+        open('hr/templates/hr/temp.html', "w").write(render_to_string('hr/updatehrevalscores_temp.html', 
+        {"hrcriterionscores": hrcriterionscores, "member": member, "SY": SY, "SEM": SEM}))
+         
+        # getting the template
+        pdf = html_to_pdf('hr/temp.html')
+         
+        # rendering the template
+        return HttpResponse(pdf, content_type='application/pdf')

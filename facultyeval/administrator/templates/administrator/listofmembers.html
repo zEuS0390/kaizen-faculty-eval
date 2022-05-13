@@ -10,7 +10,7 @@
     <div class="row" style="margin-bottom: 20px;">
         <!-- Export buttons (Not implemented yet) -->
         <div class="col d-flex justify-content-start">
-            <a href="#" class="btn btn-warning" style="margin-right: 10px;">
+            <a href="{% url 'administrator:export_members_pdf' %}" class="btn btn-warning" style="margin-right: 10px;">
                 PDF
             </a>
             <a href="{% url 'administrator:export_members_csv' %}" class="btn btn-success">
