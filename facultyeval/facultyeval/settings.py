@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'accounts',
     'canvas',
     'hr',
+    'aiv',
     'member',
     "crispy_forms",
     "crispy_bootstrap5",

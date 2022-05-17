@@ -24,18 +24,6 @@ class Dashboard(View):
         logs = ActivityLogs.objects.all()
         return render(request, template_name="administrator/dashboard.html", context={"logs": logs})
 
-class AIV(View):
-
-    @method_decorator(login_required(login_url="accounts:login"))
-    @method_decorator(admin_only)
-    def get(self, request):
-        return render(request, template_name="administrator/aiv.html", context={})
-
-    @method_decorator(login_required(login_url="accounts:login"))
-    @method_decorator(admin_only)
-    def post(self, request):
-        return redirect("/")
-
 @login_required(login_url="accounts:login")
 @admin_only
 def About(request):

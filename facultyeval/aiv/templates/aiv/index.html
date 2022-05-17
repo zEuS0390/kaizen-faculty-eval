@@ -1,20 +1,20 @@
 {% extends 'administrator/base.html' %}
 {% load static %}
-{% block title %}Faculty Evaluation in HR{% endblock %}
-{% block nav_item_hr %}active{% endblock %}
+{% block title %}Faculty Evaluation in AIV{% endblock %}
+{% block nav_item_aiv %}active{% endblock %}
 {% block content %}
 <div style="padding: 50px;min-height: 100vh;">
     <div class="row" style="margin-bottom: 20px;">
         <div class="col">
-            <h3 class="text-center">HUMAN RESOURCE EVALUATION</h3>
+            <h3 class="text-center">ACADEMIC IMPROVEMENT VISITATION EVALUATION</h3>
         </div>
     </div>
     <div class="row" style="margin-bottom: 25px;">
         <div class="col d-flex justify-content-end">
-            <a href="{% url 'hr:list_of_criteria' %}" class="btn btn-secondary" style="margin-right: 10px;">
+            <a href= "#" class="btn btn-secondary" style="margin-right: 10px;">
                 List of Criteria
             </a>
-            <a href="{% url 'hr:hr_rating_entry' SEM=SEM SY=SY %}" class="btn btn-primary">New</a>
+            <a href="#" class="btn btn-primary">New</a>
         </div>
     </div>
     <!-- Display messages from the server -->
@@ -42,7 +42,7 @@
                     <th class="text-center">ACTIONS</th>
                 </thead>
                 <tbody>
-                    {% for item in hr_data %}
+                    {% for item in aiv_data %}
                         <tr scope="row">
                             <td class="text-center" scope="col" style="width: 5%;">{{item.0.id}}</td>
                             <td class="text-center" scope="col" style="width: 40%;">
@@ -58,10 +58,10 @@
                             </td>
                             {% if item.1 == True %}
                             <td class="text-center" scope="col" style="width: 15%;">
-                                <a href="{% url 'hr:update_hr_eval_scores' SEM=SEM SY=SY ID=item.0.id %}" class="btn" style="background-color: lightgreen;">
+                                <a href="#" class="btn" style="background-color: lightgreen;">
                                     <img id="user-icon" src="{% static 'img/bootstrap/pencil-square.svg' %}">
                                 </a>
-                                <a href="{% url 'hr:delete_hr_rating' SEM=SEM SY=SY ID=item.0.id%}" class="btn btn-danger">
+                                <a href="#" class="btn btn-danger">
                                     <img id="user-icon" src="{% static 'img/bootstrap/trash3-fill.svg' %}">
                                 </a>
                             </td>
