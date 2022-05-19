@@ -25,7 +25,8 @@ class Index(View):
     def get(self, request, SEM, SY):
         members = Member.objects.all()
         school_year = SchoolYear.objects.filter(school_year=SY).first()
-        context = {"hr_data": [], "SEM": SEM, "SY":SY}
+        sy_group = SchoolYear.objects.all()
+        context = {"hr_data": [], "SEM": SEM, "SY":SY, "sy_group": sy_group}
         for member in members:
             result = HRRating.objects.filter(member=member, school_year=school_year, semester=SEM)
             if result.exists():

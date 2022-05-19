@@ -29,7 +29,8 @@ class Index(View):
         
         school_year = SchoolYear.objects.filter(school_year=SY).first()
         ratings = MGRating.objects.filter(school_year=school_year, group_title=MG, semester=SEM)
-        return render(request, template_name="canvas/index.html", context={"ratings": ratings, "SEM": SEM, "MG": MG, "SY":SY})
+        sy_group = SchoolYear.objects.all()
+        return render(request, template_name="canvas/index.html", context={"ratings": ratings, "SEM": SEM, "MG": MG, "SY":SY, "sy_group": sy_group})
 
     @method_decorator(login_required(login_url="accounts:login"))
     @method_decorator(admin_only)

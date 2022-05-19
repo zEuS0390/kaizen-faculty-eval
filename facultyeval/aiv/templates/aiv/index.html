@@ -8,13 +8,39 @@
         <div class="col">
             <h3 class="text-center">ACADEMIC IMPROVEMENT VISITATION EVALUATION</h3>
         </div>
+        <hr>
     </div>
     <div class="row" style="margin-bottom: 25px;">
+        <div class="col d-flex justify-content-start text-center">
+            <div class="dropdown">
+                <a class="btn btn-primary dropdown-toggle border" href="#" role="button" id="schoolYearDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    {{ SY }}
+                </a>
+                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="schoolYearDropdown">
+                    {% for sy in sy_group %}
+                        <li><a class="dropdown-item {% if SY == sy.school_year %}active{% endif %}" href="{% url 'aiv:index' SEM=SEM SY=sy.school_year %}">{{ sy.school_year }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="dropdown" style="margin-left: 10px;">
+                <a class="btn btn-primary dropdown-toggle border" href="#" role="button" id="semesterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    {% if SEM == '1st-Sem' %}
+                        1st Semester
+                    {% elif SEM == '2nd-Sem' %}
+                        2nd Semester
+                    {% endif %}
+                </a>
+                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="semesterDropdown">
+                    <li><a class="dropdown-item {% if SEM == '1st-Sem' %}active{% endif %}" href="{% url 'aiv:index' SEM='1st-Sem' SY=SY %}">1st Semester</a></li>
+                    <li><a class="dropdown-item {% if SEM == '2nd-Sem' %}active{% endif %}" href="{% url 'aiv:index' SEM='2nd-Sem' SY=SY %}">2nd Semester</a></li>
+                </ul>
+            </div>
+        </div>
         <div class="col d-flex justify-content-end">
-            <a href= "#" class="btn btn-secondary" style="margin-right: 10px;">
+            <a href= "{% url 'aiv:list_of_criteria' %}" class="btn btn-secondary" style="margin-right: 10px;">
                 List of Criteria
             </a>
-            <a href="#" class="btn btn-primary">New</a>
+            <a href="{% url 'aiv:aiv_rating_entry' SEM=SEM SY=SY %}" class="btn btn-primary">New</a>
         </div>
     </div>
     <!-- Display messages from the server -->
@@ -58,10 +84,10 @@
                             </td>
                             {% if item.1 == True %}
                             <td class="text-center" scope="col" style="width: 15%;">
-                                <a href="#" class="btn" style="background-color: lightgreen;">
+                                <a href="{% url 'aiv:update_aiv_eval_scores' SEM=SEM SY=SY ID=item.0.id %}" class="btn" style="background-color: lightgreen;">
                                     <img id="user-icon" src="{% static 'img/bootstrap/pencil-square.svg' %}">
                                 </a>
-                                <a href="#" class="btn btn-danger">
+                                <a href="{% url 'aiv:delete_aiv_rating' SEM=SEM SY=SY ID=item.0.id%}" class="btn btn-danger">
                                     <img id="user-icon" src="{% static 'img/bootstrap/trash3-fill.svg' %}">
                                 </a>
                             </td>

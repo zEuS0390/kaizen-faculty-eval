@@ -1,0 +1,83 @@
+{% extends 'administrator/base.html' %}
+{% load static %}
+{% block title %}HR Evaluation Crieria Form{% endblock %}
+{% block nav_item_aiv %}active{% endblock %}
+{% block content %}
+<div style="padding: 50px; min-height: 100vh;">
+    <!-- Title -->
+    <div class="row">
+        <div class="col">
+            <h4 class="text-center">AIV Criteria Scores</h4>
+            <hr>
+        </div>
+    </div>
+    <div class="row" style="margin-bottom: 25px;">
+        <div class="col">
+            <a href="#" class="btn btn-warning" style="margin-right: 5px;">
+                PDF
+            </a>
+            <a href="#" class="btn btn-success">
+                CSV
+            </a>
+        </div>
+    </div>
+    <!-- Display messages from the server -->
+    <div class="row">
+        <div class="col">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{message.tags}}{% endif %} alert-dismissible fade show" role="alert">
+                        {% if message.tags == 'error' %}<strong>Error Encountered!</strong><br>{% endif %}
+                        {{message}}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <table class="table table-hover border">
+                <thead class="table-danger">
+                    <th class="text-center" scope="col">Criterion</th>
+                    <th class="text-center" scope="col">First Visit</th>
+                    <th class="text-center" scope="col">Second Visit</th>
+                    <th class="text-center" scope="col">Average</th>
+                    <th class="text-center" scope="col">Remarks</th>
+                    <th class="text-center" scope="col">Actions</th>
+                </thead>
+                <tbody>
+                    {% for item in aivcriterionscores %}
+                        <tr scope="row">
+                            <td class="text-center" scope="col" style="width: 25%">{{ item.aivcriterion.title }}</td>
+                                <td class="text-center" scope="col" style="width: 15%">
+                                    {% if item.first_visit is not None %}
+                                        {{ item.first_visit }}
+                                    {% endif %}
+                                </td>
+                            <td class="text-center" scope="col" style="width: 15%">
+                                {% if item.second_visit is not None %}
+                                    {{ item.second_visit }}
+                                {% endif %}
+                            </td>
+                            <td class="text-center" scope="col" style="width: 15%">
+                                {% if item.average_score is not None %}
+                                    {{ item.average_score }}
+                                {% endif %} 
+                            </td>
+                            <td class="text-center" scope="col" style="width: 10%">
+                                {{ item.remarks }}
+                            </td>
+                            <td class="text-center" scope="col" style="width: 30%">
+                                <a href="{% url 'aiv:criterion_scores' SY=SY SEM=SEM ID=member_id CRITERIONID=item.aivcriterion.id %}" class="btn" style="background-color: lightgreen;">
+                                    <img id="user-icon" src="{% static 'img/bootstrap/pencil-square.svg' %}">
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

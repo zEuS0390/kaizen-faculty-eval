@@ -8,6 +8,7 @@
         <div class="col">
             <h3 class="text-center">LEARNING MANAGEMENT SYSTEM EVALUATION</h3>
         </div>
+        <hr>
     </div>
     <div class="row">
         <!-- Export buttons (Not implemented yet) -->
@@ -18,6 +19,46 @@
             <a href="{% url 'canvas:export_lms_csv' SEM=SEM MG=MG SY=SY %}" class="btn btn-success">
                 CSV
             </a>
+        </div>
+        <div class="col d-flex justify-content-start text-center">
+            <div class="dropdown">
+                <a class="btn btn-primary dropdown-toggle border" href="#" role="button" id="schoolYearDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                  {{ SY }}
+                </a>
+                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="schoolYearDropdown">
+                    {% for sy in sy_group %}
+                        <li><a class="dropdown-item {% if SY == sy.school_year %}active{% endif %}" href="{% url 'canvas:index' SEM=SEM MG=MG SY=sy.school_year %}">{{ sy.school_year }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="dropdown" style="margin-left: 10px;">
+                <a class="btn btn-primary dropdown-toggle border" href="#" role="button" id="modularGroupDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    {% if MG == 'MG1' %}Modular 1
+                    {% elif MG == 'MG2' %}Modular 2
+                    {% elif MG == 'MG3' %}Modular 3
+                    {% elif MG == 'MG4' %}Modular 4
+                    {% endif %}
+                </a>
+                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="modularGroupDropdown">
+                    <li><a class="dropdown-item" href="{% url 'canvas:index' SEM=SEM MG='MG1' SY=SY %}">Modular Group 1</a></li>
+                    <li><a class="dropdown-item" href="{% url 'canvas:index' SEM=SEM MG='MG2' SY=SY %}">Modular Group 2</a></li>
+                    <li><a class="dropdown-item" href="{% url 'canvas:index' SEM=SEM MG='MG3' SY=SY %}">Modular Group 3</a></li>
+                    <li><a class="dropdown-item" href="{% url 'canvas:index' SEM=SEM MG='MG4' SY=SY %}">Modular Group 4</a></li>
+                </ul>
+            </div>
+            <div class="dropdown" style="margin-left: 10px;">
+                <a class="btn btn-primary dropdown-toggle border" href="#" role="button" id="semesterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    {% if SEM == '1st-Sem' %}
+                        1st Semester
+                    {% elif SEM == '2nd-Sem' %}
+                        2nd Semester
+                    {% endif %}
+                </a>
+                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="semesterDropdown">
+                  <li><a class="dropdown-item {% if SEM == '1st-Sem' %}active{% endif %}" href="{% url 'canvas:index' SEM='1st-Sem' MG=MG SY=SY %}">1st Semester</a></li>
+                  <li><a class="dropdown-item {% if SEM == '2nd-Sem' %}active{% endif %}" href="{% url 'canvas:index' SEM='2nd-Sem' MG=MG SY=SY %}">2nd Semester</a></li>
+                </ul>
+              </div>
         </div>
         <!-- Create new performance evaluation -->
         <div class="col d-flex justify-content-end">

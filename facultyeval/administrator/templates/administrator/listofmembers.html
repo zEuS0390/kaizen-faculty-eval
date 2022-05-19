@@ -6,6 +6,7 @@
 <div class="container" style="padding: 40px; min-height: 100vh;">
     <div class="row" style="margin-bottom: 20px;">
         <h3 class="text-center">LIST OF REGISTERED FACULTY MEMBERS</h3>
+        <hr>
     </div>
     <div class="row" style="margin-bottom: 20px;">
         <!-- Export buttons (Not implemented yet) -->
@@ -24,7 +25,7 @@
                 <thead class="table-success">
                     <th class="text-center" scope="col">ID</th>
                     <th class="text-center" scope="col">FACULTY MEMBER</th>
-                    <th class="text-center" scope="col">DATE JOINED</th>
+                    <th class="text-center" scope="col">DATE AND TIME JOINED</th>
                     <th class="text-center">ACTIONS</th>
                 </thead>
                 <tbody>
@@ -35,7 +36,7 @@
                                 <img src="/media/{{member.image}}" class="rounded-circle" alt="" width="32" height="32">
                                 {{member}}
                             </td>
-                            <td class="text-center" scope="col"></td>
+                            <td class="text-center" scope="col">{{member.user.date_joined}}</td>
                             <td class="text-center" scope="col">
                                 <a href="{% url 'administrator:view_profile_member' ID=member.id %}" class="btn" style="background-color: lightblue;">
                                     <img id="user-icon" src="{% static 'img/bootstrap/folder2-open.svg' %}">

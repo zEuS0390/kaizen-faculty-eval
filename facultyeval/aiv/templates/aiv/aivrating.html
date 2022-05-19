@@ -1,0 +1,39 @@
+{% extends 'administrator/base.html' %}
+{% load static %}
+{% block title %}Evaluation Form Criteria{% endblock %}
+{% block nav_item_aiv %}active{% endblock %}
+{% block content %}
+<div style="padding: 50px; min-height: 100vh;">
+    <!-- Title -->
+    <div class="row">
+        <div class="col">
+            <h4 class="text-center">New AIV Evaluation</h4>
+        </div>
+    </div>
+    <!-- Display messages from the server -->
+    <div class="row">
+        <div class="col">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{message.tags}}{% endif %} alert-dismissible fade show" role="alert">
+                        {% if message.tags == 'error' %}<strong>Error Encountered!</strong><br>{% endif %}
+                        {{message}}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <form class="form-group" method="POST">
+                {% csrf_token %}
+                {{ form }}
+                <div class="d-grid" style="padding-top: 20px;">
+                    <input class="btn btn-primary"type="submit" value="Submit">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
