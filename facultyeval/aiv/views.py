@@ -77,8 +77,19 @@ class CriterionScores(View):
 
     @method_decorator(login_required(login_url="accounts:login"))
     @method_decorator(admin_only)
-    def get(self, request, SEM, SY, ID, CRITERIONID):
-        return redirect("/")
+    def post(self, request, SEM, SY, ID, CRITERIONID):
+        form = AIVCriterionScoresForm(request.POST)
+        if form.is_valid():
+            member = Member.objects.filter(id=ID).first()
+            school_year = SchoolYear.objects.filter(school_year=SY).first()
+            aivrating = AIVRating.objects.filter(member=member, school_year=school_year, semester=SEM).first()
+            aivcriterion = AIVCriterion.objects.filter(id=CRITERIONID).first()
+            aivcriterionscores = AIVCriterionScores.objects.filter(aivrating=aivrating, aivcriterion=aivcriterion)
+            aivcriterionscores.update(**form.cleaned_data)
+            messages.success(request, "Successfully updated criterion scores!")
+        else:
+            messages.error(request, "Error encountered updating criterion scores!")
+        return redirect("aiv:update_aiv_eval_scores", SEM=SEM, SY=SY, ID=ID)
 
 @login_required(login_url="accounts:login")
 @admin_only
