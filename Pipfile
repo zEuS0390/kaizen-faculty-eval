@@ -11,6 +11,9 @@ python-decouple = "*"
 mysqlclient = "*"
 Pillow = "*"
 xhtml2pdf = "*"
+django-extensions = "*"
+pydot = "*"
+pyparsing = "*"
 
 [dev-packages]
 
