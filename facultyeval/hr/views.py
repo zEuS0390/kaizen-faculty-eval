@@ -26,7 +26,8 @@ class Index(View):
         members = Member.objects.all()
         school_year = SchoolYear.objects.filter(school_year=SY).first()
         sy_group = SchoolYear.objects.all()
-        context = {"hr_data": [], "SEM": SEM, "SY":SY, "sy_group": sy_group}
+        form = HRRatingForm()
+        context = {"hr_data": [], "SEM": SEM, "SY":SY, "sy_group": sy_group, "form": form}
         for member in members:
             result = HRRating.objects.filter(member=member, school_year=school_year, semester=SEM)
             if result.exists():
@@ -38,7 +39,44 @@ class Index(View):
     @method_decorator(login_required(login_url="accounts:login"))
     @method_decorator(admin_only)
     def post(self, request, SEM, SY):
-        return redirect("/")
+        form = HRRatingForm(request.POST)
+        if form.is_valid():
+            hrrating = form.save(commit=False)
+            member = form.cleaned_data.get("member")
+            semester = form.cleaned_data.get("semester")
+            school_year = form.cleaned_data.get("school_year")
+            if HRRating.objects.filter(member=member, semester=semester, school_year=school_year).exists():
+                messages.error(request, "HR evaluation entry already exist!")
+                return redirect("hr:hr_rating_entry", SEM=semester, SY=school_year)
+            hrrating.save()
+            criteria = HRCriterion.objects.all()
+            for criterion in criteria:
+                criterion_scores = HRCriterionScores(hrrating=hrrating, hrcriterion=criterion)
+                criterion_scores.save()
+            messages.success(request, "HR evaluation entry successfully created!")
+            #ActivityLogs
+            logs = ActivityLogs(member=member, activity_log=ActivityLogs.ADDED, eval_log=ActivityLogs.HR)
+            logs.save()
+            #End of ActivityLogs
+            return redirect("hr:index", SEM=semester, SY=school_year)
+        return redirect("hr:hr_rating_entry", SEM=SEM, SY=SY)
+
+@login_required(login_url="accounts:login")
+@admin_only
+def NewHREvaluation(request, SEM, SY, ID):
+    member = Member.objects.filter(id=ID).first()
+    school_year = SchoolYear.objects.filter(school_year=SY).first()
+    if HRRating.objects.filter(member=member, semester=SEM, school_year=school_year).exists():
+        messages.error(request, "HR evaluation entry already exist!")
+        return redirect("hr:index", SEM=SEM, SY=school_year)
+    hrrating = HRRating(member=member, semester=SEM, school_year=school_year)
+    hrrating.save()
+    criteria = HRCriterion.objects.all()
+    for criterion in criteria:
+        criterion_scores = HRCriterionScores(hrrating=hrrating, hrcriterion=criterion)
+        criterion_scores.save()
+    messages.success(request, "HR evaluation entry successfully created!")
+    return redirect("hr:index", SEM=SEM, SY=SY)
 
 class EvalScores(View):
 
