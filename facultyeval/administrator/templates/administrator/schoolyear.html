@@ -14,9 +14,30 @@
     <div class="row" style="margin-bottom: 25px;">
         <!-- Create new performance evaluation -->
         <div class="col d-flex justify-content-end">
-            <a href="{% url 'administrator:new_school_year' %}" class="btn btn-primary">
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newschoolyear">
                 New
-            </a>
+            </button>
+            <form method="POST">
+                {% csrf_token %}
+                <!-- Modal -->
+                <div class="modal fade" id="newschoolyear" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">New School Year</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            {{ form }}
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success">Save</button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
     <!-- Display messages from the server -->
@@ -38,14 +59,12 @@
         <div class="col">
             <table class="table table-hover border" id="myTable">
                 <thead class="table-primary">
-                    <th class="text-center" scope="col">ID</th>
                     <th class="text-center" scope="col">SCHOOL YEAR</th>
                     <th class="text-center">ACTIONS</th>
                 </thead>
                 <tbody>
                     {% for item in data %}
                         <tr scope="row">
-                            <td class="text-center" scope="col" style="width: 5%;">{{item.id}}</td>
                             <td class="text-center" scope="col" style="width: 40%;">{{item}}</td>
                             <td class="text-center" scope="col" style="width: 15%;">
                                 <a href="#" class="btn" style="background-color: lightgreen;">

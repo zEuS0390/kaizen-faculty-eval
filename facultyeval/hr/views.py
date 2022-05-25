@@ -138,14 +138,47 @@ class CriterionScores(View):
             messages.error(request, "Error encountered updating criterion scores!")
         return redirect("hr:update_hr_eval_scores", SEM=SEM, SY=SY, ID=ID)
 
+class ListOfCriteria(View):
+
+    @method_decorator(login_required(login_url="accounts:login"))
+    @method_decorator(admin_only)
+    def get(self, request):
+        criteria = HRCriterion.objects.all()
+        form = HRCriterionForm()
+        context = {
+            "criteria": criteria,
+            "form": form
+        }
+        return render(request, template_name="hr/listofcriteria.html", context=context)
+
+    @method_decorator(login_required(login_url="accounts:login"))
+    @method_decorator(admin_only)
+    def post(self, request):
+        # New criterion form
+        if 'new_criterion' in request.POST:
+            form = HRCriterionForm(request.POST)
+            if form.is_valid():
+                hrcriterion = form.save(commit=False)
+                title = form.cleaned_data.get('title')
+                if HRCriterion.objects.filter(title=title).exists():
+                    messages.error(request, "HR evaluation criterion already exist!")
+                    return redirect("hr:list_of_criteria")
+                hrcriterion.save()
+                messages.success(request, "HR evaluation criterion successfully created!")
+                return redirect("hr:list_of_criteria")
+        return redirect("/")
+
 @login_required(login_url="accounts:login")
 @admin_only
-def ListofCriteria(request):
-    criteria = HRCriterion.objects.all()
-    context = {
-        "criteria": criteria
-    }
-    return render(request, template_name="hr/listofcriteria.html", context=context)
+def DeleteHRCriterion(request, ID):
+    hrcriterion = HRCriterion.objects.filter(id=ID)
+    if hrcriterion.exists():
+        hrcriterion.delete()
+        messages.success(request, "HR evaluation criterion was successfully deleted!")
+        return redirect("hr:list_of_criteria")
+    else:
+        messages.error(request, f"ID {ID} does not exist!")
+    return redirect("hr:list_of_criteria")
 
 class HRRatingEntry(View):
 

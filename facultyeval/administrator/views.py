@@ -63,12 +63,28 @@ class SchoolYearView(View):
     @method_decorator(admin_only)
     def get(self, request):
         school_years = SchoolYear.objects.all()
-        return render(request, template_name="administrator/schoolyear.html", context={"data": school_years})
+        form = SchoolYearForm()
+        context = {
+            "data": school_years,
+            "form": form
+        }
+        return render(request, template_name="administrator/schoolyear.html", context=context)
 
     @method_decorator(login_required(login_url="accounts:login"))
     @method_decorator(admin_only)
     def post(self, request):
-        return
+        form = SchoolYearForm(request.POST)
+        if form.is_valid():
+            SY = form.save(commit=False)
+            school_year = form.cleaned_data.get("school_year")
+            if SchoolYear.objects.filter(school_year=school_year).exists():
+                messages.error(request, "School year already exist!")
+                return redirect("administrator:new_school_year")
+            SY.save()
+            messages.success(request, "School year has successfully added!")
+            return redirect("administrator:school_year")
+        messages.error(request, "Invalid input!")
+        return redirect("administrator:new_school_year")
 
 class NewSchoolYear(View):
 
