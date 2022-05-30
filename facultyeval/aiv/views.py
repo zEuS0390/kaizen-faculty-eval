@@ -156,3 +156,20 @@ def DeleteAIVRating(request, SEM, SY, ID):
     else:
         messages.error(request, f"ID {ID} does not exist!")
     return redirect("aiv:index", SEM=SEM, SY=SY)
+
+@login_required(login_url="accounts:login")
+@admin_only
+def NewAIVEvaluation(request, SEM, SY, ID):
+    member = Member.objects.filter(id=ID).first()
+    school_year = SchoolYear.objects.filter(school_year=SY).first()
+    if AIVRating.objects.filter(member=member, semester=SEM, school_year=school_year).exists():
+        messages.error(request, "AIV evaluation entry already exist!")
+        return redirect("aiv:index", SEM=SEM, SY=school_year)
+    hrrating = AIVRating(member=member, semester=SEM, school_year=school_year)
+    hrrating.save()
+    criteria = AIVCriterion.objects.all()
+    for criterion in criteria:
+        criterion_scores = AIVCriterionScores(hrrating=hrrating, hrcriterion=criterion)
+        criterion_scores.save()
+    messages.success(request, "AIV evaluation entry successfully created!")
+    return redirect("aiv:index", SEM=SEM, SY=SY)

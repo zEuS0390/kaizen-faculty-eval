@@ -92,7 +92,9 @@
                                 </a>
                             </td>
                             {% else %}
-                            <td class="text-center"></td>
+                            <td class="text-center" style="width: 15%;">
+                                <a class="btn btn-primary" href="{% url 'aiv:new_aiv_evaluation' SEM=SEM SY=SY ID=item.0.id %}">New</a>
+                            </td>
                             {% endif %}
                         </tr>
                     {% endfor %}
