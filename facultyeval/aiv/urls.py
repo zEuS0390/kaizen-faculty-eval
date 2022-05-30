@@ -3,6 +3,7 @@ from .views import *
 
 app_name = "aiv"
 urlpatterns = [
+    path("", RedirectIndex.as_view(), name="redirect_index"),
     path("<slug:SEM>/<slug:SY>/", Index.as_view(), name="index"),
     path("list-of-criteria/", ListofCriteria, name="list_of_criteria"),
     path("<slug:SEM>/<slug:SY>/delete-aiv-rating/<int:ID>", DeleteAIVRating, name="delete_aiv_rating"),

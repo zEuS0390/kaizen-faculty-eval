@@ -3,6 +3,7 @@ from .views import *
 
 app_name = "hr"
 urlpatterns = [
+    path("", RedirectIndex.as_view(), name="redirect_index"),
     path("<slug:SEM>/<slug:SY>/update-hr-eval-scores/<int:ID>/export_pdf", GeneratePdf.as_view(), name='export_hr_pdf'),
     path("<slug:SEM>/<slug:SY>/update-hr-eval-scores/<int:ID>/export", export_hr_csv, name='export_hr_csv'),
     path("list-of-criteria/", ListOfCriteria.as_view(), name="list_of_criteria"),

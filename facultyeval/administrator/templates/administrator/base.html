@@ -40,19 +40,19 @@
                               </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{% url 'hr:index' SEM='1st-Sem' SY='2021-2022' %}" class="nav-link {% block nav_item_hr %}{% endblock %} text-white">
+                                <a href="{% url 'hr:redirect_index' %}" class="nav-link {% block nav_item_hr %}{% endblock %} text-white">
                                   <img src = "{% static 'img/bootstrap/journals.svg'%}" />
                                   HR
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{% url 'aiv:index' SEM='1st-Sem' SY='2021-2022' %}" class="nav-link {% block nav_item_aiv %}{% endblock %} text-white">
+                                <a href="{% url 'aiv:redirect_index' %}" class="nav-link {% block nav_item_aiv %}{% endblock %} text-white">
                                   <img src = "{% static 'img/bootstrap/clipboard-data-fill.svg'%}" />
                                   AIV
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{% url 'canvas:index' SEM='1st-Sem' MG='MG1' SY='2021-2022' %}" class="nav-link {% block nav_item_canvas %}{% endblock %} text-white">
+                                <a href="{% url 'canvas:redirect_index' %}" class="nav-link {% block nav_item_canvas %}{% endblock %} text-white">
                                   <img src = "{% static 'img/bootstrap/mortarboard-fill.svg'%}" /> 
                                   LMS (Canvas)
                                 </a>

@@ -8,6 +8,15 @@ from .models import *
 from .decorators import *
 from .forms import *
 
+class RedirectIndex(View):
+
+    @method_decorator(login_required(login_url="accounts:login"))
+    @method_decorator(admin_only)
+    def get(self, request):
+        SEM = "1st-Sem"
+        SY = "2021-2022"
+        return redirect("aiv:index", SEM=SEM, SY=SY)
+
 # Create your views here.
 class Index(View):
 
