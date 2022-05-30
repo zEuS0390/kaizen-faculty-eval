@@ -6,17 +6,92 @@
 <div style="padding: 50px; min-height: 100vh;">
     <div class="row" style="margin-bottom: 25px;">
         <div class="col">
-            <h3 class="text-center">LIST OF CRITERIA OF AIV EVALUATION</h3>
+            <h3 class="text-center">LIST OF CRITERIA IN AIV EVALUATION</h3>
             <hr>
         </div>
     </div>
-    <div class="row" style="margin-left: 50px; margin-right: 50px;">
+    <div class="row" style="margin-bottom: 25px;">
+        <div class="col d-flex justify-content-end">
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newcriterion">New Criterion</button>
+            <form method="POST">
+                {% csrf_token %}
+                <!-- Modal -->
+                <div class="modal fade" id="newcriterion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">New Criterion</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            {{ form }}
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success" name="new_criterion">Save</button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Display messages from the server -->
+    <div class="row">
         <div class="col">
-            <ul class="list-group text-center">
-                {% for criterion in criteria %}
-                    <li class="list-group-item">{{ criterion.title }}</li>
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{message.tags}}{% endif %} alert-dismissible fade show" role="alert">
+                        {% if message.tags == 'error' %}<strong>Error Encountered!</strong><br>{% endif %}
+                        {{message}}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
                 {% endfor %}
-              </ul>
+            {% endif %}
+        </div>
+    </div>
+    <!-- Display the criterion of the a specified criterion group -->
+    <div class="row">
+        <div class="col">
+            <table class="table table-hover border" id="myTable">
+                <thead class="table-primary">
+                    <th class="text-center" scope="col">TITLE</th>
+                    <th class="text-center" scope="col" style="width: 20%;">ACTIONS</th>
+                </thead>
+                <tbody>
+                    {% for criterion in criteria %}
+                        <tr scope="row">
+                            <td class="text-center" scope="col">{{ criterion.title }}</td>
+                            <td class="text-center" scope="col">
+                                <button class="btn" style="background-color: lightblue;" data-bs-toggle="modal" data-bs-target="#updatecriterion">
+                                    <img id="user-icon" src="{% static 'img/bootstrap/folder2-open.svg' %}">
+                                </button>
+                                <a href="{% url 'aiv:delete_aiv_criterion' ID=criterion.id%}" class="btn btn-danger">
+                                    <img id="user-icon" src="{% static 'img/bootstrap/trash3-fill.svg' %}">
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <!-- Modal -->
+            <div class="modal fade" id="updatecriterion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Update Criterion</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        ...
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-success" name="update_criterion">Update</button>
+                    </div>
+                </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

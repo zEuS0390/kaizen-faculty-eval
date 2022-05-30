@@ -100,14 +100,47 @@ class CriterionScores(View):
             messages.error(request, "Error encountered updating criterion scores!")
         return redirect("aiv:update_aiv_eval_scores", SEM=SEM, SY=SY, ID=ID)
 
+class ListOfCriteria(View):
+
+    @method_decorator(login_required(login_url="accounts:login"))
+    @method_decorator(admin_only)
+    def get(self, request):
+        criteria = AIVCriterion.objects.all()
+        form = AIVCriterionForm()
+        context = {
+            "criteria": criteria,
+            "form": form
+        }
+        return render(request, template_name="aiv/listofcriteria.html", context=context)
+
+    @method_decorator(login_required(login_url="accounts:login"))
+    @method_decorator(admin_only)
+    def post(self, request):
+        # New criterion form
+        if 'new_criterion' in request.POST:
+            form = AIVCriterionForm(request.POST)
+            if form.is_valid():
+                aivcriterion = form.save(commit=False)
+                title = form.cleaned_data.get('title')
+                if AIVCriterion.objects.filter(title=title).exists():
+                    messages.error(request, "AIV evaluation criterion already exist!")
+                    return redirect("aiv:list_of_criteria")
+                aivcriterion.save()
+                messages.success(request, "AIV evaluation criterion successfully created!")
+                return redirect("aiv:list_of_criteria")
+        return redirect("/")
+
 @login_required(login_url="accounts:login")
 @admin_only
-def ListofCriteria(request):
-    criteria = AIVCriterion.objects.all()
-    context = {
-        "criteria": criteria
-    }
-    return render(request, template_name="aiv/listofcriteria.html", context=context)
+def DeleteAIVCriterion(request, ID):
+    aivcriterion = AIVCriterion.objects.filter(id=ID)
+    if aivcriterion.exists():
+        aivcriterion.delete()
+        messages.success(request, "AIV evaluation criterion was successfully deleted!")
+        return redirect("aiv:list_of_criteria")
+    else:
+        messages.error(request, f"ID {ID} does not exist!")
+    return redirect("aiv:list_of_criteria")
 
 class AIVRatingEntry(View):
 
@@ -147,7 +180,7 @@ def DeleteAIVRating(request, SEM, SY, ID):
     aivrating = AIVRating.objects.filter(member=member, school_year=school_year, semester=SEM)
     if aivrating.exists():
     #     #ActivityLogs
-        # logs = ActivityLogs(member=member, activity_log=ActivityLogs.DELETED, eval_log=ActivityLogs.HR)
+        # logs = ActivityLogs(member=member, activity_log=ActivityLogs.DELETED, eval_log=ActivityLogs.AIV)
         # logs.save()
         #End of ActivityLogs
         aivrating.delete()
@@ -165,11 +198,11 @@ def NewAIVEvaluation(request, SEM, SY, ID):
     if AIVRating.objects.filter(member=member, semester=SEM, school_year=school_year).exists():
         messages.error(request, "AIV evaluation entry already exist!")
         return redirect("aiv:index", SEM=SEM, SY=school_year)
-    hrrating = AIVRating(member=member, semester=SEM, school_year=school_year)
-    hrrating.save()
+    aivrating = AIVRating(member=member, semester=SEM, school_year=school_year)
+    aivrating.save()
     criteria = AIVCriterion.objects.all()
     for criterion in criteria:
-        criterion_scores = AIVCriterionScores(hrrating=hrrating, hrcriterion=criterion)
+        criterion_scores = AIVCriterionScores(aivrating=aivrating, aivcriterion=criterion)
         criterion_scores.save()
     messages.success(request, "AIV evaluation entry successfully created!")
     return redirect("aiv:index", SEM=SEM, SY=SY)
