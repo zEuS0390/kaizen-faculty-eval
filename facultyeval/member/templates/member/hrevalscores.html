@@ -1,0 +1,77 @@
+{% extends 'member/base.html' %}
+{% load static %}
+{% block title %}Faculty Evaluation in HR{% endblock %}
+{% block nav_item_hr %}active{% endblock %}
+{% block content %}
+<div style="padding: 50px; min-height: 100vh;">
+    <!-- Title -->
+    <div class="row">
+        <div class="col">
+            <h3 class="text-center">HR Criteria Scores (S.Y. {{ SY }} {{ SEM }})</h3>
+            <hr>
+        </div>
+    </div>
+    <div class="row" style="margin-bottom: 25px;">
+        <div class="col">
+            <a href="#" class="btn btn-warning" style="margin-right: 5px;">
+                PDF
+            </a>
+            <a href="#" class="btn btn-success">
+                CSV
+            </a>
+        </div>
+    </div>
+    <!-- Display messages from the server -->
+    <div class="row">
+        <div class="col">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{message.tags}}{% endif %} alert-dismissible fade show" role="alert">
+                        {% if message.tags == 'error' %}<strong>Error Encountered!</strong><br>{% endif %}
+                        {{message}}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <table class="table table-hover border">
+                <thead class="table-danger">
+                    <th class="text-center" scope="col">Criterion</th>
+                    <th class="text-center" scope="col">Program Chair</th>
+                    <th class="text-center" scope="col">Student</th>
+                    <th class="text-center" scope="col">Summary</th>
+                    <th class="text-center" scope="col">Remarks</th>
+                </thead>
+                <tbody>
+                    {% for item in hrcriterionscores %}
+                        <tr scope="row">
+                            <td class="text-center" scope="col" style="width: 25%">{{ item.hrcriterion.title }}</td>
+                                <td class="text-center" scope="col" style="width: 15%">
+                                    {% if item.program_chair_score is not None %}
+                                        {{ item.program_chair_score }}
+                                    {% endif %}
+                                </td>
+                            <td class="text-center" scope="col" style="width: 15%">
+                                {% if item.student_score is not None %}
+                                    {{ item.student_score }}
+                                {% endif %}
+                            </td>
+                            <td class="text-center" scope="col" style="width: 15%">
+                                {% if item.average_score is not None %}
+                                    {{ item.average_score }}
+                                {% endif %} 
+                            </td>
+                            <td class="text-center" scope="col" style="width: 10%">
+                                {{ item.remarks }}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
