@@ -3,28 +3,57 @@
 {% block title %}Faculty Evaluation in LMS{% endblock %}
 {% block nav_item_lms %}active{% endblock %}
 {% block content %}
-<div style="padding: 50px;min-height: 100vh;">
+<div style="padding: 40px; min-height: 100vh; background-color:azure;">
     <div class="row">
         <div class="col">
-            <h3 class="text-center">LMS/CANVAS EVALUATION</h3>
+            <h3 class="text-center">FACULTY EVALUATION BY LMS</h3>
+            <hr>
         </div>
     </div>
-    <div class="row" style="margin-top: 25px;">
+    <div class="row">
+        <div class="col d-flex justify-content-start text-center">
+            <div class="dropdown">
+                <a class="btn btn-primary dropdown-toggle border" href="#" role="button" id="schoolYearDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                  {{ SY }}
+                </a>
+                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="schoolYearDropdown">
+                    {% for sy in sy_group %}
+                        <li><a class="dropdown-item {% if SY == sy.school_year %}active{% endif %}" href="{% url 'member:lms' SEM=SEM SY=sy.school_year %}">{{ sy.school_year }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="dropdown" style="margin-left: 10px;">
+                <a class="btn btn-primary dropdown-toggle border" href="#" role="button" id="semesterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    {% if SEM == '1st-Sem' %}
+                        1st Semester
+                    {% elif SEM == '2nd-Sem' %}
+                        2nd Semester
+                    {% endif %}
+                </a>
+                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="semesterDropdown">
+                  <li><a class="dropdown-item {% if SEM == '1st-Sem' %}active{% endif %}" href="{% url 'member:lms' SEM='1st-Sem' SY=SY %}">1st Semester</a></li>
+                  <li><a class="dropdown-item {% if SEM == '2nd-Sem' %}active{% endif %}" href="{% url 'member:lms' SEM='2nd-Sem' SY=SY %}">2nd Semester</a></li>
+                </ul>
+              </div>
+        </div>
+    </div>
+    <!-- Display performance evaluation of each faculty member -->
+    <div class="row">
         <div class="col">
             <table class="table table-hover border" id="myTable">
                 <thead class="table-primary">
-                    <th class="text-center" scope="col">PART1</th>
-                    <th class="text-center" scope="col">PART2</th>
-                    <th class="text-center" scope="col">FINAL</th>
-                    <th class="text-center" scope="col">REMARKS</th>
+                    <th class="text-center" scope="col">MODULAR GROUP</th>
+                    <th class="text-center">ACTIONS</th>
                 </thead>
                 <tbody>
-                    {% for rating in ratings %}
+                    {% for mgrating in mgratings %}
                         <tr scope="row">
-                            <td class="text-center" scope="col" style="width: 5%;">{{rating.part1}}</td>
-                            <td class="text-center" scope="col" style="width: 5%;">{{rating.part2}}</td>
-                            <td class="text-center" scope="col" style="width: 5%;">{{rating.final}}</td>
-                            <td class="text-center" scope="col" style="width: 30%;">{{rating.remarks}}</td>
+                            <td class="text-center" scope="col" style="width: 20%;">{{ mgrating.group_title }}</td>
+                            <td class="text-center" scope="col" style="width: 15%;">
+                                <a href="#" class="btn" style="background-color: lightgreen;">
+                                    <img id="user-icon" src="{% static 'img/bootstrap/pencil-square.svg' %}">
+                                </a>
+                            </td>
                         </tr>
                     {% endfor %}
                 </tbody>

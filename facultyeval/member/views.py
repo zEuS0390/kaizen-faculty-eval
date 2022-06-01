@@ -14,6 +14,7 @@ from django.template.loader import get_template
 from xhtml2pdf import pisa
 from django.views.generic import View
 from django.template.loader import render_to_string
+from canvas.models import *
 
 # Create your views here.
 @login_required(login_url="accounts:login")
@@ -78,8 +79,27 @@ def AIVEvalScores(request, SEM, SY):
 
 @login_required(login_url="accounts:login")
 @member_only
-def LMS(request):
-    return render(request, template_name="member/lms.html", context={})
+def RedirectLMS(request):
+    SEM = "1st-Sem"
+    SY = "2021-2022"
+    return redirect("member:lms", SEM=SEM, SY=SY)
+
+@login_required(login_url="accounts:login")
+@member_only
+def LMS(request, SEM, SY):
+    member = Member.objects.filter(user=request.user).first()
+    school_year = SchoolYear.objects.filter(school_year=SY).first()
+    sy_group = SchoolYear.objects.all()
+    mgratings = MGRating.objects.filter(member=member, semester=SEM, school_year=school_year).all()
+    group_titles = [mgrating.group_title for mgrating in mgratings]
+    print(group_titles)
+    context = {
+        "mgratings": mgratings,
+        "SY": SY,
+        "SEM": SEM,
+        "sy_group": sy_group
+    }
+    return render(request, template_name="member/lms.html", context=context)
 
 @login_required(login_url="accounts:login")
 @member_only
