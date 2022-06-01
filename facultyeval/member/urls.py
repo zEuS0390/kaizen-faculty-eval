@@ -10,5 +10,9 @@ urlpatterns = [
     path("aiv/", AIV, name="aiv"),
     path("aiv/eval-scores/<slug:SEM>/<slug:SY>", AIVEvalScores, name="aiv_eval_scores"),
     path("lms/", LMS, name="lms"),
-    path("about/", About, name="about")
+    path("about/", About, name="about"),
+    path("hr/eval-scores/<slug:SEM>/<slug:SY>/export_pdf", GeneratePdfHR.as_view(), name='export_hr_pdf'),
+    path("hr/eval-scores/<slug:SEM>/<slug:SY>/export", export_hr_csv, name='export_hr_csv'),
+    path("aiv/eval-scores/<slug:SEM>/<slug:SY>/export_pdf", GeneratePdfAIV.as_view(), name='export_aiv_pdf'),
+    path("aiv/eval-scores/<slug:SEM>/<slug:SY>/export", export_aiv_csv, name='export_aiv_csv')
 ]

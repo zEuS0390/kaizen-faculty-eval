@@ -7,6 +7,13 @@ from administrator.models import ActivityLogs
 from accounts.models import Member
 from hr.models import *
 from aiv.models import *
+from django.http import HttpResponse
+import csv
+from io import BytesIO
+from django.template.loader import get_template
+from xhtml2pdf import pisa
+from django.views.generic import View
+from django.template.loader import render_to_string
 
 # Create your views here.
 @login_required(login_url="accounts:login")
@@ -78,3 +85,87 @@ def LMS(request):
 @member_only
 def About(request):
     return render(request, template_name="member/about.html", context={})
+
+#CSV HR
+@login_required(login_url="accounts:login")
+@member_only
+def export_hr_csv(request,SEM, SY):
+    member = Member.objects.filter(user=request.user).first()
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="hr_{}_{}_{}.csv"'.format(SEM, SY, member)
+    writer = csv.writer(response)
+    writer.writerow(["Faculty Member",member])
+    writer.writerow(["Criterion", "Program Chair", "Student", "Average", "Remarks"])
+    school_year = SchoolYear.objects.filter(school_year=SY).first()
+    hrrating = HRRating.objects.filter(member=member, school_year=school_year, semester=SEM).first()
+    hrcriterionscores = HRCriterionScores.objects.filter(hrrating=hrrating).all()
+    for item in hrcriterionscores:
+        writer.writerow([item.hrcriterion,item.program_chair_score,item.student_score,item.average_score,item.remarks])
+    return response 
+
+#CSV AIV
+@login_required(login_url="accounts:login")
+@member_only
+def export_aiv_csv(request,SEM, SY):
+    member = Member.objects.filter(user=request.user).first()
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="aiv_{}_{}_{}.csv"'.format(SEM, SY, member)
+    writer = csv.writer(response)
+    writer.writerow(["Faculty Member",member])
+    writer.writerow(["Criterion", "First Visit", "Second Visit", "Average", "Remarks"])
+    school_year = SchoolYear.objects.filter(school_year=SY).first()
+    aivrating = AIVRating.objects.filter(member=member, school_year=school_year, semester=SEM).first()
+    aivcriterionscores = AIVCriterionScores.objects.filter(aivrating=aivrating).all()
+    for item in aivcriterionscores:
+        writer.writerow([item.aivcriterion,item.first_visit,item.second_visit,item.average_score,item.remarks])
+    return response 
+
+#PDF
+def html_to_pdf(template_src, context_dict={}):
+     template = get_template(template_src)
+     html  = template.render(context_dict)
+     result = BytesIO()
+     pdf = pisa.pisaDocument(BytesIO(html.encode("ISO-8859-1")), result)
+     if not pdf.err:
+         return HttpResponse(result.getvalue(), content_type='application/pdf')
+     return None
+
+#PDF HR
+class GeneratePdfHR(View):
+    @method_decorator(login_required(login_url="accounts:login"))
+    @method_decorator(member_only)
+    def get(self, request, SEM, SY):
+
+        member = Member.objects.filter(user=request.user).first()
+        school_year = SchoolYear.objects.filter(school_year=SY).first()
+        hrrating = HRRating.objects.filter(member=member, school_year=school_year, semester=SEM).first()
+        hrcriterionscores = HRCriterionScores.objects.filter(hrrating=hrrating).all()
+
+        open('member/templates/member/temp.html', "w").write(render_to_string('member/hrevalscores_temp.html', 
+        {"hrcriterionscores": hrcriterionscores, "member": member, "SY": SY, "SEM": SEM}))
+         
+        # getting the template
+        pdf = html_to_pdf('member/temp.html')
+         
+        # rendering the template
+        return HttpResponse(pdf, content_type='application/pdf')
+
+#PDF AIV
+class GeneratePdfAIV(View):
+    @method_decorator(login_required(login_url="accounts:login"))
+    @method_decorator(member_only)
+    def get(self, request, SEM, SY):
+
+        member = Member.objects.filter(user=request.user).first()
+        school_year = SchoolYear.objects.filter(school_year=SY).first()
+        aivrating = AIVRating.objects.filter(member=member, school_year=school_year, semester=SEM).first()
+        aivcriterionscores = AIVCriterionScores.objects.filter(aivrating=aivrating).all()
+
+        open('member/templates/member/temp.html', "w").write(render_to_string('member/aivevalscores_temp.html', 
+        {"aivcriterionscores": aivcriterionscores, "member": member, "SY": SY, "SEM": SEM}))
+         
+        # getting the template
+        pdf = html_to_pdf('member/temp.html')
+         
+        # rendering the template
+        return HttpResponse(pdf, content_type='application/pdf')
