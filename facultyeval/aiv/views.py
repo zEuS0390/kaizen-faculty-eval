@@ -7,6 +7,14 @@ from django.contrib import messages
 from .models import *
 from .decorators import *
 from .forms import *
+from administrator.models import ActivityLogs
+from django.http import HttpResponse
+import csv
+from io import BytesIO
+from django.template.loader import get_template
+from xhtml2pdf import pisa
+from django.views.generic import View
+from django.template.loader import render_to_string
 
 class RedirectIndex(View):
 
@@ -179,12 +187,12 @@ def DeleteAIVRating(request, SEM, SY, ID):
     school_year = SchoolYear.objects.filter(school_year=SY).first()
     aivrating = AIVRating.objects.filter(member=member, school_year=school_year, semester=SEM)
     if aivrating.exists():
-    #     #ActivityLogs
-        # logs = ActivityLogs(member=member, activity_log=ActivityLogs.DELETED, eval_log=ActivityLogs.AIV)
-        # logs.save()
-        #End of ActivityLogs
         aivrating.delete()
         messages.success(request, "AIV evaluation entry was successfully deleted!")
+        #ActivityLogs
+        logs = ActivityLogs(member=member, activity_log=ActivityLogs.DELETED, eval_log=ActivityLogs.AIV)
+        logs.save()
+        # End of ActivityLogs
         return redirect("aiv:index", SEM=SEM, SY=SY)
     else:
         messages.error(request, f"ID {ID} does not exist!")
@@ -205,4 +213,54 @@ def NewAIVEvaluation(request, SEM, SY, ID):
         criterion_scores = AIVCriterionScores(aivrating=aivrating, aivcriterion=criterion)
         criterion_scores.save()
     messages.success(request, "AIV evaluation entry successfully created!")
+    #ActivityLogs
+    logs = ActivityLogs(member=member, activity_log=ActivityLogs.ADDED, eval_log=ActivityLogs.AIV)
+    logs.save()
+    #End of ActivityLogs
     return redirect("aiv:index", SEM=SEM, SY=SY)
+
+#CSV
+@login_required(login_url="accounts:login")
+@admin_only
+def export_aiv_csv(request,SEM, SY, ID):
+    member = Member.objects.filter(id=ID).first()
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="aiv_{}_{}_{}.csv"'.format(SEM, SY, member)
+    writer = csv.writer(response)
+    writer.writerow(["Faculty Member",member])
+    writer.writerow(["Criterion", "First Visit", "Second Visit", "Average", "Remarks"])
+    school_year = SchoolYear.objects.filter(school_year=SY).first()
+    aivrating = AIVRating.objects.filter(member=member, school_year=school_year, semester=SEM).first()
+    aivcriterionscores = AIVCriterionScores.objects.filter(aivrating=aivrating)
+    for item in aivcriterionscores:
+        writer.writerow([item.aivcriterion,item.first_visit,item.second_visit,item.average_score,item.remarks])
+    return response 
+
+#PDF
+def html_to_pdf(template_src, context_dict={}):
+     template = get_template(template_src)
+     html  = template.render(context_dict)
+     result = BytesIO()
+     pdf = pisa.pisaDocument(BytesIO(html.encode("ISO-8859-1")), result)
+     if not pdf.err:
+         return HttpResponse(result.getvalue(), content_type='application/pdf')
+     return None
+
+class GeneratePdf(View):
+    @method_decorator(login_required(login_url="accounts:login"))
+    @method_decorator(admin_only)
+    def get(self, request, SEM, SY, ID):
+
+        member = Member.objects.filter(id=ID).first()
+        school_year = SchoolYear.objects.filter(school_year=SY).first()
+        aivrating = AIVRating.objects.filter(member=member, school_year=school_year, semester=SEM).first()
+        aivcriterionscores = AIVCriterionScores.objects.filter(aivrating=aivrating).all()
+
+        open('aiv/templates/aiv/temp.html', "w").write(render_to_string('aiv/updateaivevalscores_temp.html', 
+        {"aivcriterionscores": aivcriterionscores, "member": member, "SY": SY, "SEM": SEM}))
+         
+        # getting the template
+        pdf = html_to_pdf('aiv/temp.html')
+         
+        # rendering the template
+        return HttpResponse(pdf, content_type='application/pdf')

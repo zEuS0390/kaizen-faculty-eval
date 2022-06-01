@@ -4,6 +4,8 @@ from .views import *
 app_name = "aiv"
 urlpatterns = [
     path("", RedirectIndex.as_view(), name="redirect_index"),
+    path("<slug:SEM>/<slug:SY>/update-aiv-eval-scores/<int:ID>/export_pdf", GeneratePdf.as_view(), name='export_aiv_pdf'),
+    path("<slug:SEM>/<slug:SY>/update-aiv-eval-scores/<int:ID>/export", export_aiv_csv, name='export_aiv_csv'),
     path("list-of-criteria/", ListOfCriteria.as_view(), name="list_of_criteria"),
     path("delete-criterion/<int:ID>/", DeleteAIVCriterion, name="delete_aiv_criterion"),
     path("<slug:SEM>/<slug:SY>/", Index.as_view(), name="index"),

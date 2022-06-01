@@ -13,10 +13,10 @@
     </div>
     <div class="row" style="margin-bottom: 25px;">
         <div class="col">
-            <a href="#" class="btn btn-warning" style="margin-right: 5px;">
+            <a href="{% url 'aiv:export_aiv_pdf' SEM=SEM SY=SY ID=member_id %}" class="btn btn-warning" style="margin-right: 5px;">
                 PDF
             </a>
-            <a href="#" class="btn btn-success">
+            <a href="{% url 'aiv:export_aiv_csv' SEM=SEM SY=SY ID=member_id %}" class="btn btn-success">
                 CSV
             </a>
         </div>

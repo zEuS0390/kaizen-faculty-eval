@@ -85,6 +85,10 @@ def NewHREvaluation(request, SEM, SY, ID):
         criterion_scores = HRCriterionScores(hrrating=hrrating, hrcriterion=criterion)
         criterion_scores.save()
     messages.success(request, "HR evaluation entry successfully created!")
+    #ActivityLogs
+    logs = ActivityLogs(member=member, activity_log=ActivityLogs.ADDED, eval_log=ActivityLogs.HR)
+    logs.save()
+    #End of ActivityLogs
     return redirect("hr:index", SEM=SEM, SY=SY)
 
 class EvalScores(View):
