@@ -1,4 +1,4 @@
-cd ../..
+cd ../../facultyeval/
 cls
-python -m pipenv run python ./facultyeval/manage.py makemigrations
+python -m pipenv run python ./manage.py makemigrations
 pause
