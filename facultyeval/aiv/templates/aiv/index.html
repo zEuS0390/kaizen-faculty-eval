@@ -93,7 +93,25 @@
                             </td>
                             {% else %}
                             <td class="text-center" style="width: 15%;">
-                                <a class="btn btn-primary" href="{% url 'aiv:new_aiv_evaluation' SEM=SEM SY=SY ID=item.0.id %}">New</a>
+                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#confirmationModal">New</button>
+                                <!-- Modal -->
+                                <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                        <h5 class="modal-title" id="confirmationModalLabel">Add Confirmation</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Are you sure you want to ADD an HR evaluation to this member?
+                                        </div>
+                                        <div class="modal-footer">
+                                        <a type="button" href="{% url 'aiv:new_aiv_evaluation' SEM=SEM SY=SY ID=item.0.id %}" class="btn btn-success">Yes</a>
+                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">No</button>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
                             </td>
                             {% endif %}
                         </tr>
