@@ -87,9 +87,9 @@
                                 <a href="{% url 'aiv:update_aiv_eval_scores' SEM=SEM SY=SY ID=item.0.id %}" class="btn" style="background-color: lightgreen;">
                                     <img id="user-icon" src="{% static 'img/bootstrap/pencil-square.svg' %}">
                                 </a>
-                                <a href="{% url 'aiv:delete_aiv_rating' SEM=SEM SY=SY ID=item.0.id%}" class="btn btn-danger">
+                                <button href="{% url 'aiv:delete_aiv_rating' SEM=SEM SY=SY ID=item.0.id%}" class="btn btn-danger">
                                     <img id="user-icon" src="{% static 'img/bootstrap/trash3-fill.svg' %}">
-                                </a>
+                                </button>
                             </td>
                             {% else %}
                             <td class="text-center" style="width: 15%;">

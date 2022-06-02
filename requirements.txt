@@ -8,3 +8,5 @@ xhtml2pdf
 django-extensions
 pydot
 pyparsing
+gunicorn
+django-heroku
