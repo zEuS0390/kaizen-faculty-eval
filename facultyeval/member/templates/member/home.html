@@ -2,6 +2,7 @@
 {% block title %}Home{% endblock %}
 {% block nav_item_home %}active{% endblock %}
 {% block content %}
+{% load static %}
 <div class="row" style="min-height: 100vh; background-color:azure;">
     <div class="col d-flex justify-content-center">
         <div class="container">
@@ -11,7 +12,15 @@
             <div class="row">
                 <div class="col-4">
                     <div class="card" style="width: 18rem;">
-                        <img src="https://picsum.photos/200/100" class="card-img-top" alt="...">
+                        <div>
+                            <video id="video1" class="card-img-top"
+                                autoPlay data-play="hover" muted="muted">
+                                <source src="{% static 'img/dashboard/HR2.mp4' %}"
+                                    type="video/mp4">
+                                Your browser does not 
+                                support the video tag.
+                            </video>
+                        </div>
                         <div class="card-body">
                             <h5 class="card-title">HR Evaluation</h5>
                             <p class="card-text">Navigate to HR panel to view HR evaluation.</p>
@@ -21,7 +30,15 @@
                 </div>
                 <div class="col-4">
                     <div class="card" style="width: 18rem;">
-                        <img src="https://picsum.photos/200/100" class="card-img-top" alt="...">
+                        <div>
+                            <video id="video2" class="card-img-top"
+                                autoPlay data-play="hover" muted="muted">
+                                <source src="{% static 'img/dashboard/AIV2.mp4' %}"
+                                    type="video/mp4">
+                                Your browser does not 
+                                support the video tag.
+                            </video>
+                        </div>
                         <div class="card-body">
                             <h5 class="card-title">AIV Evaluation</h5>
                             <p class="card-text">Navigate to AIV panel to view AIV evaluation.</p>
@@ -31,7 +48,15 @@
                 </div>
                 <div class="col-4">
                     <div class="card" style="width: 18rem;">
-                        <img src="https://picsum.photos/200/100" class="card-img-top" alt="...">
+                        <div>
+                            <video id="video3" class="card-img-top"
+                                autoPlay data-play="hover" muted="muted">
+                                <source src="{% static 'img/dashboard/LMS2.mp4' %}"
+                                    type="video/mp4">
+                                Your browser does not 
+                                support the video tag.
+                            </video>
+                        </div>
                         <div class="card-body">
                             <h5 class="card-title">LMS Evaluation</h5>
                             <p class="card-text">Navigate to LMS panel to view LMS evaluation.</p>
@@ -73,5 +98,27 @@
 	$(document).ready(function(){
 		$('#myTable').DataTable();
 	});
+</script>
+<script>
+    // Getting video element using jQuery
+    var video1 = $("#video1");
+    var video2 = $("#video2");
+    var video3 = $("#video3");
+    // Check if video is ready to play
+    $(video1).on('canplay', function () {
+        $(video1).mouseenter(function () {
+            $(this).get(0).play();
+        })
+    });
+    $(video2).on('canplay', function () {
+        $(video2).mouseenter(function () {
+            $(this).get(0).play();
+        })
+    });
+    $(video3).on('canplay', function () {
+        $(video3).mouseenter(function () {
+            $(this).get(0).play();
+        })
+    });    
 </script>
 {% endblock %}
