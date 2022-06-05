@@ -67,30 +67,9 @@
                         <tr scope="row">
                             <td class="text-center" scope="col" style="width: 40%;">{{item}}</td>
                             <td class="text-center" scope="col" style="width: 15%;">
-                                <a href="#" class="btn" style="background-color: lightgreen;">
-                                    <img id="user-icon" src="{% static 'img/bootstrap/pencil-square.svg' %}">
-                                </a>
-                                <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmationModal">
+                                <a href="{% url 'administrator:delete_school_year' ID=item.id %}" class="btn btn-danger">
                                     <img id="user-icon" src="{% static 'img/bootstrap/trash3-fill.svg' %}">
-                                </button>
-                                <!-- Modal -->
-                                <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                        <h5 class="modal-title" id="confirmationModalLabel">Delete Confirmation</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            Are you sure you want to DELETE the school year? {{item.id}} {{item}}
-                                        </div>
-                                        <div class="modal-footer">
-                                        <a type="button" href="{% url 'administrator:delete_school_year' ID=item.id %}" class="btn btn-success">Yes</a>
-                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">No</button>
-                                        </div>
-                                    </div>
-                                    </div>
-                                </div>
+                                </a>
                             </td>
                         </tr>
                     {% endfor %}

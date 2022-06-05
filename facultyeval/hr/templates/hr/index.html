@@ -37,31 +37,9 @@
               </div>
         </div>
         <div class="col d-flex justify-content-end">
-            <a href="{% url 'hr:list_of_criteria' %}" class="btn btn-secondary" style="margin-right: 10px;">
+            <a href="{% url 'hr:list_of_criteria' %}" class="btn btn-secondary">
                 List of Criteria
             </a>
-            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">New</button>
-            <form method="POST">
-                {% csrf_token %}
-                <!-- Modal -->
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            {{ form }}
-                        </div>
-                        <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-success">Save changes</button>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-            </form>
         </div>
     </div>
     <!-- Display messages from the server -->
@@ -112,25 +90,7 @@
                             </td>
                             {% else %}
                             <td class="text-center" style="width: 15%;">
-                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#confirmationModal">New</button>
-                                <!-- Modal -->
-                                <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                        <h5 class="modal-title" id="confirmationModalLabel">Add Confirmation</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            Are you sure you want to ADD an HR evaluation to this member?
-                                        </div>
-                                        <div class="modal-footer">
-                                        <a type="button" href="{% url 'hr:new_hr_evaluation' SEM=SEM SY=SY ID=item.0.id %}" class="btn btn-success">Yes</a>
-                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">No</button>
-                                        </div>
-                                    </div>
-                                    </div>
-                                </div>
+                                <a href="{% url 'hr:new_hr_evaluation' SEM=SEM SY=SY ID=item.0.id %}" class="btn btn-primary">New</a>
                             </td>
                             {% endif %}
                         </tr>

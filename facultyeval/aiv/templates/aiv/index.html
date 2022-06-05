@@ -37,10 +37,9 @@
             </div>
         </div>
         <div class="col d-flex justify-content-end">
-            <a href= "{% url 'aiv:list_of_criteria' %}" class="btn btn-secondary" style="margin-right: 10px;">
+            <a href= "{% url 'aiv:list_of_criteria' %}" class="btn btn-secondary">
                 List of Criteria
             </a>
-            <a href="{% url 'aiv:aiv_rating_entry' SEM=SEM SY=SY %}" class="btn btn-primary">New</a>
         </div>
     </div>
     <!-- Display messages from the server -->
@@ -87,31 +86,13 @@
                                 <a href="{% url 'aiv:update_aiv_eval_scores' SEM=SEM SY=SY ID=item.0.id %}" class="btn" style="background-color: lightgreen;">
                                     <img id="user-icon" src="{% static 'img/bootstrap/pencil-square.svg' %}">
                                 </a>
-                                <button href="{% url 'aiv:delete_aiv_rating' SEM=SEM SY=SY ID=item.0.id%}" class="btn btn-danger">
+                                <a href="{% url 'aiv:delete_aiv_rating' SEM=SEM SY=SY ID=item.0.id%}" class="btn btn-danger">
                                     <img id="user-icon" src="{% static 'img/bootstrap/trash3-fill.svg' %}">
-                                </button>
+                                </a>
                             </td>
                             {% else %}
                             <td class="text-center" style="width: 15%;">
-                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#confirmationModal">New</button>
-                                <!-- Modal -->
-                                <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                        <h5 class="modal-title" id="confirmationModalLabel">Add Confirmation</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            Are you sure you want to ADD an HR evaluation to this member?
-                                        </div>
-                                        <div class="modal-footer">
-                                        <a type="button" href="{% url 'aiv:new_aiv_evaluation' SEM=SEM SY=SY ID=item.0.id %}" class="btn btn-success">Yes</a>
-                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">No</button>
-                                        </div>
-                                    </div>
-                                    </div>
-                                </div>
+                                <a href="{% url 'aiv:new_aiv_evaluation' SEM=SEM SY=SY ID=item.0.id %}" class="btn btn-primary">New</a>
                             </td>
                             {% endif %}
                         </tr>

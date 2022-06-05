@@ -63,9 +63,6 @@
                         <tr scope="row">
                             <td class="text-center" scope="col">{{ criterion.title }}</td>
                             <td class="text-center" scope="col">
-                                <button class="btn" style="background-color: lightblue;" data-bs-toggle="modal" data-bs-target="#updatecriterion">
-                                    <img id="user-icon" src="{% static 'img/bootstrap/folder2-open.svg' %}">
-                                </button>
                                 <a href="{% url 'aiv:delete_aiv_criterion' ID=criterion.id%}" class="btn btn-danger">
                                     <img id="user-icon" src="{% static 'img/bootstrap/trash3-fill.svg' %}">
                                 </a>
