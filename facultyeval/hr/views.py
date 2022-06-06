@@ -16,6 +16,8 @@ from django.template.loader import get_template
 from xhtml2pdf import pisa
 from django.views.generic import View
 from django.template.loader import render_to_string
+from django.conf import settings
+import os
 
 class RedirectIndex(View):
 
@@ -280,8 +282,10 @@ class GeneratePdf(View):
         school_year = SchoolYear.objects.filter(school_year=SY).first()
         hrrating = HRRating.objects.filter(member=member, school_year=school_year, semester=SEM).first()
         hrcriterionscores = HRCriterionScores.objects.filter(hrrating=hrrating).all()
-
-        open('hr/templates/hr/temp.html', "w").write(render_to_string('hr/updatehrevalscores_temp.html', 
+        
+        value = settings.BASE_DIR
+        temp = os.path.join(value, "hr", "templates", "hr", "temp.html")
+        open(temp, "w").write(render_to_string('hr/updatehrevalscores_temp.html', 
         {"hrcriterionscores": hrcriterionscores, "member": member, "SY": SY, "SEM": SEM}))
          
         # getting the template

@@ -15,6 +15,8 @@ from django.template.loader import get_template
 from xhtml2pdf import pisa
 from django.views.generic import View
 from django.template.loader import render_to_string
+from django.conf import settings
+import os
 
 class RedirectIndex(View):
 
@@ -184,8 +186,10 @@ class GeneratePdf(View):
 
         school_year = SchoolYear.objects.filter(school_year=SY).first()
         ratings = MGRating.objects.filter(school_year=school_year, group_title=MG, semester=SEM)
-
-        open('canvas/templates/canvas/temp.html', "w").write(render_to_string('canvas/index_temp.html', 
+        
+        value = settings.BASE_DIR
+        temp = os.path.join(value, "canvas", "templates", "canvas", "temp.html")
+        open(temp, "w").write(render_to_string('canvas/index_temp.html', 
         {"ratings": ratings, "SY": SY, "SEM": SEM, "MG": MG}))
          
         # getting the template

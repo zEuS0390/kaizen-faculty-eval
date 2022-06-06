@@ -14,6 +14,8 @@ from django.template.loader import get_template
 from xhtml2pdf import pisa
 from django.views.generic import View
 from django.template.loader import render_to_string
+from django.conf import settings
+import os
 
 # Create your views here.
 class Dashboard(View):
@@ -151,7 +153,9 @@ class GeneratePdf(View):
     def get(self, request, *args, **kwargs):
 
         data = Member.objects.all()
-        open('administrator/templates/administrator/temp.html', "w").write(render_to_string('administrator/listofmembers_temp.html', {'data': data}))
+        value = settings.BASE_DIR
+        temp = os.path.join(value, "administrator", "templates", "administrator", "temp.html")
+        open(temp, "w").write(render_to_string('administrator/listofmembers_temp.html', {'data': data}))
          
         # getting the template
         pdf = html_to_pdf('administrator/temp.html')
