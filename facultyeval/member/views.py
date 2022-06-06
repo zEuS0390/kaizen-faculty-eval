@@ -15,6 +15,8 @@ from xhtml2pdf import pisa
 from django.views.generic import View
 from django.template.loader import render_to_string
 from canvas.models import *
+from django.conf import settings
+import os
 
 # Create your views here.
 @login_required(login_url="accounts:login")
@@ -160,8 +162,10 @@ class GeneratePdfHR(View):
         school_year = SchoolYear.objects.filter(school_year=SY).first()
         hrrating = HRRating.objects.filter(member=member, school_year=school_year, semester=SEM).first()
         hrcriterionscores = HRCriterionScores.objects.filter(hrrating=hrrating).all()
-
-        open('member/templates/member/temp.html', "w").write(render_to_string('member/hrevalscores_temp.html', 
+        
+        value = settings.BASE_DIR
+        temp = os.path.join(value, "member", "templates", "member", "temp.html")
+        open(temp, "w").write(render_to_string('member/hrevalscores_temp.html', 
         {"hrcriterionscores": hrcriterionscores, "member": member, "SY": SY, "SEM": SEM}))
          
         # getting the template
@@ -181,7 +185,9 @@ class GeneratePdfAIV(View):
         aivrating = AIVRating.objects.filter(member=member, school_year=school_year, semester=SEM).first()
         aivcriterionscores = AIVCriterionScores.objects.filter(aivrating=aivrating).all()
 
-        open('member/templates/member/temp.html', "w").write(render_to_string('member/aivevalscores_temp.html', 
+        value = settings.BASE_DIR
+        temp = os.path.join(value, "member", "templates", "member", "temp.html")
+        open(temp, "w").write(render_to_string('member/aivevalscores_temp.html', 
         {"aivcriterionscores": aivcriterionscores, "member": member, "SY": SY, "SEM": SEM}))
          
         # getting the template

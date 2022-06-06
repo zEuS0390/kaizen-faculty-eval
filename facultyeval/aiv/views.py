@@ -15,6 +15,8 @@ from django.template.loader import get_template
 from xhtml2pdf import pisa
 from django.views.generic import View
 from django.template.loader import render_to_string
+from django.conf import settings
+import os
 
 class RedirectIndex(View):
 
@@ -256,7 +258,9 @@ class GeneratePdf(View):
         aivrating = AIVRating.objects.filter(member=member, school_year=school_year, semester=SEM).first()
         aivcriterionscores = AIVCriterionScores.objects.filter(aivrating=aivrating).all()
 
-        open('aiv/templates/aiv/temp.html', "w").write(render_to_string('aiv/updateaivevalscores_temp.html', 
+        value = settings.BASE_DIR
+        temp = os.path.join(value, "aiv", "templates", "aiv", "temp.html")
+        open(temp, "w").write(render_to_string('aiv/updateaivevalscores_temp.html', 
         {"aivcriterionscores": aivcriterionscores, "member": member, "SY": SY, "SEM": SEM}))
          
         # getting the template
