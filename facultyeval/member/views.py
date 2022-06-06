@@ -15,7 +15,6 @@ from xhtml2pdf import pisa
 from django.views.generic import View
 from django.template.loader import render_to_string
 from canvas.models import *
-from django.contrib.auth.models import User
 from .forms import *
 from django.conf import settings
 import os
@@ -39,30 +38,23 @@ class EditProfile(View):
     @method_decorator(member_only)
     def get(self, request):
         member = Member.objects.filter(user=request.user).first()
-        form = EditProfileForm(initial={
-            "first_name": request.user.first_name, 
-            "middle_name": member.middle_name,
-            "last_name": request.user.last_name,
-            "email": request.user.email
-        })
+        member_form = EditMemberForm(instance=member)
+        user_form = EditUserForm(instance=request.user)
         context = {
-            "form": form
+            "member_form": member_form,
+            "user_form": user_form
         }
         return render(request, template_name="member/edit_profile.html", context=context)
 
     @method_decorator(login_required(login_url="accounts:login"))
     @method_decorator(member_only)
     def post(self, request):
-        form = EditProfileForm(request.POST)
-        if form.is_valid():
-            first_name = form.cleaned_data.get("first_name")
-            middle_name = form.cleaned_data.get("middle_name")
-            last_name = form.cleaned_data.get("last_name")
-            email = form.cleaned_data.get("email")
-            user = User.objects.filter(id=request.user.id)
-            member = Member.objects.filter(user=request.user)
-            user.update(first_name=first_name, last_name=last_name, email=email)
-            member.update(middle_name=middle_name)
+        member = Member.objects.filter(user=request.user).first()
+        member_form = EditMemberForm(request.POST, request.FILES, instance=member)
+        user_form = EditUserForm(request.POST, instance=request.user)
+        if member_form.is_valid() and user_form.is_valid():
+            member_form.save()
+            user_form.save()
         return redirect("member:profile")
 
 @login_required(login_url="accounts:login")

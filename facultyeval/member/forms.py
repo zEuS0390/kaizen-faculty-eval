@@ -1,8 +1,15 @@
 from django import forms
+from accounts.models import *
+from django.contrib.auth.models import User
 
-class EditProfileForm(forms.Form):
+class EditUserForm(forms.ModelForm):
 
-    first_name = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'class': "form-control"}))
-    middle_name = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'class': "form-control"}))
-    last_name = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'class': "form-control"}))
-    email = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'class': "form-control"}))
+    class Meta:
+        model = User
+        fields = ["first_name", "last_name", "email"]
+
+class EditMemberForm(forms.ModelForm):
+
+    class Meta:
+        model = Member
+        fields = ["middle_name", "image"]

@@ -3,7 +3,7 @@
 <div class="d-flex justify-content-center" style="min-height: 100vh;">
     <div class="d-flex align-items-center">
   <div class="container">
-    <form class="form-group" method="POST">
+    <form class="form-group" method="POST" enctype="multipart/form-data">
       {% csrf_token %}
     <div class="row">
       <div class="col">
@@ -24,26 +24,30 @@
             </div>
             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                 <label for="First Name">First Name</label>
-                <p>{{ form.first_name }}</p>
+                <p>{{ user_form.first_name }}</p>
             </div>
             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                 <label for="Middle Name">Middle Name</label>
-                <p>{{ form.middle_name }}</p>
+                <p>{{ member_form.middle_name }}</p>
             </div>
             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                 <label for="Last Name">Last Name</label>
-                <p>{{ form.last_name }}</p>
+                <p>{{ user_form.last_name }}</p>
             </div>
             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                 <label for="eMail">Email</label>
-                <p>{{ form.email }}</p>
+                <p>{{ user_form.email }}</p>
             </div>
-            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+              <label for="eMail">Update Profile Picture</label>
+              <p>{{ member_form.image }}</p>
+          </div>
+            <!-- <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
               <div class="mb-3">
                 <label for="formFile" class="form-label">Update Profile Picture</label>
                 <input class="form-control" type="file" id="formFile">
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
