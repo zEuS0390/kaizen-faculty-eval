@@ -3,28 +3,18 @@
 <div class="d-flex justify-content-center" style="min-height: 100vh;">
     <div class="d-flex align-items-center">
   <div class="container">
+    <form class="form-group" method="POST">
+      {% csrf_token %}
     <div class="row">
       <div class="col">
         <h3 class="user-name">My Profile</h3> 
       </div>
       <div class="col d-flex justify-content-end">
-          <a href="{% url 'member:edit_profile' %}" class="btn btn-primary text-center">Edit Profile</a>
+          <a href="{% url 'member:profile' %}" class="btn btn-secondary text-center">Cancel</a>
+          <button type="submit" class="btn btn-primary text-center">Save Profile</button>
       </div>
     </div>
       <div class="row gutters">
-      <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
-      <div class="card h-100">
-        <div class="card-body">
-          <div class="account-settings">
-            <div class="user-profile">
-              <div class="user-avatar">
-                <img class="img-fluid" src="/media/{{ user.member.image }}"/>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      </div>
       <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
       <div class="card h-100">
         <div class="card-body">
@@ -33,27 +23,25 @@
               <h6 class="mb-2 text-primary">Personal Details</h6>
             </div>
             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-              <div class="form-group">
                 <label for="First Name">First Name</label>
-                <p>{{ user.first_name }}</p>
-              </div>
+                <p>{{ form.first_name }}</p>
             </div>
             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-              <div class="form-group">
                 <label for="Middle Name">Middle Name</label>
-                <p>{{ user.member.middle_name }}</p>
-              </div>
+                <p>{{ form.middle_name }}</p>
             </div>
             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-              <div class="form-group">
                 <label for="Last Name">Last Name</label>
-                <p>{{ user.last_name }}</p>
-              </div>
+                <p>{{ form.last_name }}</p>
             </div>
             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-              <div class="form-group">
                 <label for="eMail">Email</label>
-                <p>{{ user.email }}</p>
+                <p>{{ form.email }}</p>
+            </div>
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+              <div class="mb-3">
+                <label for="formFile" class="form-label">Update Profile Picture</label>
+                <input class="form-control" type="file" id="formFile">
               </div>
             </div>
           </div>
@@ -63,5 +51,6 @@
       </div>
       </div>
     </div>
+    </form>
   </div>
 {% endblock %}
