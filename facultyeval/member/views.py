@@ -119,8 +119,6 @@ def LMS(request, SEM, SY):
     school_year = SchoolYear.objects.filter(school_year=SY).first()
     sy_group = SchoolYear.objects.all()
     mgratings = MGRating.objects.filter(member=member, semester=SEM, school_year=school_year).all()
-    group_titles = [mgrating.group_title for mgrating in mgratings]
-    print(group_titles)
     context = {
         "mgratings": mgratings,
         "SY": SY,

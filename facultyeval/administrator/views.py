@@ -79,6 +79,7 @@ class SchoolYearView(View):
         if form.is_valid():
             SY = form.save(commit=False)
             school_year = form.cleaned_data.get("school_year")
+            SY.school_year = SY.school_year.replace(" ", "-")
             if SchoolYear.objects.filter(school_year=school_year).exists():
                 messages.error(request, "School year already exist!")
                 return redirect("administrator:new_school_year")

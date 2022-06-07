@@ -3,14 +3,14 @@
 {% block title %}Faculty Evaluation in LMS{% endblock %}
 {% block nav_item_lms %}active{% endblock %}
 {% block content %}
-<div style="padding: 40px; min-height: 100vh; background-color:azure;">
-    <div class="row">
+<div style="padding: 50px; min-height: 100vh; background-color:azure;">
+    <div class="row" style="margin-bottom: 20px;">
         <div class="col">
             <h3 class="text-center">FACULTY EVALUATION BY LMS</h3>
             <hr>
         </div>
     </div>
-    <div class="row">
+    <div class="row" style="margin-bottom: 25px;">
         <div class="col d-flex justify-content-start text-center">
             <div class="dropdown">
                 <a class="btn btn-primary dropdown-toggle border" href="#" role="button" id="schoolYearDropdown" data-bs-toggle="dropdown" aria-expanded="false">
@@ -43,17 +43,19 @@
             <table class="table table-hover border" id="myTable">
                 <thead class="table-primary">
                     <th class="text-center" scope="col">MODULAR GROUP</th>
-                    <th class="text-center">ACTIONS</th>
+                    <th class="text-center">PART 1</th>
+                    <th class="text-center">PART 2</th>
+                    <th class="text-center">FINAL</th>
+                    <th class="text-center">REMARKS</th>
                 </thead>
                 <tbody>
                     {% for mgrating in mgratings %}
                         <tr scope="row">
-                            <td class="text-center" scope="col" style="width: 20%;">{{ mgrating.group_title }}</td>
-                            <td class="text-center" scope="col" style="width: 15%;">
-                                <a href="#" class="btn" style="background-color: lightgreen;">
-                                    <img id="user-icon" src="{% static 'img/bootstrap/pencil-square.svg' %}">
-                                </a>
-                            </td>
+                            <td class="text-center" scope="col" style="width: 40%;">{{ mgrating.group_title }}</td>
+                            <td class="text-center" scope="col" style="width: 10%">{{ mgrating.part1 }}</td>
+                            <td class="text-center" scope="col" style="width: 10%">{{ mgrating.part2 }}</td>
+                            <td class="text-center" scope="col" style="width: 10%">{{ mgrating.final }}</td>
+                            <td class="text-center" scope="col" style="width: 30%">{{ mgrating.remarks }}</td>
                         </tr>
                     {% endfor %}
                 </tbody>
