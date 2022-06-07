@@ -100,7 +100,7 @@
                             <td class="text-center" scope="col" style="width: 5%;">{{rating.id}}</td>
                             <td class="text-center" scope="col" style="width: 40%;">
                                 <img src="/media/{{rating.member.image}}" class="rounded-circle" alt="" width="32" height="32">
-                                {{rating.member}}
+                                {{rating.member.user.last_name}}, {{rating.member.user.first_name}}{% if rating.member.middle_name != "" %}, {{rating.member.middle_name}}{% endif %}
                             </td>
                             <td class="text-center" scope="col" style="width: 5%;">{{rating.part1}}</td>
                             <td class="text-center" scope="col" style="width: 5%;">{{rating.part2}}</td>

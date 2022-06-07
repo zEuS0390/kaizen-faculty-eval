@@ -70,7 +70,7 @@
                         <tr scope="row">
                             <td class="text-center" scope="col" style="width: 40%;">
                                 <img src="/media/{{item.0.image}}" class="rounded-circle" alt="" width="32" height="32">
-                                {{item.0}}
+                                {{item.0.user.last_name}}, {{item.0.user.first_name}}{% if item.0.middle_name != "" %}, {{item.0.middle_name}}{% endif %}
                             </td>
                             <td class="text-center" scope="col" style="width: 15%">
                                 {% if item.1 == True %}
