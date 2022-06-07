@@ -8,6 +8,18 @@
         <div class="container">
             <div class="row my-5">
                 <h4 class="text-left">Welcome {{user.username}}!</h4>
+                <!-- Display messages from the server -->
+                <div class="col">
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{message.tags}}{% endif %} alert-dismissible fade show" role="alert">
+                                {% if message.tags == 'error' %}<strong>Error Encountered!</strong><br>{% endif %}
+                                {{message}}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
             </div>
             <div class="row">
                 <div class="col-4">

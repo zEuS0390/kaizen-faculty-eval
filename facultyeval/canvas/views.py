@@ -24,9 +24,15 @@ class RedirectIndex(View):
     @method_decorator(admin_only)
     def get(self, request):
         SEM = "1st-Sem"
-        SY = "2021-2022"
         MG = "MG1"
-        return redirect("canvas:index", SEM=SEM, MG=MG, SY=SY)
+        try:
+            _SY = SchoolYear.objects.latest("id")
+            SY = _SY.school_year
+            return redirect("canvas:index", SEM=SEM, MG=MG, SY=SY)
+        except:
+            pass
+        messages.error(request, "School year does not exist!")
+        return redirect("administrator:dashboard")
 
 # Create your views here.
 class Index(View):
