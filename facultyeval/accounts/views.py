@@ -55,7 +55,8 @@ class Register(View):
             middle_name = form.cleaned_data.get('middle_name')
             member = Member(user=user, middle_name=middle_name)
             member.save()
-            mail_admins("New Registrant","A new member has successfully registered.")           
+            mail_admins("New Registrant","A new member has successfully registered.") 
+            messages.success(request, "Successfully registered!")          
             return redirect("accounts:login")
         errors = [' '.join(error for error in errorlist) for errorlist in form.errors.values()]
         for error in errors:
