@@ -18,7 +18,7 @@ class PassResetForm(PasswordResetForm):
 
 class UserForm(UserCreationForm):
 
-    middle_name = forms.CharField(max_length=200, required=True, label="Middle Name")
+    middle_name = forms.CharField(max_length=200, required=False, label="Middle Name")
 
     class Meta:
         model = User

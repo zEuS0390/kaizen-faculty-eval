@@ -8,7 +8,7 @@ class Member(models.Model):
     This will allow them to view their evaluations by visiting the web application.
     """
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
-    middle_name = models.CharField(max_length=200)
+    middle_name = models.CharField(max_length=200, null=True, blank=True)
     image = models.ImageField(upload_to="profile_img", default="profile_img/profile_default.png")
     def __str__(self):
         return f"{self.user.last_name}, {self.user.first_name}, {self.middle_name}"
