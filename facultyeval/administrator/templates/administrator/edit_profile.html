@@ -5,12 +5,14 @@
 <div class="d-flex justify-content-center" style="padding: 50px; min-height: 100vh;">
   <div class="d-flex align-items-center">
     <form class="container" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
       <div class="row">
         <div class="col">
           <h3 class="user-name">My Profile</h3>
         </div>
         <div class="col d-flex justify-content-end">
-          <a href="{% url 'administrator:edit_profile' %}" class="btn btn-primary text-center">Edit Profile</a>
+          <a href="{% url 'administrator:profile' %}" class="btn btn-secondary text-center">Cancel</a>
+          <button type="submit" class="btn btn-primary text-center">Save Profile</button>
         </div>
       </div>
       <div class="row gutters">
@@ -23,15 +25,15 @@
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                     <label for="First Name">First Name</label>
-                    <p>{{ user.first_name }}</p>
+                    <p>{{ user_form.first_name }}</p>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                   <label for="Last Name">Last Name</label>
-                  <p>{{ user.last_name }}</p>
+                  <p>{{ user_form.last_name }}</p>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                     <label for="eMail">Email</label>
-                    <p>{{ user.email }}</p>
+                    <p>{{ user_form.email }}</p>
                 </div>
               </div>
             </div>

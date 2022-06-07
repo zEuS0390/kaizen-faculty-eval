@@ -1,60 +1,102 @@
 {% extends 'member/base.html' %}
 {% block content %}
-<div class="d-flex justify-content-center" style="min-height: 100vh;">
-    <div class="d-flex align-items-center">
-  <div class="container">
-    <form class="form-group" method="POST" enctype="multipart/form-data">
-      {% csrf_token %}
-    <div class="row">
-      <div class="col">
-        <h3 class="user-name">My Profile</h3> 
-      </div>
-      <div class="col d-flex justify-content-end">
+<div class="d-flex justify-content-center" style="padding: 50px; min-height: 100vh;">
+  <div class="d-flex align-items-center">
+    <form class="container" method="POST" enctype="multipart/form-data">
+      <div class="row">
+        <div class="col">
+          <h3 class="user-name">My Profile</h3>
+        </div>
+        <div class="col d-flex justify-content-end">
           <a href="{% url 'member:profile' %}" class="btn btn-secondary text-center">Cancel</a>
           <button type="submit" class="btn btn-primary text-center">Save Profile</button>
+        </div>
       </div>
-    </div>
       <div class="row gutters">
-      <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
-      <div class="card h-100">
-        <div class="card-body">
-          <div class="row gutters">
-            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-              <h6 class="mb-2 text-primary">Personal Details</h6>
-            </div>
-            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                <label for="First Name">First Name</label>
-                <p>{{ user_form.first_name }}</p>
-            </div>
-            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                <label for="Middle Name">Middle Name</label>
-                <p>{{ member_form.middle_name }}</p>
-            </div>
-            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                <label for="Last Name">Last Name</label>
-                <p>{{ user_form.last_name }}</p>
-            </div>
-            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                <label for="eMail">Email</label>
-                <p>{{ user_form.email }}</p>
-            </div>
-            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-              <label for="eMail">Update Profile Picture</label>
-              <p>{{ member_form.image }}</p>
-          </div>
-            <!-- <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-              <div class="mb-3">
-                <label for="formFile" class="form-label">Update Profile Picture</label>
-                <input class="form-control" type="file" id="formFile">
+        <div class="col">
+          <div class="card h-100">
+            <div class="card-body">
+              <div class="row gutters">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                  <h6 class="mb-2 text-primary">Personal Details</h6>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                    <label for="First Name">First Name</label>
+                    <p>{{ user_form.first_name }}</p>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                  <label for="Middle Name">Middle Name</label>
+                  <p>{{ member_form.middle_name }}</p>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                  <label for="Last Name">Last Name</label>
+                  <p>{{ user_form.last_name }}</p>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                    <label for="eMail">Email</label>
+                    <p>{{ user_form.email }}</p>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                  <label for="eMail">Update Profile Picture</label>
+                  <p>{{ member_form.image }}</p>
+                </div>
               </div>
-            </div> -->
+            </div>
           </div>
         </div>
       </div>
-      </div>
-      </div>
-      </div>
-    </div>
     </form>
   </div>
+</div>
+<!-- <div class="d-flex justify-content-center" style="min-height: 100vh;">
+  <div class="d-flex align-items-center">
+<div class="container">
+  <form class="form-group" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+  <div class="row">
+    <div class="col">
+      <h3 class="user-name">My Profile</h3> 
+    </div>
+    <div class="col d-flex justify-content-end">
+        <a href="{% url 'member:profile' %}" class="btn btn-secondary text-center">Cancel</a>
+        <button type="submit" class="btn btn-primary text-center">Save Profile</button>
+    </div>
+  </div>
+    <div class="row gutters">
+    <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+    <div class="card h-100">
+      <div class="card-body">
+        <div class="row gutters">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <h6 class="mb-2 text-primary">Personal Details</h6>
+          </div>
+          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+              <label for="First Name">First Name</label>
+              <p>{{ user_form.first_name }}</p>
+          </div>
+          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+              <label for="Middle Name">Middle Name</label>
+              <p>{{ member_form.middle_name }}</p>
+          </div>
+          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+              <label for="Last Name">Last Name</label>
+              <p>{{ user_form.last_name }}</p>
+          </div>
+          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+              <label for="eMail">Email</label>
+              <p>{{ user_form.email }}</p>
+          </div>
+          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+            <label for="eMail">Update Profile Picture</label>
+            <p>{{ member_form.image }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+    </div>
+  </div>
+  </form>
+</div> -->
 {% endblock %}

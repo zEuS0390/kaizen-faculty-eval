@@ -164,5 +164,21 @@ class GeneratePdf(View):
         # rendering the template
         return HttpResponse(pdf, content_type='application/pdf')
 
+class EditProfile(View):
 
-   
+    @method_decorator(login_required(login_url="accounts:login"))
+    @method_decorator(admin_only)
+    def get(self, request):
+        user_form = EditUserForm(instance=request.user)
+        context = {
+            "user_form": user_form
+        }
+        return render(request, template_name="administrator/edit_profile.html", context=context)
+
+    @method_decorator(login_required(login_url="accounts:login"))
+    @method_decorator(admin_only)
+    def post(self, request):
+        user_form = EditUserForm(request.POST, instance=request.user)
+        if user_form.is_valid():
+            user_form.save()
+        return redirect("administrator:profile")

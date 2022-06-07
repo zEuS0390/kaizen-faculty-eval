@@ -10,6 +10,7 @@ urlpatterns = [
     path('about/', About, name="about"),
     path('list_of_members/', ListOfMembers, name="list_of_members"),
     path('profile/', Profile, name="profile"),
+    path("profile/edit/", EditProfile.as_view(), name="edit_profile"),
     path('delete-member/<int:ID>/', DeleteMember, name="delete_member"),
     path("view-profile-member/<int:ID>/", ViewMemberProfile, name="view_profile_member"),
     path("school-year/", SchoolYearView.as_view(), name="school_year"),
