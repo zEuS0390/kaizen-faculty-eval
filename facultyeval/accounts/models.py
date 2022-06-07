@@ -9,6 +9,6 @@ class Member(models.Model):
     """
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
     middle_name = models.CharField(max_length=200)
-    image = models.ImageField(upload_to="profile_img")
+    image = models.ImageField(upload_to="profile_img", default="profile_img/profile_default.png")
     def __str__(self):
         return f"{self.user.last_name}, {self.user.first_name}, {self.middle_name}"
