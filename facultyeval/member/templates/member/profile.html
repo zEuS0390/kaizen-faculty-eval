@@ -1,4 +1,5 @@
 {% extends 'member/base.html' %}
+{% load static %}
 {% block content %}
 <div class="d-flex justify-content-center" style="min-height: 100vh;">
     <div class="d-flex align-items-center">
@@ -18,7 +19,7 @@
           <div class="account-settings">
             <div class="user-profile">
               <div class="user-avatar">
-                <img class="img-fluid" src="/media/{{ user.member.image }}"/>
+                <img class="img-fluid" src="{% if user.member.image != '' %}/media/{{ user.member.image }}{% else %}{% static 'img/profile_default.png' %}{% endif %}"/>
               </div>
             </div>
           </div>
