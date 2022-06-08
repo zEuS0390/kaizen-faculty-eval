@@ -3,6 +3,7 @@
 <div class="d-flex justify-content-center" style="padding: 50px; min-height: 100vh;">
   <div class="d-flex align-items-center">
     <form class="container" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
       <div class="row">
         <div class="col">
           <h3 class="user-name">My Profile</h3>
