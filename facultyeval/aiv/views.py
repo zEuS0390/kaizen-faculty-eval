@@ -266,7 +266,7 @@ class GeneratePdf(View):
 
         value = settings.BASE_DIR
         temp = os.path.join(value, "aiv", "templates", "aiv", "temp.html")
-        open(temp, "w").write(render_to_string('aiv/updateaivevalscores_temp.html', 
+        open(temp, "w+").write(render_to_string('aiv/updateaivevalscores_temp.html', 
         {"aivcriterionscores": aivcriterionscores, "member": member, "SY": SY, "SEM": SEM}))
          
         # getting the template

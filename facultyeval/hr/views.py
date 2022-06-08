@@ -291,7 +291,7 @@ class GeneratePdf(View):
         
         value = settings.BASE_DIR
         temp = os.path.join(value, "hr", "templates", "hr", "temp.html")
-        open(temp, "w").write(render_to_string('hr/updatehrevalscores_temp.html', 
+        open(temp, "w+").write(render_to_string('hr/updatehrevalscores_temp.html', 
         {"hrcriterionscores": hrcriterionscores, "member": member, "SY": SY, "SEM": SEM}))
          
         # getting the template

@@ -156,7 +156,7 @@ class GeneratePdf(View):
         data = Member.objects.all()
         value = settings.BASE_DIR
         temp = os.path.join(value, "administrator", "templates", "administrator", "temp.html")
-        open(temp, "w").write(render_to_string('administrator/listofmembers_temp.html', {'data': data}))
+        open(temp, "w+").write(render_to_string('administrator/listofmembers_temp.html', {'data': data}))
          
         # getting the template
         pdf = html_to_pdf('administrator/temp.html')

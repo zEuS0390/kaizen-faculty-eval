@@ -195,7 +195,7 @@ class GeneratePdf(View):
         
         value = settings.BASE_DIR
         temp = os.path.join(value, "canvas", "templates", "canvas", "temp.html")
-        open(temp, "w").write(render_to_string('canvas/index_temp.html', 
+        open(temp, "w+").write(render_to_string('canvas/index_temp.html', 
         {"ratings": ratings, "SY": SY, "SEM": SEM, "MG": MG}))
          
         # getting the template
