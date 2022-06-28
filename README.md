@@ -15,15 +15,15 @@ These are all the team members of the Faculty Evaluation Project.
 
 ### Tools/Dependencies
 The following are the requirements needed in creating the Faculty Evaluation Project.
-* **Git** (Local Version Control)
-* **GitHub** (Remote Version Control) 
-* **Python**  (Programming Language) 
-* **Pipenv** (Packaging Tool with Virtual Environment) 
-* **Django** (Python Web Framework) 
-* **MySQL** (Server-based Database)
-* **XAMPP** (MySQL Server)
-* **HTML/CSS/JS** (Web Page Fundamentals)
-* **Bootstrap** (CSS Framework)
+* [**Git**](https://git-scm.com/) (Local Version Control)
+* [**GitHub**](https://github.com/) (Remote Version Control) 
+* [**Python**](https://www.python.org/)  (Programming Language) 
+* [**Pipenv**](https://pipenv.pypa.io/) (Packaging Tool with Virtual Environment) 
+* [**Django**](https://www.djangoproject.com/) (Python Web Framework) 
+* [**MySQL**](https://en.wikipedia.org/wiki/MySQL) (Server-based Database)
+* [**XAMPP**](https://www.apachefriends.org/) (MySQL Server)
+* [**HTML/CSS/JS**](https://en.wikipedia.org/wiki/Front-end_web_development) (Web Page Fundamentals)
+* [**Bootstrap**](https://getbootstrap.com/) (CSS Framework)
 
 ## Development
 
