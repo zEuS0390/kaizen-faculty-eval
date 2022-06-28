@@ -28,6 +28,10 @@ The following are the requirements needed in creating the Faculty Evaluation Pro
 
 ## Development
 
+Before starting the web application, we need to consider these things:
+1. **Environment variables** - are necessary for the application to get working. They are hidden values that must be separated to the source code. These variables are: [*EMAIL_HOST_PASSWORD*](https://docs.djangoproject.com/en/4.0/ref/settings/#email-host-password), [*EMAIL_HOST_USER*](https://docs.djangoproject.com/en/4.0/ref/settings/#std-setting-EMAIL_HOST_USER), [*SECRET_KEY*](https://docs.djangoproject.com/en/4.0/ref/settings/#secret-key). The *EMAIL_HOST_USER* and *EMAIL_HOST_PASSWORD* is used in the backend for sending emails. The *SECRET_KEY* is used for providing cryptographic signing to keep the system secure.
+2. **Database settings** - should be configured because all the information in the system are stored in the database. They are in the .env configuration file and will be parsed by the decouple library in settings.py. The name should exist in the database and match the credentials.
+
 ### Create a virtual environment
 In this project, we are using pipenv packaging tool to manage dependencies and virtual environemnt. To activate the virtual environment, run the following command or execute
 the batch file **'shell.bat'**. Make sure the directory of your terminal is in the project folder. 
