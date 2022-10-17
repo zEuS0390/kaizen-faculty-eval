@@ -4,7 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-django = ">=4.0.6"
+django = ">=4.0.7"
 django-import-export = "*"
 crispy-bootstrap5 = "*"
 python-decouple = "*"
@@ -18,7 +18,7 @@ gunicorn = "*"
 django-heroku = "*"
 
 [dev-packages]
-django = ">=4.0.6"
+django = ">=4.0.7"
 
 [requires]
 python_version = "3"
