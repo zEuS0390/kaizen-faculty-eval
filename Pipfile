@@ -18,6 +18,7 @@ gunicorn = "*"
 django-heroku = "*"
 
 [dev-packages]
+django = ">=4.0.6"
 
 [requires]
 python_version = "3"
